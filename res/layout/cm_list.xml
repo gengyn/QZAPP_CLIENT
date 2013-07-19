@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@drawable/mm_listitem"
+    android:gravity="center_vertical"
+    android:clickable="false">"
+
+    <TextView
+        android:id="@+id/cm_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:padding="7dp"
+        android:paddingLeft="5dp"
+        android:textSize="15sp" />
+
+     <ImageView
+        android:id="@+id/cm_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:paddingRight="20dp"
+        android:src="@drawable/phone"
+        android:layout_marginRight="50dp" 
+        android:onClick="phone_onclick"/>
+    <ImageView
+        android:id="@+id/cm_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:paddingRight="20dp"
+        android:src="@drawable/message" 
+        android:onClick="message_onclick"/>
+
+</RelativeLayout>
