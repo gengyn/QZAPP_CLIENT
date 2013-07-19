@@ -139,7 +139,7 @@ public final class R {
         public static final int mycontract_favorable=0x7f03000c;
         public static final int mycontract_project_date=0x7f03000d;
         public static final int myhome=0x7f03000e;
-        public static final int myhomebak=0x7f03000f;
+        public static final int myhomebak1=0x7f03000f;
         public static final int myinfo=0x7f030010;
         public static final int myinfo_content=0x7f030011;
         public static final int welcome=0x7f030012;
