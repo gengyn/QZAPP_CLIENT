@@ -11,5 +11,12 @@
     <string name="seachtext">搜索</string>
     <string name="returntext">返回</string>
     <string name="sendtext">发送</string>
+    
+    <!-- 版本相关 -->
+    <string name="version_download_url">http://192.168.1.176:8080/apk/</string>
+    <string name="versionJSON">qcversion.json</string>
+    <string name="appPackName">com.qingzhou.client</string>
+    <string name="savePath">/sdcard/QZ/</string>
+    <!-- 版本相关 -->
 
 </resources>

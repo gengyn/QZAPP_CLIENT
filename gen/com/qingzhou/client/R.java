@@ -79,7 +79,7 @@ public final class R {
     }
     public static final class id {
         public static final int ImageView01=0x7f080017;
-        public static final int action_settings=0x7f08002b;
+        public static final int action_settings=0x7f08002c;
         public static final int body=0x7f080022;
         public static final int body_left=0x7f080023;
         public static final int btn_back=0x7f080005;
@@ -92,7 +92,7 @@ public final class R {
         public static final int et_sendmessage=0x7f080008;
         public static final int head=0x7f080016;
         public static final int imageView1=0x7f080020;
-        public static final int imageView2=0x7f08002a;
+        public static final int imageView2=0x7f08002b;
         public static final int img_amount=0x7f08001e;
         public static final int img_base=0x7f08001c;
         public static final int img_favorable=0x7f08001f;
@@ -112,6 +112,7 @@ public final class R {
         public static final int new_content=0x7f080029;
         public static final int new_date=0x7f080028;
         public static final int new_title=0x7f080027;
+        public static final int progress=0x7f08002a;
         public static final int progressBar1=0x7f080013;
         public static final int project_name=0x7f080024;
         public static final int rl_bottom=0x7f080006;
@@ -142,13 +143,15 @@ public final class R {
         public static final int myhomebak1=0x7f03000f;
         public static final int myinfo=0x7f030010;
         public static final int myinfo_content=0x7f030011;
-        public static final int welcome=0x7f030012;
+        public static final int progress=0x7f030012;
+        public static final int welcome=0x7f030013;
     }
     public static final class menu {
         public static final int main=0x7f070000;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
+        public static final int appPackName=0x7f05000c;
         public static final int app_name=0x7f050000;
         public static final int hello=0x7f050002;
         public static final int mycontract=0x7f050006;
@@ -156,8 +159,13 @@ public final class R {
         public static final int myinfo=0x7f050004;
         public static final int mymessage=0x7f050003;
         public static final int returntext=0x7f050008;
+        public static final int savePath=0x7f05000d;
         public static final int seachtext=0x7f050007;
         public static final int sendtext=0x7f050009;
+        public static final int versionJSON=0x7f05000b;
+        /**  版本相关 
+         */
+        public static final int version_download_url=0x7f05000a;
     }
     public static final class style {
         /** 
