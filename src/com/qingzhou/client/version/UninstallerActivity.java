@@ -1,8 +1,7 @@
 package com.qingzhou.client.version;
 
-import java.io.File;
-
 import com.qingzhou.client.R;
+import com.qingzhou.client.util.FileUtil;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -76,31 +75,10 @@ public class UninstallerActivity extends Activity{
 //		Intent uninstallIntent = new Intent(Intent.ACTION_DELETE, packageURI);       
 //		startActivity(uninstallIntent); 
     		
-    	deleteDir(savePath); //卸载后清理
+    	FileUtil.deleteDir(savePath); //卸载后清理
     }
     
-    /**
-     * 递归删除整个目录，以后整理成公共方法
-     * @param savePath
-     * @return
-     */
-    private void deleteDir(String savePath) {
-    	File f = new File(savePath);//定义文件路径         
-    	if(f.exists() && f.isDirectory()){//判断是文件还是目录  
-    		if(f.listFiles().length==0){//若目录下没有文件则直接删除  
-    			f.delete();  
-    		}else{//若有则把文件放进数组，并判断是否有下级目录  
-    			File delFile[]=f.listFiles();  
-    			int i =f.listFiles().length;  
-    			for(int j=0;j<i;j++){  
-    				if(delFile[j].isDirectory()){  
-    					deleteDir(delFile[j].getAbsolutePath());//递归调用del方法并取得子目录路径  
-    				}  
-    				delFile[j].delete();//删除文件  
-    			}  
-    		}  
-    	}
-    }  
+   
 
 	
 }

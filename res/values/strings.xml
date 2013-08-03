@@ -12,7 +12,21 @@
     <string name="returntext">返回</string>
     <string name="sendtext">发送</string>
     
+    <!-- 登录相关 -->
+    <string name="loginTitle">登录</string>
+    <string name="userName">客户名称</string>
+    <string name="passwd">密码</string>
+    <string name="phone">客户电话</string>
+    <string name="loginErrorText">请检查您的输入，确保输入正确</string>
+    <string name="loginInputErrorText">请填写完整</string>
+    <string name="logoutBtnText">退出</string>
+    <string name="loginBtnText">登录</string>
+    <string name="autoLoginBoxText">自动登录</string>
+    <string name="sdErr">您的SD卡没有正确设置，请检查</string>
+    <!-- 登录相关 -->
+    
     <!-- 版本相关 -->
+    <string name="isupdate">false</string><!-- 是否进行版本检查的开关，false代表不检查，在正式发布时应设置为true -->
     <string name="version_download_url">http://192.168.1.176:8080/apk/</string>
     <string name="versionJSON">qcversion.json</string>
     <string name="appPackName">com.qingzhou.client</string>

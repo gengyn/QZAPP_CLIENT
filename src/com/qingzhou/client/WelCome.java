@@ -1,5 +1,7 @@
 package com.qingzhou.client;
 
+import com.qingzhou.client.util.FileUtil;
+import com.qingzhou.client.util.DialogUtil;
 import com.qingzhou.client.version.VersionUpdate;
 
 import android.os.Bundle;
@@ -20,9 +22,15 @@ public class WelCome extends Activity{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);	
 		setContentView(R.layout.welcome);
+		//检查SD卡
+		if (!FileUtil.checkSD(this.getResources().getText(R.string.savePath).toString()))
+			DialogUtil.showErrDialog(this,this.getResources().getText(R.string.sdErr).toString());
+		
+		//是否进行版本检查的开关
+		boolean isUpdate = new Boolean(this.getResources().getString(R.string.isupdate));
 		//检查网络
 		VersionUpdate.checkNetwork(this);
-		if(VersionUpdate.isValid)
+		if(VersionUpdate.isValid && isUpdate)
 		{
 			//是否能获取版本信息
 			new Thread(){
@@ -35,7 +43,7 @@ public class WelCome extends Activity{
 		new Handler().postDelayed(new Runnable(){
 			@Override
 			public void run(){
-				Intent intent = new Intent (WelCome.this,MainActivity.class);			
+				Intent intent = new Intent (WelCome.this,Login.class);			
 				startActivity(intent);			
 				WelCome.this.finish();
 			}

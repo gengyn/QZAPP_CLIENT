@@ -2,11 +2,13 @@ package com.qingzhou.client;
 
 import com.qingzhou.client.LoadingActivity;
 import com.qingzhou.client.version.VersionUpdate;
+import com.qingzhou.client.util.DialogUtil;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
@@ -47,36 +49,13 @@ public class MainActivity extends Activity{
 	@Override  
     public boolean onKeyDown(int keyCode, KeyEvent event) {  
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {  
-        	showExitDialog();  
+        	DialogUtil.showExitDialog(this);  
             return true;  
         }  
         return true;  
     } 
 	
-	/**
-	 * 退出应用对话框
-	 */
-	protected void showExitDialog() {  
-		AlertDialog.Builder builder = new Builder(this);  
-		builder.setMessage("确定要退出吗?");  
-		builder.setTitle("提示");  
-		builder.setPositiveButton("确认", new OnClickListener() {			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-				//另外一种关闭应用的方式
-				android.os.Process.killProcess(android.os.Process.myPid());
-			}
-		});
-		builder.setNegativeButton("取消", new OnClickListener() {			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();				
-			}
-		});
-        
-        builder.create().show();  
-    }  
+	
 
 	/**
 	 * 我的消息点击事件
@@ -120,6 +99,19 @@ public class MainActivity extends Activity{
 		Intent intent = new Intent();
 	    intent.setClass(MainActivity.this,MyContractActivity.class);
 	    startActivity(intent);
+	}
+	
+	/**
+	 * 临时方法，切换用户
+	 * @param arg0
+	 */
+	public void reLogin(View arg0)
+	{
+		Intent intent = new Intent();
+		intent.putExtra("isReLogin", true);
+		intent.setClass(MainActivity.this,Login.class);
+		startActivity(intent);
+		MainActivity.this.finish();
 	}
 	
 	
