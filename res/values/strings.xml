@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">客户版</string>
+    <string name="app_name">掌上轻舟</string>
     <string name="action_settings">Settings</string>
     <string name="hello">欢迎您使用轻舟装饰客户端！</string>
     <string name="mymessage">我的消息</string>
@@ -23,12 +23,14 @@
     <string name="loginBtnText">登录</string>
     <string name="autoLoginBoxText">自动登录</string>
     <string name="sdErr">您的SD卡没有正确设置，请检查</string>
+    <string name="networkErr">监测出您的网络无效，请检查</string>
     <!-- 登录相关 -->
     
     <!-- 版本相关 -->
-    <string name="isupdate">false</string><!-- 是否进行版本检查的开关，false代表不检查，在正式发布时应设置为true -->
-    <string name="version_download_url">http://192.168.1.176:8080/apk/</string>
-    <string name="versionJSON">qcversion.json</string>
+    <string name="isupdate">true</string><!-- 是否进行版本检查的开关，false代表不检查，在正式发布时应设置为true -->
+    <string name="version_download_url">http://192.168.1.176:8089/appService/</string>
+    <!--rest/service/version/0/C  -->
+    <string name="versionJSON">qcversion.json</string>    
     <string name="appPackName">com.qingzhou.client</string>
     <string name="savePath">/sdcard/QZ/</string>
     <!-- 版本相关 -->

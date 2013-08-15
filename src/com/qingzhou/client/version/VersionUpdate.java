@@ -19,8 +19,11 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import com.alibaba.fastjson.JSON;
 
 import com.qingzhou.client.R;
+import com.qingzhou.client.domain.Version;
+import com.qingzhou.client.util.HttpUtil;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -111,36 +114,25 @@ public class VersionUpdate {
 	 */
 	public static void getVersionInfo()
 	{
-		StringBuilder serverSb = new StringBuilder();
+		HttpUtil httpUtil = new HttpUtil();
+		String returnStr = "";
 		try{
-			HttpClient client = new DefaultHttpClient();// 新建http客户端
-			HttpParams httpParams = client.getParams();
-			HttpConnectionParams.setConnectionTimeout(httpParams, 1000);// 设置连接超时范围
-			HttpConnectionParams.setSoTimeout(httpParams, 2000);
-			HttpResponse response = client.execute(new HttpGet(
+			returnStr = httpUtil.httpGetExecute(
 					mContext.getResources().getText(R.string.version_download_url).toString() +
-					mContext.getResources().getText(R.string.versionJSON).toString()));
-			HttpEntity entity = response.getEntity();
-			if (entity != null) {
-				BufferedReader reader = new BufferedReader(new InputStreamReader(
-						entity.getContent(), "UTF-8"), 8192);
-				String line = null;
-				while ((line = reader.readLine()) != null) {
-					serverSb.append(line + "\n");// 按行读取放入StringBuilder中
-				}
-				reader.close();
-			}
+					mContext.getResources().getText(R.string.versionJSON).toString());
+			
 			//解析版本信息
-			JSONArray jsonArray = new JSONArray(serverSb.toString());
-			if(jsonArray.length() > 0){
-				JSONObject obj = jsonArray.getJSONObject(0);
-				serverVersionCode = Integer.parseInt(obj.getString("verCode"));
-				serverVersionName = obj.getString("verName");
-				serverUpdateInfo = obj.getString("updateInfo");
-				serverDate = obj.getString("date");
-				serverApkSize = obj.getString("apkSize");
-				apkName = obj.getString("verFileName");
+			Version verJson = JSON.parseObject(returnStr,Version.class);
+			if (verJson != null)
+			{
+				serverVersionCode = Integer.parseInt(verJson.getVer_code());
+				serverVersionName = verJson.getVer_name();
+				serverUpdateInfo = verJson.getUpdate_info();
+				serverDate = verJson.getVer_date();
+				serverApkSize = verJson.getFile_size();
+				apkName = verJson.getFile_name();
 			}
+
 			isValid = true;
 		}catch(Exception e)
 		{
@@ -199,7 +191,7 @@ public class VersionUpdate {
 	{
 		AlertDialog.Builder builder = new Builder(mContext);
 		builder.setTitle("网络监测");
-		builder.setMessage("监测出您的网络无效，请检查网络！");
+		builder.setMessage("监测出您的网络无效，请检查网络");
 		builder.setPositiveButton("退出应用", new OnClickListener() {			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

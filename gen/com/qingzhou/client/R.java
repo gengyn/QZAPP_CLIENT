@@ -166,14 +166,14 @@ public final class R {
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
-        public static final int appPackName=0x7f050017;
+        public static final int appPackName=0x7f050018;
         public static final int app_name=0x7f050000;
         public static final int autoLoginBoxText=0x7f050012;
         public static final int hello=0x7f050002;
         /**  登录相关 
  版本相关 
          */
-        public static final int isupdate=0x7f050014;
+        public static final int isupdate=0x7f050015;
         public static final int loginBtnText=0x7f050011;
         public static final int loginErrorText=0x7f05000e;
         public static final int loginInputErrorText=0x7f05000f;
@@ -185,18 +185,21 @@ public final class R {
         public static final int myhome=0x7f050005;
         public static final int myinfo=0x7f050004;
         public static final int mymessage=0x7f050003;
+        public static final int networkErr=0x7f050014;
         public static final int passwd=0x7f05000c;
         public static final int phone=0x7f05000d;
         public static final int returntext=0x7f050008;
-        public static final int savePath=0x7f050018;
+        public static final int savePath=0x7f050019;
         public static final int sdErr=0x7f050013;
         public static final int seachtext=0x7f050007;
         public static final int sendtext=0x7f050009;
         public static final int userName=0x7f05000b;
-        public static final int versionJSON=0x7f050016;
+        /** rest/service/version/0/C  
+         */
+        public static final int versionJSON=0x7f050017;
         /**  是否进行版本检查的开关，false代表不检查，在正式发布时应设置为true 
          */
-        public static final int version_download_url=0x7f050015;
+        public static final int version_download_url=0x7f050016;
     }
     public static final class style {
         /** 
