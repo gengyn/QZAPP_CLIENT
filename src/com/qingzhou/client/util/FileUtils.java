@@ -14,7 +14,7 @@ import java.io.PrintWriter;
  * @author hihi
  *
  */
-public class FileUtil {
+public class FileUtils {
 	
 	
 	/**

@@ -1,7 +1,7 @@
 package com.qingzhou.client.version;
 
 import com.qingzhou.client.R;
-import com.qingzhou.client.util.FileUtil;
+import com.qingzhou.client.util.FileUtils;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -75,7 +75,7 @@ public class UninstallerActivity extends Activity{
 //		Intent uninstallIntent = new Intent(Intent.ACTION_DELETE, packageURI);       
 //		startActivity(uninstallIntent); 
     		
-    	FileUtil.deleteDir(savePath); //卸载后清理
+    	FileUtils.deleteDir(savePath); //卸载后清理
     }
     
    

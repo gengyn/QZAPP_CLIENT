@@ -23,7 +23,7 @@ import org.apache.http.util.EntityUtils;
  * @author hihi
  *
  */
-public class HttpUtil {
+public class HttpUtils {
 	
 	/**
 	 * 获取HttpClient对象，并且设置通信参数

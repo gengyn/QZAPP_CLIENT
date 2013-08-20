@@ -3,11 +3,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
-    <TextView 
-        android:layout_width="match_parent"
-    	android:layout_height="match_parent"
-        android:textSize="30sp"
-        android:text="优惠"></TextView>
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/preference_single_item"
+        android:gravity="center_vertical" >
+
+        <TextView
+            style="@style/Contract.title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="优惠总金额" />
+
+        <TextView
+            android:id="@+id/favorable_price"
+            style="@style/Contract.item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+
+	    <ListView android:id="@+id/favorablelist"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:clickable="false">
+	    </ListView>
+
 
 </LinearLayout>

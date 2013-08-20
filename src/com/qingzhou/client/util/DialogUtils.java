@@ -13,7 +13,7 @@ import android.content.DialogInterface.OnClickListener;
  * @author hihi
  *
  */
-public class DialogUtil {
+public class DialogUtils {
 
 	/**
 	 * 退出应用对话框

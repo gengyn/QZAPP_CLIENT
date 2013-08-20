@@ -23,7 +23,7 @@ import com.alibaba.fastjson.JSON;
 
 import com.qingzhou.client.R;
 import com.qingzhou.client.domain.Version;
-import com.qingzhou.client.util.HttpUtil;
+import com.qingzhou.client.util.HttpUtils;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -114,7 +114,7 @@ public class VersionUpdate {
 	 */
 	public static void getVersionInfo()
 	{
-		HttpUtil httpUtil = new HttpUtil();
+		HttpUtils httpUtil = new HttpUtils();
 		String returnStr = "";
 		try{
 			returnStr = httpUtil.httpGetExecute(

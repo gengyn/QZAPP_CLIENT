@@ -9,17 +9,23 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.qingzhou.client.util.CustomerUtil;
-import com.qingzhou.client.util.DialogUtil;
-import com.qingzhou.client.util.FileUtil;
-import com.qingzhou.client.util.StringUtil;
+import com.qingzhou.client.util.CustomerUtils;
+import com.qingzhou.client.util.DialogUtils;
+import com.qingzhou.client.util.FileUtils;
+import com.qingzhou.client.util.StringUtils;
+import com.qingzhou.client.util.HttpUtils;
+import com.qingzhou.client.common.GlobalParameter;
 import com.qingzhou.client.common.QcApp;
+import com.qingzhou.client.common.RestService;
+import com.qingzhou.client.domain.LoginStatus;
+import com.qingzhou.client.domain.UserBase;
 
 import com.alibaba.fastjson.JSON;
 
@@ -65,7 +71,7 @@ public class Login extends Activity {
 	@Override  
     public boolean onKeyDown(int keyCode, KeyEvent event) {  
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {  
-        	DialogUtil.showExitDialog(this);  
+        	DialogUtils.showExitDialog(this);  
             return true;  
         }  
         return true;  
@@ -82,7 +88,7 @@ public class Login extends Activity {
 		loginMap.put("phone", mPhone.getText().toString().trim());
 		loginMap.put("passwd", mPassword.getText().toString().trim());
 				
-		return FileUtil.writeFile(filePath, JSON.toJSONString(loginMap));
+		return FileUtils.writeFile(filePath, JSON.toJSONString(loginMap));
 	}
 	
 	/**
@@ -90,8 +96,8 @@ public class Login extends Activity {
 	 */
 	public void readLoginJSON()
 	{
-		String fileStr = FileUtil.readFile(filePath);
-		if (!StringUtil.isNull(fileStr))
+		String fileStr = FileUtils.readFile(filePath);
+		if (!StringUtils.isNull(fileStr))
 		{
 			Map<String,String> loginMap = new HashMap<String,String>();
 			loginMap = (Map)JSON.parseObject(fileStr);
@@ -109,16 +115,19 @@ public class Login extends Activity {
 	 */
 	public void deleteLoginJSON()
 	{
-		FileUtil.deleteFile(filePath);
+		FileUtils.deleteFile(filePath);
 	}
 	
+	
+	
 	/**
-	 * 转向主界面
+	 * 转向加载界面
 	 */
-	private void toMainActivity()
+	private void toLoadingActivity()
 	{
 		Intent intent = new Intent();
-        intent.setClass(Login.this,MainActivity.class);
+		intent.putExtra("FLAG", GlobalParameter.INIT_USERINFO);
+        intent.setClass(Login.this,LoadingActivity.class);
         startActivity(intent);
         Login.this.finish();
 	}
@@ -137,21 +146,25 @@ public class Login extends Activity {
      * @param v
      */
     public void loginSub() {
-    	if(CustomerUtil.checkPasswd(mPhone.getText().toString().trim() + mUser.getText().toString().trim(), 
+    	if(CustomerUtils.checkPasswd(mPhone.getText().toString().trim() + mUser.getText().toString().trim(), 
     			mPassword.getText().toString().trim()))  
         {
     		//登录成功
     		//如果选择自动登录，将保存客户信息，如不是讲删除客户信息
     		if (mIsAuto.isChecked()) writeLoginJSON();
     		else deleteLoginJSON();
-    		
-    		qcApp.setUserToken(CustomerUtil.createToken());//设置客户令牌
-    		toMainActivity();
+    		//设置客户姓名到QCAPP
+			qcApp.setUserName(mUser.getText().toString().trim());
+			qcApp.setUserPhone(mPhone.getText().toString().trim());
+			//获取客户信息
+    		//intUserBase();
+    		//成功后转向
+			toLoadingActivity();
              //Toast.makeText(getApplicationContext(), "登录成功", Toast.LENGTH_SHORT).show();
           }
-        else if(StringUtil.isNull(mUser.getText().toString()) 
-        		|| StringUtil.isNull(mPassword.getText().toString()) 
-        		|| StringUtil.isNull(mPhone.getText().toString())) 
+        else if(StringUtils.isNull(mUser.getText().toString()) 
+        		|| StringUtils.isNull(mPassword.getText().toString()) 
+        		|| StringUtils.isNull(mPhone.getText().toString())) 
         {
         	new AlertDialog.Builder(Login.this)
 			.setIcon(getResources().getDrawable(R.drawable.login_error_icon))

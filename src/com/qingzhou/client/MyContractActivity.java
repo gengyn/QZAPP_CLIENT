@@ -1,12 +1,20 @@
 package com.qingzhou.client;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import com.qingzhou.client.common.QcApp;
+
+import com.qingzhou.client.domain.Contract;
+import com.qingzhou.client.domain.ContractDiscount;
+import com.qingzhou.client.util.StringUtils;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +23,9 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 /**
  * 资讯活动
@@ -26,6 +36,7 @@ import android.widget.PopupWindow;
 public class MyContractActivity extends Activity {
 
 	public static MyContractActivity instance = null;
+	private QcApp qcApp;
 	private ViewPager mTabPager;
 	private ImageView mTabImg;
 	private ImageView mTab1, mTab2, mTab3, mTab4;
@@ -34,7 +45,10 @@ public class MyContractActivity extends Activity {
 	private int one;
 	private int two;
 	private int three;
-
+	
+		
+	Contract contract;
+	List<ContractDiscount> contractDiscountList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +58,126 @@ public class MyContractActivity extends Activity {
 		getWindow().setSoftInputMode(
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		instance = this;
+		qcApp = (QcApp)getApplication();
+		contract = qcApp.getContract();
+		contractDiscountList = contract.getContractList();
+		//初始化界面
+		initPager();
+		
+		
+	}
+	
+	/**
+	 * 初始化基础数据
+	 */
+	public void initBaseData(View v)
+	{
+		TextView contract_num;
+		TextView contract_type_name;
+		TextView contractsigned_date;
+		TextView reg_name ;
+		TextView reg_phone;
+		TextView reg_village_name;
+		TextView reg_construct_address;
+		TextView reg_customer_mgr_name;
+		TextView reg_customer_mgr_mobile;
+		TextView reg_stylist_name;
+		TextView reg_stylist_mobile;
+		TextView reg_project_mgr_name;
+		TextView reg_project_mgr_mobile;
+		
+		contract_num = (TextView) v.findViewById(R.id.contract_num);
+		contract_type_name = (TextView) v.findViewById(R.id.contract_type_name);
+		contractsigned_date = (TextView) v.findViewById(R.id.contractsigned_date);
+		reg_name = (TextView) v.findViewById(R.id.reg_name);
+		reg_phone =  (TextView) v.findViewById(R.id.reg_phone);
+		reg_village_name = (TextView) v.findViewById(R.id.reg_village_name);
+		reg_construct_address = (TextView) v.findViewById(R.id.reg_construct_address);
+		reg_customer_mgr_name =  (TextView) v.findViewById(R.id.reg_customer_mgr_name);
+		reg_customer_mgr_mobile = (TextView) v.findViewById(R.id.reg_customer_mgr_mobile);
+		reg_stylist_name = (TextView) v.findViewById(R.id.reg_stylist_name);
+		reg_stylist_mobile = (TextView) v.findViewById(R.id.reg_stylist_mobile);
+		reg_project_mgr_name = (TextView) v.findViewById(R.id.reg_project_mgr_name);
+		reg_project_mgr_mobile = (TextView) v.findViewById(R.id.reg_project_mgr_mobile);
+		
+		
+		contract_num.setText(contract.getContract_num());
+		contract_type_name.setText(contract.getContract_type_name());
+		contractsigned_date.setText(contract.getContractsigned_date());
+		reg_name.setText(contract.getReg_name());
+		reg_phone.setText(contract.getReg_phone());
+		reg_village_name.setText(contract.getReg_village_name());
+		reg_construct_address.setText(contract.getReg_construct_address());
+		reg_customer_mgr_name.setText(contract.getReg_customer_mgr_name());
+		reg_customer_mgr_mobile.setText(contract.getReg_customer_mgr_mobile());
+		reg_stylist_name.setText(contract.getReg_stylist_name());
+		reg_stylist_mobile.setText(contract.getReg_stylist_mobile());
+		reg_project_mgr_name.setText(contract.getReg_project_mgr_name());
+		reg_project_mgr_mobile.setText(contract.getReg_project_mgr_mobile());
+	}
+	
+	/**
+	 * 初始化进度
+	 * @param v
+	 */
+	public void initDate(View v)
+	{
+		TextView contractsigned_date1 = (TextView) v.findViewById(R.id.contractsigned_date1);
+		TextView contractbegindate = (TextView) v.findViewById(R.id.contractbegindate);
+		TextView contractenddate = (TextView) v.findViewById(R.id.contractenddate);
+		TextView date_number = (TextView) v.findViewById(R.id.date_number);
+		
+		contractsigned_date1.setText(contract.getContractsigned_date());
+		contractbegindate.setText(contract.getContractbegindate());
+		contractenddate.setText(contract.getContractenddate());
+		date_number.setText(contract.getDate_number()+"天");		
+	}
+	
+	/**
+	 * 初始化金额
+	 * @param v
+	 */
+	public void initAmount(View v)
+	{
+		TextView contract_sum_price = (TextView) v.findViewById(R.id.contract_sum_price);
+		TextView base_item_price = (TextView) v.findViewById(R.id.base_item_price);
+		TextView main_item_price = (TextView) v.findViewById(R.id.main_item_price);
+		TextView finish_item_price = (TextView) v.findViewById(R.id.finish_item_price);
+		TextView design_fee = (TextView) v.findViewById(R.id.design_fee);
+		TextView manage_fee = (TextView) v.findViewById(R.id.manage_fee);
 
+		TextView favorable_price = (TextView) v.findViewById(R.id.favorable_price);
+		TextView fact_totalmoney = (TextView) v.findViewById(R.id.fact_totalmoney);
+		
+		contract_sum_price.setText(StringUtils.formatDecimal(contract.getContract_sum_price()));
+		base_item_price.setText(StringUtils.formatDecimal(contract.getBase_item_price()));
+		main_item_price.setText(StringUtils.formatDecimal(contract.getMain_item_price()));
+		finish_item_price.setText(StringUtils.formatDecimal(contract.getFinish_item_price()));
+		design_fee.setText(StringUtils.formatDecimal(contract.getDesign_fee()));
+		manage_fee.setText(StringUtils.formatDecimal(contract.getManage_fee()));
+		favorable_price.setText(StringUtils.formatDecimal(contract.getFavorable_price()));
+		fact_totalmoney.setText(StringUtils.formatDecimal(contract.getFact_totalmoney()));
+	}
+	
+	/**
+	 * 初始化优惠信息
+	 * @param v
+	 */
+	public void initFavorable(View v)
+	{
+		TextView favorable_price = (TextView) v.findViewById(R.id.favorable_price);
+		favorable_price.setText(StringUtils.formatDecimal(contract.getFavorable_price()));
+		
+		ListView favorablelist = (ListView) v.findViewById(R.id.favorablelist);
+		favorablelist.setAdapter(new FavorableViewAdapter(getBaseContext(),contractDiscountList));
+	}
+	
+	
+	/**
+	 * 初始化页面
+	 */
+	public void initPager()
+	{
 		mTabPager = (ViewPager) findViewById(R.id.tabpager);
 		mTabPager.setOnPageChangeListener(new MyOnPageChangeListener());
 
@@ -57,7 +190,7 @@ public class MyContractActivity extends Activity {
 		mTab2.setOnClickListener(new MyOnClickListener(1));
 		mTab3.setOnClickListener(new MyOnClickListener(2));
 		mTab4.setOnClickListener(new MyOnClickListener(3));
-		Display currDisplay = getWindowManager().getDefaultDisplay();// ��ȡ��Ļ��ǰ�ֱ���
+		Display currDisplay = getWindowManager().getDefaultDisplay();
 		int displayWidth = currDisplay.getWidth();
 		int displayHeight = currDisplay.getHeight();
 		one = displayWidth / 4;
@@ -66,10 +199,14 @@ public class MyContractActivity extends Activity {
 
 		LayoutInflater mLi = LayoutInflater.from(this);
 		View view1 = mLi.inflate(R.layout.mycontract_base, null);
+		initBaseData(view1);
 		View view2 = mLi.inflate(R.layout.mycontract_project_date, null);
+		initDate(view2);
 		View view3 = mLi.inflate(R.layout.mycontract_amount, null);
+		initAmount(view3);
 		View view4 = mLi.inflate(R.layout.mycontract_favorable, null);
-
+		initFavorable(view4);
+		
 		final ArrayList<View> views = new ArrayList<View>();
 		views.add(view1);
 		views.add(view2);
@@ -99,7 +236,6 @@ public class MyContractActivity extends Activity {
 				return views.get(position);
 			}
 		};
-
 		mTabPager.setAdapter(mPagerAdapter);
 	}
 

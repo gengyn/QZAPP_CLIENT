@@ -1,8 +1,11 @@
 package com.qingzhou.client;
 
+import com.alibaba.fastjson.JSON;
 import com.qingzhou.client.LoadingActivity;
 import com.qingzhou.client.version.VersionUpdate;
-import com.qingzhou.client.util.DialogUtil;
+import com.qingzhou.client.common.GlobalParameter;
+import com.qingzhou.client.common.QcApp;
+import com.qingzhou.client.util.DialogUtils;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -12,9 +15,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
+import android.widget.TextView;
 
 /**
  * 主界面活动
@@ -23,16 +28,23 @@ import android.view.View;
  */
 public class MainActivity extends Activity{
 
-
+	private QcApp qcApp;
+	private TextView main_title;
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		qcApp = (QcApp)getApplication();
+		main_title = (TextView) this.findViewById(R.id.main_title);
+		main_title.setText(String.format(getResources().getString(R.string.hello),qcApp.getUserName()));
 		
 		//版本更新
 		VersionUpdate verUpdate = new VersionUpdate(this);
 		verUpdate.checkNewVersion();
 	}
+	
 
 	/**
 	 * 菜单
@@ -49,7 +61,7 @@ public class MainActivity extends Activity{
 	@Override  
     public boolean onKeyDown(int keyCode, KeyEvent event) {  
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {  
-        	DialogUtil.showExitDialog(this);  
+        	DialogUtils.showExitDialog(this);  
             return true;  
         }  
         return true;  
@@ -64,7 +76,7 @@ public class MainActivity extends Activity{
 	public void mymessage_onClick(View arg0) {
 		
 		Intent intent = new Intent();
-	    intent.setClass(MainActivity.this,LoadingActivity.class);
+	    intent.setClass(MainActivity.this,MainWeixin.class);
 	    startActivity(intent);
 		
 	}
@@ -97,7 +109,8 @@ public class MainActivity extends Activity{
 	public void mycontract_onclick(View arg0)
 	{
 		Intent intent = new Intent();
-	    intent.setClass(MainActivity.this,MyContractActivity.class);
+		intent.putExtra("FLAG", GlobalParameter.INIT_CONTRACT);
+	    intent.setClass(MainActivity.this,LoadingActivity.class);
 	    startActivity(intent);
 	}
 	

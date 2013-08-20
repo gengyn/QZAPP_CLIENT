@@ -1,7 +1,7 @@
 package com.qingzhou.client;
 
-import com.qingzhou.client.util.FileUtil;
-import com.qingzhou.client.util.DialogUtil;
+import com.qingzhou.client.util.FileUtils;
+import com.qingzhou.client.util.DialogUtils;
 import com.qingzhou.client.version.VersionUpdate;
 
 import android.os.Bundle;
@@ -25,9 +25,9 @@ public class WelCome extends Activity{
 		
 		//检查项目现在包括SD卡、网络
 		//检查SD卡
-		if (!FileUtil.checkSD(this.getResources().getText(R.string.savePath).toString()))
+		if (!FileUtils.checkSD(this.getResources().getText(R.string.savePath).toString()))
 		{
-			DialogUtil.showErrDialog(this,this.getResources().getText(R.string.sdErr).toString());
+			DialogUtils.showErrDialog(this,this.getResources().getText(R.string.sdErr).toString());
 		}else
 		{
 			//是否进行版本检查的开关
@@ -56,7 +56,7 @@ public class WelCome extends Activity{
 				}, 3000);
 			}else
 			{
-				DialogUtil.showErrDialog(this,this.getResources().getText(R.string.networkErr).toString());
+				DialogUtils.showErrDialog(this,this.getResources().getText(R.string.networkErr).toString());
 			}
 		}
    }

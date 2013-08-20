@@ -9,7 +9,7 @@ import java.util.UUID;
  * @author hihi
  *
  */
-public class CustomerUtil {
+public class CustomerUtils {
 	
 	/**
 	 * 生成客户密码
@@ -19,7 +19,7 @@ public class CustomerUtil {
 	public static String createPasswd(String str)
 	{
 		String passwd = "9999";
-		if (!StringUtil.isNull(str) && str.length() > 11)
+		if (!StringUtils.isNull(str) && str.length() > 11)
 		{
 			//passwd = Base64.encodeBase64String(str.getBytes());
 			passwd = new String(Base64.encodeBase64(str.getBytes()));
@@ -37,9 +37,9 @@ public class CustomerUtil {
 	public static boolean checkPasswd(String src, String passwd)
 	{
 		boolean returnFlg = false; 
-		if (!StringUtil.isNull(src) && !StringUtil.isNull(passwd))
+		if (!StringUtils.isNull(src) && !StringUtils.isNull(passwd))
 		{
-			String cuPasswd = CustomerUtil.createPasswd(src);
+			String cuPasswd = CustomerUtils.createPasswd(src);
 			if (!cuPasswd.equals("9999") && cuPasswd.equals(passwd.toUpperCase()))
 				returnFlg = true;				
 		}
@@ -60,7 +60,7 @@ public class CustomerUtil {
 	 {
 		 //System.out.println(CustomerUtil.createPasswd("15011320143焗油"));
 		 //System.out.println(CustomerUtil.checkPasswd("15011320143耿延宁", "UWMROe"));
-		 System.out.println(CustomerUtil.createToken());
+		 System.out.println(CustomerUtils.createToken());
 	 }	
 
 }
