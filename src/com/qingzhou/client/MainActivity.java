@@ -98,7 +98,8 @@ public class MainActivity extends Activity{
 	public void myhome_onclick(View arg0)
 	{
 		Intent intent = new Intent();
-	    intent.setClass(MainActivity.this,MyHomeActivity.class);
+		intent.putExtra("FLAG", GlobalParameter.INIT_PROJECTPLAN);
+	    intent.setClass(MainActivity.this,LoadingActivity.class);
 	    startActivity(intent);
 	}
 	

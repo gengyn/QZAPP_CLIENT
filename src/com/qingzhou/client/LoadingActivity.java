@@ -7,6 +7,7 @@ import com.qingzhou.client.common.GlobalParameter;
 import com.qingzhou.client.common.QcApp;
 import com.qingzhou.client.common.RestService;
 import com.qingzhou.client.domain.LoginStatus;
+import com.qingzhou.client.domain.RestProjectPlan;
 import com.qingzhou.client.domain.UserBase;
 import com.qingzhou.client.domain.Contract;
 import com.qingzhou.client.util.CustomerUtils;
@@ -45,7 +46,7 @@ public class LoadingActivity extends Activity{
         flag = intent.getIntExtra("FLAG",0);
         //开启线程并执行
         ThreadPoolUtils.execute(mRunnable);
-
+        
    }
 	
 	/**
@@ -93,6 +94,23 @@ public class LoadingActivity extends Activity{
 	}
 	
 	/**
+	 * 获取工程进度信息
+	 * @throws ClientProtocolException
+	 * @throws Exception
+	 */
+	public void initProjectPlan() throws ClientProtocolException, Exception
+	{
+		HttpUtils httpUtil = new HttpUtils();
+		String projectPlanJson = httpUtil.httpGetExecute(
+				RestService.GET_PROJECTPLAN_URL+qcApp.getUserBase().getCustomer_id());
+		RestProjectPlan restProjectPlan = JSON.parseObject(projectPlanJson, RestProjectPlan.class);
+		qcApp.setProjectPlan(restProjectPlan);
+		Intent intent = new Intent (LoadingActivity.this,MyHomeActivity.class);			
+		startActivity(intent);
+		
+	}
+	
+	/**
 	 * 具体执行方法
 	 */
 	private Runnable mRunnable = new Runnable() {	
@@ -106,6 +124,9 @@ public class LoadingActivity extends Activity{
 		        	break;
 		        case GlobalParameter.INIT_CONTRACT:
 		        	initContract();
+		        	break;
+		        case GlobalParameter.INIT_PROJECTPLAN:
+		        	initProjectPlan();
 		        	break;
 		        default:
 		        	throw new Exception("异常");	

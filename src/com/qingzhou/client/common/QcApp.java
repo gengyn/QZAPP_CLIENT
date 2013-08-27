@@ -2,6 +2,7 @@ package com.qingzhou.client.common;
 
 import android.app.Application;
 
+import com.qingzhou.client.domain.RestProjectPlan;
 import com.qingzhou.client.domain.UserBase;
 import com.qingzhou.client.domain.Contract;
 
@@ -18,7 +19,14 @@ public class QcApp extends Application {
 	
 	UserBase userBase ;//客户的基本信息
 	Contract contract;//合同信息
+	RestProjectPlan projectPlan;//工程进度信息
 	
+	public RestProjectPlan getProjectPlan() {
+		return projectPlan;
+	}
+	public void setProjectPlan(RestProjectPlan projectPlan) {
+		this.projectPlan = projectPlan;
+	}
 	public Contract getContract() {
 		return contract;
 	}
