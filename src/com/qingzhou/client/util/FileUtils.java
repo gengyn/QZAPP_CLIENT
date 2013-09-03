@@ -3,9 +3,11 @@ package com.qingzhou.client.util;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
@@ -104,6 +106,38 @@ public class FileUtils {
 		}
 	
 	}
+	
+	/**
+	 * 将输入流写入指定文件
+	 * @param dirPath
+	 * @param filename
+	 * @param content
+	 * @return
+	 */
+	public static boolean writeFile(String dirPath,String filename,InputStream content)
+	{
+		try
+		{
+			File dir = new File(dirPath);
+			if (!dir.exists())
+				dir.mkdir();
+			File f = new File(dirPath+filename);
+			FileOutputStream fos = new FileOutputStream(f);
+			byte buf[] = new byte[1024];
+			int numread = 0;
+			while((numread = content.read(buf))!=-1){   		   		
+	    		fos.write(buf,0,numread);
+	    	};
+	    	fos.flush();
+	    	fos.close();
+			return true;
+		}catch(IOException ioex)
+		{
+			System.err.println(ioex.toString());
+			return false;
+		}
+	
+	}
 	/**
 	 * 删除某一个文件
 	 * @param filePath
@@ -139,5 +173,16 @@ public class FileUtils {
     		}  
     	}
     }  
+    
+    /**
+     * 判断文件是否存在
+     * @param filepath
+     * @return
+     */
+    public static boolean isExists(String filepath)
+    {
+    	File f = new File(filepath);
+    	return f.exists();
+    }
 
 }

@@ -31,6 +31,11 @@
         <item name="android:textColor">#000</item> 
         <item name="android:textSize">17sp</item>         
 	</style> 
+	<!-- 图片GridLayout -->
+	<style name="PhotoGridLayout">
+        <item name="android:drawSelectorOnTop">true</item>
+        <item name="android:listSelector">@drawable/photogrid_list_selector</item>
+    </style>
 	
 	<style name="MyDialogStyle">
         <item name="android:windowBackground">@android:color/transparent</item>

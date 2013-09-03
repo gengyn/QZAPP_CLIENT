@@ -1,8 +1,11 @@
 package com.qingzhou.client;
 
+import java.util.List;
+
 import org.apache.http.client.ClientProtocolException;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.qingzhou.client.common.GlobalParameter;
 import com.qingzhou.client.common.QcApp;
 import com.qingzhou.client.common.RestService;
@@ -10,6 +13,8 @@ import com.qingzhou.client.domain.LoginStatus;
 import com.qingzhou.client.domain.RestProjectPlan;
 import com.qingzhou.client.domain.UserBase;
 import com.qingzhou.client.domain.Contract;
+import com.qingzhou.client.domain.RestProjectPhoto;
+import com.qingzhou.client.image.ui.ImageGridActivity;
 import com.qingzhou.client.util.CustomerUtils;
 import com.qingzhou.client.util.HttpUtils;
 import com.qingzhou.client.util.StringUtils;
@@ -28,6 +33,7 @@ public class LoadingActivity extends Activity{
 
 	private QcApp qcApp;
 	int flag;
+	String schedetail_id = "";
 	private static final int FINISH_MESSAGE = 0x01;
 	private static final int ERROR_MESSAGE = 0x02;
 	
@@ -44,6 +50,7 @@ public class LoadingActivity extends Activity{
         Intent intent = getIntent();
         //取出Intent中附加的数据,是否是切换用户登录，如为空，默认为不是切换用户
         flag = intent.getIntExtra("FLAG",0);
+        schedetail_id = intent.getStringExtra("schedetail_id");
         //开启线程并执行
         ThreadPoolUtils.execute(mRunnable);
         
@@ -111,6 +118,23 @@ public class LoadingActivity extends Activity{
 	}
 	
 	/**
+	 * 获取图片
+	 */
+	public void showPhoto() throws ClientProtocolException, Exception
+	{
+		HttpUtils httpUtil = new HttpUtils();
+		String photoPathJson = httpUtil.httpGetExecute(
+				RestService.GET_PHOTO_URL+schedetail_id+"/"+qcApp.getProjectPlan().getSche_id());
+		Intent intent = new Intent();
+		intent.putExtra("photoPath", photoPathJson);
+		//一个界面完成浏览
+		//intent.setClass(LoadingActivity.this,ProjectPhotoActivity.class);
+		//先缩略图列表，后整图
+		intent.setClass(LoadingActivity.this,ImageGridActivity.class);
+		startActivity(intent);
+	}
+	
+	/**
 	 * 具体执行方法
 	 */
 	private Runnable mRunnable = new Runnable() {	
@@ -127,6 +151,9 @@ public class LoadingActivity extends Activity{
 		        	break;
 		        case GlobalParameter.INIT_PROJECTPLAN:
 		        	initProjectPlan();
+		        	break;
+		        case GlobalParameter.SHOW_PHOTO:
+		        	showPhoto();
 		        	break;
 		        default:
 		        	throw new Exception("异常");	

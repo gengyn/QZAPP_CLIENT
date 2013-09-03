@@ -9,4 +9,5 @@ public class RestService {
 	public final static String DEL_LOGIN_URL = SERVICE_URL + "login/";//删除客户登录信息
 	public final static String GET_CONTRACT_URL = SERVICE_URL + "contract/";//获取合同信息及优惠信息
 	public final static String GET_PROJECTPLAN_URL = SERVICE_URL + "projectplan/";//GET项目进度情况
+	public final static String GET_PHOTO_URL = SERVICE_URL + "projectplan/photo/";//获取图片
 }

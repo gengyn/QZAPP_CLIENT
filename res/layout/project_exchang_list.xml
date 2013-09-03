@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:clickable="false" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/mm_listitem"
+        android:clickable="false"
+        android:gravity="center_vertical" >
+
+        <TextView
+            android:id="@+id/stylist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:padding="7dp"
+            android:paddingLeft="5dp"
+            android:textSize="15sp" />
+
+        <ImageButton
+            android:id="@+id/stylist_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:onClick="stylist_message_onclick"
+            android:paddingRight="20dp"
+            android:src="@drawable/message"
+            android:background="@drawable/list_imgbutton_background" />
+
+        <ImageButton
+            android:id="@+id/stylist_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/stylist_message"
+            android:onClick="stylist_phone_onclick"
+            android:paddingRight="20dp"
+            android:src="@drawable/phone" 
+            android:background="@drawable/list_imgbutton_background"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/mm_listitem"
+        android:clickable="false"
+        android:gravity="center_vertical" >
+
+        <TextView
+            android:id="@+id/project_mgr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:padding="7dp"
+            android:paddingLeft="5dp"
+            android:textSize="15sp" />
+
+        <ImageButton
+            android:id="@+id/project_mgr_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:onClick="project_mgr_message_onclick"
+            android:paddingRight="20dp"
+            android:src="@drawable/message" 
+            android:background="@drawable/list_imgbutton_background"/>
+
+        <ImageButton
+            android:id="@+id/project_mgr_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/project_mgr_message"
+            android:onClick="project_mgr_phone_onclick"
+            android:paddingRight="20dp"
+            android:src="@drawable/phone" 
+            android:background="@drawable/list_imgbutton_background"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/mm_listitem"
+        android:clickable="false"
+        android:gravity="center_vertical" >
+
+        <TextView
+            android:id="@+id/customer_mgr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:padding="7dp"
+            android:paddingLeft="5dp"
+            android:textSize="15sp" />
+
+        <ImageButton
+            android:id="@+id/customer_mgr_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:onClick="customer_mgr_message_onclick"
+            android:paddingRight="20dp"
+            android:src="@drawable/message" 
+            android:background="@drawable/list_imgbutton_background"/>
+
+        <ImageButton
+            android:id="@+id/customer_mgr_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/customer_mgr_message"
+            android:onClick="customer_mgr_phone_onclick"
+            android:paddingRight="20dp"
+            android:src="@drawable/phone" 
+            android:background="@drawable/list_imgbutton_background"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

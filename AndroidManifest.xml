@@ -31,6 +31,16 @@
         </activity>
         <activity android:name="com.qingzhou.client.MyHomeActivity" >
         </activity>
+        <activity android:name="com.qingzhou.client.MyHomeLevel2Activity" >
+        </activity>
+        <activity android:name="com.qingzhou.client.image.ui.ImageDetailActivity">
+        </activity>
+        <activity
+            android:name="com.qingzhou.client.image.ui.ImageGridActivity"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity android:name="com.qingzhou.client.ProjectPhotoActivity" >
+        </activity>
         <activity android:name="com.qingzhou.client.MyContractActivity" >
         </activity>
         <activity android:name="com.qingzhou.client.MyInfoActivity" >
@@ -41,33 +51,34 @@
         </activity>
         <activity android:name="com.qingzhou.client.ChatActivity" >
         </activity>
-        <!-- 卸载程序-->
-        <activity android:name="com.qingzhou.client.version.UninstallerActivity">
-			<!-- <intent-filter>
+        <!-- 卸载程序 -->
+        <activity android:name="com.qingzhou.client.version.UninstallerActivity" >
+
+            <!--
+            <intent-filter>
 				<action android:name="android.intent.action.DELETE" />      
 				<category android:name="android.intent.category.DEFAULT" />      
 				<data android:scheme="package" />    
 			</intent-filter>
-			 -->
-		</activity>
-		 
-         <!--在安装成功后广播 --> 
-        <!-- <receiver android:name="com.qingzhou.client.version.ReplaceBroadcastReceiver">
+            -->
+        </activity>
+
+        <!-- 在安装成功后广播 -->
+        <!--
+          <receiver android:name="com.qingzhou.client.version.ReplaceBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_ADDED"/>
                 <action android:name="android.intent.action.PACKAGE_REPLACED"/>
                 <data android:scheme="package"/>
             </intent-filter>
   		</receiver>
-  		 -->
+        -->
     </application>
-    
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>
