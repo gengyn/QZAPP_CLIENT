@@ -1,7 +1,5 @@
 package com.qingzhou.client;
 
-import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,12 +18,8 @@ import com.qingzhou.client.util.CustomerUtils;
 import com.qingzhou.client.util.DialogUtils;
 import com.qingzhou.client.util.FileUtils;
 import com.qingzhou.client.util.StringUtils;
-import com.qingzhou.client.util.HttpUtils;
 import com.qingzhou.client.common.GlobalParameter;
 import com.qingzhou.client.common.QcApp;
-import com.qingzhou.client.common.RestService;
-import com.qingzhou.client.domain.LoginStatus;
-import com.qingzhou.client.domain.UserBase;
 
 import com.alibaba.fastjson.JSON;
 
@@ -34,7 +28,7 @@ import com.alibaba.fastjson.JSON;
  * @author hihi
  *
  */
-public class Login extends Activity {
+public class LoginActivity extends Activity {
 	private EditText mUser;  //客户名称
 	private EditText mPhone; //客户电话
 	private EditText mPassword; //客户密码
@@ -43,11 +37,13 @@ public class Login extends Activity {
 	private String filePath = "loginUser.json";//客户信息文件位置
 	private boolean isReLogin = false;//是否切换用户登录
 	
+	public static LoginActivity _instance = null; 
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        
+        _instance = this;
         //取得启动该Activity的Intent对象
         Intent intent = getIntent();
         //取出Intent中附加的数据,是否是切换用户登录，如为空，默认为不是切换用户
@@ -127,9 +123,9 @@ public class Login extends Activity {
 	{
 		Intent intent = new Intent();
 		intent.putExtra("FLAG", GlobalParameter.INIT_USERINFO);
-        intent.setClass(Login.this,LoadingActivity.class);
+        intent.setClass(LoginActivity.this,LoadingActivity.class);
         startActivity(intent);
-        Login.this.finish();
+        //LoginActivity.this.finish();
 	}
 	
 	/**
@@ -156,8 +152,6 @@ public class Login extends Activity {
     		//设置客户姓名到QCAPP
 			qcApp.setUserName(mUser.getText().toString().trim());
 			qcApp.setUserPhone(mPhone.getText().toString().trim());
-			//获取客户信息
-    		//intUserBase();
     		//成功后转向
 			toLoadingActivity();
              //Toast.makeText(getApplicationContext(), "登录成功", Toast.LENGTH_SHORT).show();
@@ -166,7 +160,7 @@ public class Login extends Activity {
         		|| StringUtils.isNull(mPassword.getText().toString()) 
         		|| StringUtils.isNull(mPhone.getText().toString())) 
         {
-        	new AlertDialog.Builder(Login.this)
+        	new AlertDialog.Builder(LoginActivity.this)
 			.setIcon(getResources().getDrawable(R.drawable.login_error_icon))
 			.setTitle("提醒")
 			.setMessage(getResources().getText(R.string.loginInputErrorText).toString())
@@ -174,7 +168,7 @@ public class Login extends Activity {
          }
         else{
            
-        	new AlertDialog.Builder(Login.this)
+        	new AlertDialog.Builder(LoginActivity.this)
 			.setIcon(getResources().getDrawable(R.drawable.login_error_icon))
 			.setTitle("失败")
 			.setMessage(getResources().getText(R.string.loginErrorText).toString())

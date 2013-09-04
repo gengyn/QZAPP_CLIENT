@@ -79,8 +79,9 @@ public class LoadingActivity extends Activity{
 			qcApp.setUserToken(userToken);
 			qcApp.setUserBase(JSON.parseObject(userBaseJson,UserBase.class));
 			Intent intent = new Intent (LoadingActivity.this,MainActivity.class);			
-			startActivity(intent);			
-		}					
+			startActivity(intent);
+			LoginActivity._instance.finish();
+		}
 	
 	}
 	

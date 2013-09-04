@@ -70,7 +70,7 @@ public class MainActivity extends Activity{
 	public void mymessage_onClick(View arg0) {
 		
 		Intent intent = new Intent();
-	    intent.setClass(MainActivity.this,MainWeixin.class);
+	    intent.setClass(MainActivity.this,MyMessageActivity.class);
 	    startActivity(intent);
 		
 	}
@@ -117,7 +117,7 @@ public class MainActivity extends Activity{
 	{
 		Intent intent = new Intent();
 		intent.putExtra("isReLogin", true);
-		intent.setClass(MainActivity.this,Login.class);
+		intent.setClass(MainActivity.this,LoginActivity.class);
 		startActivity(intent);
 		MainActivity.this.finish();
 	}

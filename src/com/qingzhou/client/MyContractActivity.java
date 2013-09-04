@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -169,6 +170,7 @@ public class MyContractActivity extends Activity {
 		favorable_price.setText(StringUtils.formatDecimal(contract.getFavorable_price()));
 		
 		ListView favorablelist = (ListView) v.findViewById(R.id.favorablelist);
+		//favorablelist.setEnabled(false);
 		favorablelist.setAdapter(new FavorableViewAdapter(getBaseContext(),contractDiscountList));
 	}
 	
@@ -190,12 +192,13 @@ public class MyContractActivity extends Activity {
 		mTab2.setOnClickListener(new MyOnClickListener(1));
 		mTab3.setOnClickListener(new MyOnClickListener(2));
 		mTab4.setOnClickListener(new MyOnClickListener(3));
-		Display currDisplay = getWindowManager().getDefaultDisplay();
-		int displayWidth = currDisplay.getWidth();
-		int displayHeight = currDisplay.getHeight();
-		one = displayWidth / 4;
-		two = one * 2;
-		three = one * 3;
+		DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int height = displayMetrics.heightPixels;
+        int width = displayMetrics.widthPixels;
+        one = width/4; 
+        two = one*2;
+        three = one*3;
 
 		LayoutInflater mLi = LayoutInflater.from(this);
 		View view1 = mLi.inflate(R.layout.mycontract_base, null);

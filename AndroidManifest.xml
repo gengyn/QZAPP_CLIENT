@@ -23,11 +23,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.qingzhou.client.Login" >
+        <activity android:name="com.qingzhou.client.LoginActivity" >
         </activity>
         <activity android:name="com.qingzhou.client.MainActivity" >
         </activity>
-        <activity android:name="com.qingzhou.client.MainWeixin" >
+        <activity android:name="com.qingzhou.client.MyMessageActivity" >
         </activity>
         <activity android:name="com.qingzhou.client.MyHomeActivity" >
         </activity>
@@ -47,7 +47,7 @@
         </activity>
         <activity android:name="com.qingzhou.client.MyInfoContentActivity" >
         </activity>
-        <activity android:name="com.qingzhou.client.LoadingActivity" >
+        <activity android:name="com.qingzhou.client.LoadingActivity" android:theme="@style/MyDialogStyle">
         </activity>
         <activity android:name="com.qingzhou.client.ChatActivity" >
         </activity>
