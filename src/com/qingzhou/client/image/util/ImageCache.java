@@ -17,6 +17,7 @@
 package com.qingzhou.client.image.util;
 
 import com.qingzhou.client.BuildConfig;
+import com.qingzhou.client.common.GlobalParameter;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -68,7 +69,8 @@ public class ImageCache {
     // Constants to easily toggle various caches
     private static final boolean DEFAULT_MEM_CACHE_ENABLED = true;
     private static final boolean DEFAULT_DISK_CACHE_ENABLED = true;
-    private static final boolean DEFAULT_INIT_DISK_CACHE_ON_CREATE = false;
+    //初始时是否建立磁盘缓存，原值为false
+    private static final boolean DEFAULT_INIT_DISK_CACHE_ON_CREATE = true;
 
     private DiskLruCache mDiskLruCache;
     private LruCache<String, BitmapDrawable> mMemoryCache;
@@ -279,7 +281,7 @@ public class ImageCache {
         }
 
         if (BuildConfig.DEBUG && memValue != null) {
-            Log.d(TAG, "Memory cache hit");
+            Log.d(TAG, "内存缓存命中");
         }
 
         return memValue;
@@ -306,7 +308,7 @@ public class ImageCache {
                     final DiskLruCache.Snapshot snapshot = mDiskLruCache.get(key);
                     if (snapshot != null) {
                         if (BuildConfig.DEBUG) {
-                            Log.d(TAG, "Disk cache hit");
+                            Log.d(TAG, "磁盘缓存命中");
                         }
                         inputStream = snapshot.getInputStream(DISK_CACHE_INDEX);
                         if (inputStream != null) {
@@ -499,7 +501,7 @@ public class ImageCache {
 
     /**
      * Get a usable cache directory (external if available, internal otherwise).
-     *
+     * 磁盘缓存保存位置
      * @param context The context to use
      * @param uniqueName A unique directory name to append to the cache dir
      * @return The cache dir
@@ -507,10 +509,11 @@ public class ImageCache {
     public static File getDiskCacheDir(Context context, String uniqueName) {
         // Check if media is mounted or storage is built-in, if so, try and use external cache dir
         // otherwise use internal cache dir
-        final String cachePath =
-                Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) ||
-                        !isExternalStorageRemovable() ? getExternalCacheDir(context).getPath() :
-                                context.getCacheDir().getPath();
+    	final String cachePath = GlobalParameter.CACHE_DIR;
+//        final String cachePath =
+//                Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) ||
+//                        !isExternalStorageRemovable() ? getExternalCacheDir(context).getPath() :
+//                                context.getCacheDir().getPath();
 
         return new File(cachePath + File.separator + uniqueName);
     }

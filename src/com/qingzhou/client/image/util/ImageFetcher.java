@@ -187,7 +187,7 @@ public class ImageFetcher extends ImageResizer {
      */
     private Bitmap processBitmap(String data) {
         if (BuildConfig.DEBUG) {
-            Log.d(TAG, "processBitmap - " + data);
+            Log.d(TAG, "processBitmap -下载 " + data);
         }
 
         final String key = ImageCache.hashKeyForDisk(data);

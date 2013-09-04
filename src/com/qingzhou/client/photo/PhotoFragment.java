@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,11 +40,13 @@ import com.qingzhou.client.image.util.ImageCache.ImageCacheParams;
 public class PhotoFragment extends Fragment implements AdapterView.OnItemClickListener {
     private static final String TAG = "PhotoFragment";
     private static final String IMAGE_CACHE_DIR = "thumbs";
+    private static final String BIGIMAGE_CACHE_DIR = "images";
 
     private int mImageThumbSize;
     private int mImageThumbSpacing;
     private ImageAdapter mAdapter;
     private ImageFetcher mImageFetcher;
+    private ImageFetcher mBigImageFetcher;
     private TextView count;
     private ImageView photo_imageView;
 
@@ -66,7 +69,7 @@ public class PhotoFragment extends Fragment implements AdapterView.OnItemClickLi
         mAdapter = new ImageAdapter(getActivity());
         
         ImageCacheParams cacheParams = new ImageCacheParams(getActivity(), IMAGE_CACHE_DIR);
-
+        
         cacheParams.setMemCacheSizePercent(0.25f); // Set memory cache to 25% of app memory
 
         // The ImageFetcher takes care of loading images into our ImageView children asynchronously
@@ -75,6 +78,20 @@ public class PhotoFragment extends Fragment implements AdapterView.OnItemClickLi
         mImageFetcher.addImageCache(getActivity().getSupportFragmentManager(), cacheParams);
         
         
+      //获取屏幕的分辨率，用于设置图片的宽带和高度
+        final DisplayMetrics displayMetrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        final int height = displayMetrics.heightPixels;
+        final int width = displayMetrics.widthPixels;
+        
+        final int longest = (height > width ? height : width) / 2;
+        ImageCacheParams cacheParamsBig = new ImageCacheParams(getActivity(), BIGIMAGE_CACHE_DIR);
+        cacheParamsBig.setMemCacheSizePercent(0.25f);
+        mBigImageFetcher = new ImageFetcher(getActivity(), longest);
+        mBigImageFetcher.setImageFadeIn(false);
+        //mBigImageFetcher.setLoadingImage(R.drawable.ic_launcher);
+        mBigImageFetcher.addImageCache(getActivity().getSupportFragmentManager(), cacheParamsBig);
+               
     }
 
     @Override
@@ -146,7 +163,7 @@ public class PhotoFragment extends Fragment implements AdapterView.OnItemClickLi
     public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
     	
     	count.setText(position + 1 +"/"+Images.getImageUrls().size());
-    	mImageFetcher.loadImage(getResources().getString(R.string.project_photo_url)
+    	mBigImageFetcher.loadImage(getResources().getString(R.string.project_photo_url)
 				+Images.getImageUrls().get(position).getFile_path().replace("\\", "/"), photo_imageView);
     }
     
@@ -156,9 +173,8 @@ public class PhotoFragment extends Fragment implements AdapterView.OnItemClickLi
     public void defaultShow()
     {
     	count.setText( 1 +"/"+Images.getImageUrls().size());
-    	mImageFetcher.setImageFadeIn(false);
     	
-    	mImageFetcher.loadImage(getResources().getString(R.string.project_photo_url)
+    	mBigImageFetcher.loadImage(getResources().getString(R.string.project_photo_url)
 				+Images.getImageUrls().get(0).getFile_path().replace("\\", "/"), photo_imageView);
     }
 

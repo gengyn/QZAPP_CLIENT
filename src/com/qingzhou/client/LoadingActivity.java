@@ -48,7 +48,7 @@ public class LoadingActivity extends Activity{
 		
 		//取得启动该Activity的Intent对象
         Intent intent = getIntent();
-        //取出Intent中附加的数据,是否是切换用户登录，如为空，默认为不是切换用户
+        //取出Intent中附加的数据
         flag = intent.getIntExtra("FLAG",0);
         schedetail_id = intent.getStringExtra("schedetail_id");
         //开启线程并执行

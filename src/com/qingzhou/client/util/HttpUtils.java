@@ -69,8 +69,8 @@ public class HttpUtils {
 	{
 		HttpClient client = new DefaultHttpClient();// 新建http客户端
 		HttpParams httpParams = client.getParams();
-		HttpConnectionParams.setConnectionTimeout(httpParams, 1000);// 设置连接超时范围
-		HttpConnectionParams.setSoTimeout(httpParams, 2000);
+		HttpConnectionParams.setConnectionTimeout(httpParams, 2000);// 设置连接超时范围
+		HttpConnectionParams.setSoTimeout(httpParams, 4000);
 		return client;
 	}
 	

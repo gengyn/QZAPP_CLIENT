@@ -239,7 +239,7 @@ public abstract class ImageWorker {
         @Override
         protected BitmapDrawable doInBackground(Object... params) {
             if (BuildConfig.DEBUG) {
-                Log.d(TAG, "doInBackground - starting work");
+                Log.d(TAG, "后台程序 - starting work");
             }
 
             data = params[0];
