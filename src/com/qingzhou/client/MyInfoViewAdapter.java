@@ -2,11 +2,14 @@ package com.qingzhou.client;
 
 import java.util.List;
 
+import com.qingzhou.client.domain.Myinfo;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -16,11 +19,11 @@ import android.widget.TextView;
  */
 public class MyInfoViewAdapter extends BaseAdapter {
 	
-	private List<MyInfoEntity> rows;
+	public List<Myinfo> rows;
 	private Context ctx;
     private LayoutInflater mInflater;
 
-	public MyInfoViewAdapter(Context context,List<MyInfoEntity> rows)
+	public MyInfoViewAdapter(Context context,List<Myinfo> rows)
 	{
 		ctx = context;
 		this.rows = rows;
@@ -48,17 +51,21 @@ public class MyInfoViewAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
-		MyInfoEntity entity = rows.get(position);
-		convertView = mInflater.inflate(R.layout.infolist,null);
+		Myinfo entity = rows.get(position);
+		convertView = mInflater.inflate(R.layout.infolist_item,null);
 		ViewHolder viewHolder = new ViewHolder();
 		
 		viewHolder.info_title = (TextView) convertView.findViewById(R.id.info_title);
 		viewHolder.info_date = (TextView) convertView.findViewById(R.id.info_date);
+		viewHolder.info_type = (TextView) convertView.findViewById(R.id.info_type);
+		viewHolder.info_flag = (ImageView) convertView.findViewById(R.id.info_flag);
 		
 		convertView.setTag(viewHolder);
 		
 		viewHolder.info_title.setText(entity.getInfo_title());
 		viewHolder.info_date.setText(entity.getInfo_date());
+		viewHolder.info_type.setText(entity.getInfo_type());
+		//viewHolder.info_flag.setVisibility(View.VISIBLE);
 		
 		return convertView;
 	}
@@ -66,5 +73,7 @@ public class MyInfoViewAdapter extends BaseAdapter {
 	static class ViewHolder { 
         public TextView info_title;
         public TextView info_date;
+        public TextView info_type;
+        public ImageView info_flag;
     }
 }

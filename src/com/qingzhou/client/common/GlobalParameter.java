@@ -8,6 +8,8 @@ public class GlobalParameter {
 	public final static int INIT_CONTRACT = 0x02; //初始化合同信息标识
 	public final static int INIT_PROJECTPLAN = 0x03;//初始化工程进度标识
 	public final static int SHOW_PHOTO = 0x04;//查看图片
+	public final static int INIT_MYINFO = 0X05;//初始化资讯
+	
 	
 	
 	//工程状态
@@ -23,4 +25,7 @@ public class GlobalParameter {
 	//缓存存放位置，SD卡中
 	public final static String CACHE_DIR = 
 			Environment.getExternalStorageDirectory().toString() + "/QZ/cache/";
+	
+	//分页默认值
+	public final static int PAGESIZE = 10;//默认分页每页行数
 }

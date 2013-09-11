@@ -1,5 +1,7 @@
 package com.qingzhou.client.common;
 
+import java.util.List;
+
 import org.apache.http.HttpVersion;
 import org.apache.http.client.HttpClient;
 import org.apache.http.conn.ClientConnectionManager;
@@ -18,6 +20,7 @@ import org.apache.http.protocol.HTTP;
 import android.app.Application;
 
 import com.qingzhou.client.domain.RestProjectPlan;
+import com.qingzhou.client.domain.Myinfo;
 import com.qingzhou.client.domain.UserBase;
 import com.qingzhou.client.domain.Contract;
 
@@ -36,6 +39,14 @@ public class QcApp extends Application {
 	Contract contract;//合同信息
 	RestProjectPlan projectPlan;//工程进度信息
 	
+	List<Myinfo> infoList;//资讯列表
+	
+	public List<Myinfo> getInfoList() {
+		return infoList;
+	}
+	public void setInfoList(List<Myinfo> infoList) {
+		this.infoList = infoList;
+	}
 	public RestProjectPlan getProjectPlan() {
 		return projectPlan;
 	}

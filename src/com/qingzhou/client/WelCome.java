@@ -7,6 +7,10 @@ import com.qingzhou.client.version.VersionUpdate;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.app.Activity;
 import android.content.Intent;
 
@@ -22,6 +26,28 @@ public class WelCome extends Activity{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);	
 		setContentView(R.layout.welcome);
+		
+//		final View view = View.inflate(this, R.layout.welcome, null);
+//		setContentView(view);
+//		
+//		//渐变展示启动屏
+//		AlphaAnimation aa = new AlphaAnimation(0.3f,1.0f);
+//		aa.setDuration(2000);
+//		view.startAnimation(aa);
+//		aa.setAnimationListener(new AnimationListener()
+//		{
+//			@Override
+//			public void onAnimationEnd(Animation arg0) {
+//				Intent intent = new Intent (WelCome.this,LoginActivity.class);			
+//				startActivity(intent);			
+//				WelCome.this.finish();
+//			}
+//			@Override
+//			public void onAnimationRepeat(Animation animation) {}
+//			@Override
+//			public void onAnimationStart(Animation animation) {}
+//			
+//		});
 		
 		//检查项目现在包括SD卡、网络
 		//检查SD卡
@@ -53,7 +79,7 @@ public class WelCome extends Activity{
 						startActivity(intent);			
 						WelCome.this.finish();
 					}
-				}, 3000);
+				}, 2000);
 			}else
 			{
 				DialogUtils.showErrDialog(this,this.getResources().getText(R.string.networkErr).toString());

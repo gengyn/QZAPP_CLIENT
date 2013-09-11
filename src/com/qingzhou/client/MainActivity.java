@@ -6,6 +6,7 @@ import com.qingzhou.client.version.VersionUpdate;
 import com.qingzhou.client.common.GlobalParameter;
 import com.qingzhou.client.common.QcApp;
 import com.qingzhou.client.util.DialogUtils;
+import com.qingzhou.client.util.FileUtils;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -30,6 +31,7 @@ public class MainActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
 		qcApp = (QcApp)getApplication();
 		main_title = (TextView) this.findViewById(R.id.main_title);
 		main_title.setText(String.format(getResources().getString(R.string.hello),qcApp.getUserName()));
@@ -81,7 +83,10 @@ public class MainActivity extends Activity{
 	public void myinfo_onclick(View arg0)
 	{
 		Intent intent = new Intent();
-	    intent.setClass(MainActivity.this,MyInfoActivity.class);
+		intent.putExtra("FLAG", GlobalParameter.INIT_MYINFO);
+	    intent.setClass(MainActivity.this,LoadingActivity.class);
+		//增加翻页、下拉获取最新资讯功能
+	    //intent.setClass(MainActivity.this,MyInfoActivity.class);
 	    startActivity(intent);
 	}
 	

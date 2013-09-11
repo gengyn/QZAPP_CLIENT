@@ -46,7 +46,7 @@ public class ImageFetcher extends ImageResizer {
     private static final String HTTP_CACHE_DIR = "http";
     private static final int IO_BUFFER_SIZE = 8 * 1024;
 
-    private DiskLruCache mHttpDiskCache;
+    public static DiskLruCache mHttpDiskCache;
     private File mHttpCacheDir;
     private boolean mHttpDiskCacheStarting = true;
     private final Object mHttpDiskCacheLock = new Object();
@@ -187,7 +187,7 @@ public class ImageFetcher extends ImageResizer {
      */
     private Bitmap processBitmap(String data) {
         if (BuildConfig.DEBUG) {
-            Log.d(TAG, "processBitmap -下载 " + data);
+            Log.d(TAG, "processBitmap - 需要判断是否下载过" + data);
         }
 
         final String key = ImageCache.hashKeyForDisk(data);
@@ -207,7 +207,7 @@ public class ImageFetcher extends ImageResizer {
                     snapshot = mHttpDiskCache.get(key);
                     if (snapshot == null) {
                         if (BuildConfig.DEBUG) {
-                            Log.d(TAG, "processBitmap, not found in http cache, downloading...");
+                            Log.d(TAG, "processBitmap, 没有在 http cache找到, 下载中...");
                         }
                         DiskLruCache.Editor editor = mHttpDiskCache.edit(key);
                         if (editor != null) {
@@ -219,8 +219,14 @@ public class ImageFetcher extends ImageResizer {
                             }
                         }
                         snapshot = mHttpDiskCache.get(key);
+                    }else
+                    {
+                    	if (BuildConfig.DEBUG) {
+                            Log.d(TAG, "processBitmap, 在 http cache找到, 无需重复下载");
+                        }
                     }
                     if (snapshot != null) {
+                    	
                         fileInputStream =
                                 (FileInputStream) snapshot.getInputStream(DISK_CACHE_INDEX);
                         fileDescriptor = fileInputStream.getFD();

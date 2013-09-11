@@ -45,7 +45,7 @@
 	            android:layout_height="wrap_content"
 	            android:orientation="horizontal" >
 	
-	            <com.qingzhou.client.view.MyImageView
+	            <com.qingzhou.client.widget.MyImageView
 	                android:id="@+id/myhome"
 	                android:layout_width="wrap_content"
 	                android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
 	                android:layout_height="wrap_content"
 	                android:orientation="vertical" >
 	
-	                <com.qingzhou.client.view.MyImageView
+	                <com.qingzhou.client.widget.MyImageView
 	                    android:id="@+id/mymessage"
 	                    android:layout_width="wrap_content"
 	                    android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
 	                    android:src="@drawable/left_top"
 	                    android:onClick="mymessage_onClick"/>
 	
-	                <com.qingzhou.client.view.MyImageView
+	                <com.qingzhou.client.widget.MyImageView
 	                    android:id="@+id/mycontract"
 	                    android:layout_width="wrap_content"
 	                    android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
 	            </LinearLayout>
 	        </LinearLayout>
 	
-	        <com.qingzhou.client.view.MyImageView
+	        <com.qingzhou.client.widget.MyImageView
 	            android:id="@+id/myinfo"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"

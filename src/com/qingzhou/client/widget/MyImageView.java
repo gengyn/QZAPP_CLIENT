@@ -1,4 +1,4 @@
-package com.qingzhou.client.view;
+package com.qingzhou.client.widget;
 
 import android.content.Context;
 import android.graphics.Camera;

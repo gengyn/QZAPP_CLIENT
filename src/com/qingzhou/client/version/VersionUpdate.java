@@ -24,6 +24,7 @@ import com.alibaba.fastjson.JSON;
 import com.qingzhou.client.R;
 import com.qingzhou.client.domain.Version;
 import com.qingzhou.client.util.HttpUtils;
+import com.qingzhou.client.util.ThreadPoolUtils;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -65,6 +66,7 @@ public class VersionUpdate {
 	static String serverUpdateInfo = "";//版本更新信息
 	static String serverDate = "";//版本更新时间
 	static String serverApkSize = "";//服务器端版本文件大小
+	static String forceUpdate = "0";//是否强制更新
 
 	File apkfile;//安装文件FILE对象
 	private boolean interceptFlag = false;
@@ -131,6 +133,7 @@ public class VersionUpdate {
 				serverDate = verJson.getVer_date();
 				serverApkSize = verJson.getFile_size();
 				apkName = verJson.getFile_name();
+				forceUpdate = verJson.getForceupdate();
 			}
 
 			isValid = true;
@@ -158,7 +161,7 @@ public class VersionUpdate {
 			if (serverVersionCode > curVersionCode)
 			{
 				isNew = true;
-				showNoticeDialog();
+				showUpdateNoticeDialog();
 			}
 		}else 
 			showNetWorkInvalidDialog();
@@ -205,9 +208,9 @@ public class VersionUpdate {
 	}
 	
 	/**
-	 * 下载提醒对话框
+	 * 下载提醒对话框,需要判断是否强制更新
 	 */
-	private void showNoticeDialog(){
+	private void showUpdateNoticeDialog(){
 		AlertDialog.Builder builder = new Builder(mContext);
 		builder.setTitle("软件版本更新");
 		builder.setMessage("发现有新的版本，是否更新？\r\n版本号为:" 
@@ -219,12 +222,24 @@ public class VersionUpdate {
 				showDownloadDialog();			
 			}
 		});
-		builder.setNegativeButton("以后再说", new OnClickListener() {			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-			}
-		});
+		if (forceUpdate.equals("1"))
+		{
+			builder.setNegativeButton("退出应用", new OnClickListener() {			
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					System.exit(0);//退出应用
+				}
+			});
+		}else
+		{
+			builder.setNegativeButton("以后再说", new OnClickListener() {			
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+				}
+		
+			});
+		}
 		noticeDialog = builder.create();
 		noticeDialog.setCanceledOnTouchOutside(false);//点击屏幕不消失
 		noticeDialog.show();
@@ -260,8 +275,9 @@ public class VersionUpdate {
 	 * 下载APK文件
 	 */
 	private void downloadApk(){
-		downLoadThread = new Thread(mdownApkRunnable);
-		downLoadThread.start();
+//		downLoadThread = new Thread(mdownApkRunnable);
+//		downLoadThread.start();
+		ThreadPoolUtils.execute(mdownApkRunnable);
 	}
 	
 	/**

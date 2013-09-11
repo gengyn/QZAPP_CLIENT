@@ -330,6 +330,35 @@ public class ImageCache {
                     } catch (IOException e) {}
                 }
             }
+//            //如果磁盘缓存中没有，在http缓存中找一遍，避免重复下载
+//            if (bitmap == null && ImageFetcher.mHttpDiskCache != null) {
+//                InputStream inputStream = null;
+//                try {
+//                    final DiskLruCache.Snapshot snapshot = ImageFetcher.mHttpDiskCache.get(key);
+//                    if (snapshot != null) {
+//                        if (BuildConfig.DEBUG) {
+//                            Log.d(TAG, "HTTP缓存命中");
+//                        }
+//                        inputStream = snapshot.getInputStream(DISK_CACHE_INDEX);
+//                        if (inputStream != null) {
+//                            FileDescriptor fd = ((FileInputStream) inputStream).getFD();
+//
+//                            // Decode bitmap, but we don't want to sample so give
+//                            // MAX_VALUE as the target dimensions
+//                            bitmap = ImageResizer.decodeSampledBitmapFromDescriptor(
+//                                    fd, Integer.MAX_VALUE, Integer.MAX_VALUE, this);
+//                        }
+//                    }
+//                } catch (final IOException e) {
+//                    Log.e(TAG, "getBitmapFromDiskCache - " + e);
+//                } finally {
+//                    try {
+//                        if (inputStream != null) {
+//                            inputStream.close();
+//                        }
+//                    } catch (IOException e) {}
+//                }
+//            }
             return bitmap;
         }
     }
@@ -509,7 +538,8 @@ public class ImageCache {
     public static File getDiskCacheDir(Context context, String uniqueName) {
         // Check if media is mounted or storage is built-in, if so, try and use external cache dir
         // otherwise use internal cache dir
-    	final String cachePath = GlobalParameter.CACHE_DIR;
+    	
+    	final String cachePath = GlobalParameter.CACHE_DIR;;
 //        final String cachePath =
 //                Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) ||
 //                        !isExternalStorageRemovable() ? getExternalCacheDir(context).getPath() :
@@ -590,8 +620,10 @@ public class ImageCache {
         }
 
         // Before Froyo we need to construct the external cache dir ourselves
-        final String cacheDir = "/Android/data/" + context.getPackageName() + "/cache/";
-        return new File(Environment.getExternalStorageDirectory().getPath() + cacheDir);
+        //final String cacheDir = "/Android/data/" + context.getPackageName() + "/cache/";
+        final String cacheDir = GlobalParameter.CACHE_DIR;
+        //return new File(Environment.getExternalStorageDirectory().getPath() + cacheDir);
+        return new File(cacheDir);
     }
 
     /**

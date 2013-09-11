@@ -10,6 +10,7 @@ import com.qingzhou.client.common.GlobalParameter;
 import com.qingzhou.client.common.QcApp;
 import com.qingzhou.client.common.RestService;
 import com.qingzhou.client.domain.LoginStatus;
+import com.qingzhou.client.domain.Myinfo;
 import com.qingzhou.client.domain.RestProjectPlan;
 import com.qingzhou.client.domain.UserBase;
 import com.qingzhou.client.domain.Contract;
@@ -37,6 +38,9 @@ public class LoadingActivity extends Activity{
 	private static final int FINISH_MESSAGE = 0x01;
 	private static final int ERROR_MESSAGE = 0x02;
 	
+	private int pageSize = GlobalParameter.PAGESIZE;//默认分页每页行数
+	private int pageNo = 1;//默认页数
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		
@@ -51,17 +55,21 @@ public class LoadingActivity extends Activity{
         //取出Intent中附加的数据
         flag = intent.getIntExtra("FLAG",0);
         schedetail_id = intent.getStringExtra("schedetail_id");
+        pageNo = intent.getIntExtra("pageNo",1);
+        pageSize = intent.getIntExtra("pageSize",10);
         //开启线程并执行
         ThreadPoolUtils.execute(mRunnable);
         
    }
+	
+
 	
 	/**
 	 * 登录成功后，获取客户基本信息，set到QCAPP中，并进入主界面
 	 * @throws Exception 
 	 * @throws ClientProtocolException 
 	 */
-	public void intUserBase() throws ClientProtocolException, Exception
+	public void initUserBase() throws ClientProtocolException, Exception
 	{
 		
 		String userToken = CustomerUtils.createToken();
@@ -95,10 +103,13 @@ public class LoadingActivity extends Activity{
 		HttpUtils httpUtil = new HttpUtils();
 		String contractJson = httpUtil.httpGetExecute(
 				RestService.GET_CONTRACT_URL+"/"+qcApp.getUserBase().getFormal_contract_id());
-		Contract contract = JSON.parseObject(contractJson, Contract.class);
-		qcApp.setContract(contract);
-		Intent intent = new Intent (LoadingActivity.this,MyContractActivity.class);			
-		startActivity(intent);
+		if (!StringUtils.isNull(contractJson))
+		{
+			Contract contract = JSON.parseObject(contractJson, Contract.class);
+			qcApp.setContract(contract);
+			Intent intent = new Intent (LoadingActivity.this,MyContractActivity.class);			
+			startActivity(intent);
+		}
 	}
 	
 	/**
@@ -111,10 +122,13 @@ public class LoadingActivity extends Activity{
 		HttpUtils httpUtil = new HttpUtils();
 		String projectPlanJson = httpUtil.httpGetExecute(
 				RestService.GET_PROJECTPLAN_URL+qcApp.getUserBase().getCustomer_id());
-		RestProjectPlan restProjectPlan = JSON.parseObject(projectPlanJson, RestProjectPlan.class);
-		qcApp.setProjectPlan(restProjectPlan);
-		Intent intent = new Intent (LoadingActivity.this,MyHomeActivity.class);			
-		startActivity(intent);
+		if (!StringUtils.isNull(projectPlanJson))
+		{
+			RestProjectPlan restProjectPlan = JSON.parseObject(projectPlanJson, RestProjectPlan.class);
+			qcApp.setProjectPlan(restProjectPlan);
+			Intent intent = new Intent (LoadingActivity.this,MyHomeActivity.class);			
+			startActivity(intent);
+		}
 		
 	}
 	
@@ -136,6 +150,27 @@ public class LoadingActivity extends Activity{
 	}
 	
 	/**
+	 * 获取轻舟资讯列表，根据客户ID进行查询
+	 * @throws ClientProtocolException
+	 * @throws Exception
+	 */
+	public void initMyinfo() throws ClientProtocolException, Exception
+	{
+		HttpUtils httpUtil = new HttpUtils();
+		String myinfoJson = httpUtil.httpGetExecute(RestService.GET_MYINFO_URL+qcApp.getUserBase().getCustomer_id()+
+				"/" + pageNo + "/" + pageSize);
+		//暂时不访问网络，内置资讯数据
+		//String myinfoJson = "[{\"info_id\":\"1\",\"info_title\":\"什么是轻舟装饰完整家装？\",\"info_type\":\"家装常识\",\"info_url\":\"file:///android_asset/html/2013090901.html\",\"info_date\":\"2013-09-09\"},{\"info_id\":\"2\",\"info_title\":\"轻舟装饰完整家装有哪些优势？\",\"info_type\":\"家装常识\",\"info_url\":\"file:///android_asset/html/2013090902.html\",\"info_date\":\"2013-09-09\"},{\"info_id\":\"3\",\"info_title\":\"完整家装必须包含哪些项目？\",\"info_type\":\"家装常识\",\"info_url\":\"file:///android_asset/html/2013090903.html\",\"info_date\":\"2013-09-09\"},{\"info_id\":\"4\",\"info_title\":\"完整家装设计、施工质量如何保障？\",\"info_type\":\"家装常识\",\"info_url\":\"file:///android_asset/html/2013090904.html\",\"info_date\":\"2013-09-09\"},{\"info_id\":\"5\",\"info_title\":\"完整家装售后服务如何保障？\",\"info_type\":\"家装常识\",\"info_url\":\"file:///android_asset/html/2013090905.html\",\"info_date\":\"2013-09-09\"},{\"info_id\":\"6\",\"info_title\":\"完整家装设计费收取方式？\",\"info_type\":\"家装常识\",\"info_url\":\"file:///android_asset/html/2013090906.html\",\"info_date\":\"2013-09-09\"}]";
+		if(!StringUtils.isNull(myinfoJson))
+		{
+			qcApp.setInfoList(JSONArray.parseArray(myinfoJson,Myinfo.class));
+			Intent intent = new Intent (LoadingActivity.this,MyInfoTempActivity.class);
+			startActivity(intent);
+		}
+		
+	}
+	
+	/**
 	 * 具体执行方法
 	 */
 	private Runnable mRunnable = new Runnable() {	
@@ -145,7 +180,7 @@ public class LoadingActivity extends Activity{
 		        switch(flag)
 		        {
 		        case GlobalParameter.INIT_USERINFO:
-		        	intUserBase();
+		        	initUserBase();
 		        	break;
 		        case GlobalParameter.INIT_CONTRACT:
 		        	initContract();
@@ -155,6 +190,9 @@ public class LoadingActivity extends Activity{
 		        	break;
 		        case GlobalParameter.SHOW_PHOTO:
 		        	showPhoto();
+		        	break;
+		        case GlobalParameter.INIT_MYINFO:
+		        	initMyinfo();
 		        	break;
 		        default:
 		        	throw new Exception("异常");	
