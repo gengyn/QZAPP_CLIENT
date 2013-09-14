@@ -12,6 +12,7 @@
     <string name="seachtext">搜索</string>
     <string name="returntext">返回</string>
     <string name="sendtext">发送</string>
+    <string name="noticetext">通知</string>
     <!-- 轻舟资讯 -->
     <string name="infocontent">资讯内容</string>
     <string name="pull_to_refresh_pull_label">下拉可以刷新</string>
@@ -23,7 +24,7 @@
     <string name="load_more">更多</string>
     <string name="load_empty">无更多资讯</string>
     <string name="load_error">加载数据出错</string>
-    <string name="info_data_toast_message">有 %d 条更新</string>
+    <string name="info_data_toast_message">有%1$条更新</string>
     <string name="info_data_toast_none">没有新更新</string>
     <!-- 轻舟资讯 -->
     <!-- 我的家装相关 -->

@@ -19,10 +19,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 /**
- * 下拉刷新控件
- * @author liux (http://my.oschina.net/liux)
- * @version 1.0
- * @created 2012-3-21
+ * 下拉刷新ListView控件
+ * @author hihi
+ *
  */
 public class PullToRefreshListView extends ListView implements OnScrollListener {  
 	   

@@ -65,7 +65,8 @@ public class MyInfoViewAdapter extends BaseAdapter {
 		viewHolder.info_title.setText(entity.getInfo_title());
 		viewHolder.info_date.setText(entity.getInfo_date());
 		viewHolder.info_type.setText(entity.getInfo_type());
-		//viewHolder.info_flag.setVisibility(View.VISIBLE);
+		if (entity.getToday_flag() == 1)
+			viewHolder.info_flag.setVisibility(View.VISIBLE);
 		
 		return convertView;
 	}

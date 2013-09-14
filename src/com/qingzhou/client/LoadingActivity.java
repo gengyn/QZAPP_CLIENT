@@ -47,7 +47,7 @@ public class LoadingActivity extends Activity{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);	
 		setContentView(R.layout.loading);
-		
+
 		qcApp = (QcApp)getApplication();
 		
 		//取得启动该Activity的Intent对象

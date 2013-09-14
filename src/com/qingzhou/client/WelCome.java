@@ -1,5 +1,6 @@
 package com.qingzhou.client;
 
+import com.qingzhou.client.common.QcApp;
 import com.qingzhou.client.util.FileUtils;
 import com.qingzhou.client.util.DialogUtils;
 import com.qingzhou.client.version.VersionUpdate;
@@ -21,11 +22,17 @@ import android.content.Intent;
  */
 public class WelCome extends Activity{
 
+	private QcApp qcApp;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);	
 		setContentView(R.layout.welcome);
+		
+		qcApp = (QcApp)getApplication();
+		
+		Intent intent = getIntent();
+		qcApp.setGoFlag(intent.getIntExtra("FLAG",0));
 		
 //		final View view = View.inflate(this, R.layout.welcome, null);
 //		setContentView(view);

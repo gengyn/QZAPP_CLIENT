@@ -39,8 +39,17 @@ public class QcApp extends Application {
 	Contract contract;//合同信息
 	RestProjectPlan projectPlan;//工程进度信息
 	
+	int goFlag = 0;//跳转标识
+	
+	
 	List<Myinfo> infoList;//资讯列表
 	
+	public int getGoFlag() {
+		return goFlag;
+	}
+	public void setGoFlag(int goFlag) {
+		this.goFlag = goFlag;
+	}
 	public List<Myinfo> getInfoList() {
 		return infoList;
 	}

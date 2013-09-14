@@ -26,9 +26,9 @@ public class DialogUtils {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
-				//System.exit(0);
+				System.exit(0);
 				//另外一种关闭应用的方式
-				android.os.Process.killProcess(android.os.Process.myPid());
+				//android.os.Process.killProcess(android.os.Process.myPid());
 			}
 		});
 		builder.setNegativeButton("取消", new OnClickListener() {			
