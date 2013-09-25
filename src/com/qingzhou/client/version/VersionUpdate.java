@@ -21,10 +21,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import com.alibaba.fastjson.JSON;
 
+import com.qingzhou.app.utils.HttpUtils;
+import com.qingzhou.app.utils.ThreadPoolUtils;
 import com.qingzhou.client.R;
 import com.qingzhou.client.domain.Version;
-import com.qingzhou.client.util.HttpUtils;
-import com.qingzhou.client.util.ThreadPoolUtils;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

@@ -6,13 +6,12 @@ import java.util.Set;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
 
-import com.alibaba.fastjson.JSON;
+import com.qingzhou.app.utils.DialogUtils;
+import com.qingzhou.app.utils.Logger;
 import com.qingzhou.client.LoadingActivity;
 import com.qingzhou.client.version.VersionUpdate;
-import com.qingzhou.client.common.GlobalParameter;
+import com.qingzhou.client.common.Constants;
 import com.qingzhou.client.common.QcApp;
-import com.qingzhou.client.util.DialogUtils;
-import com.qingzhou.client.util.FileUtils;
 import com.qingzhou.client.BuildConfig;
 
 import android.os.Bundle;
@@ -54,8 +53,24 @@ public class MainActivity extends Activity implements TagAliasCallback{
 		//版本更新
 		VersionUpdate verUpdate = new VersionUpdate(this);
 		verUpdate.checkNewVersion();
+		
+		//界面跳转
+		jumpActivity();
 	}
 	
+	@Override
+	public void onResume() {
+    	Logger.d(TAG, "mainActivity启动状态");
+    	Constants.mainActivity_isBackground = false;
+		super.onResume();
+	}
+
+	@Override
+	public void onPause() {
+		Logger.d(TAG, "mainActivity关闭状态");
+		Constants.mainActivity_isBackground = true;
+		super.onPause();
+	}
 
 	/**
 	 * 初始化 JPush。如果已经初始化，但没有登录成功，则执行重新登录。
@@ -65,11 +80,13 @@ public class MainActivity extends Activity implements TagAliasCallback{
 		if (BuildConfig.DEBUG)
 			Log.i(TAG, "初始化JPush");
 		JPushInterface.init(getApplicationContext());
+		//最多保留十条
+		JPushInterface.setLatestNotifactionNumber(getApplicationContext(), 10);
 		//设置alias
-		JPushInterface.setAliasAndTags(getApplicationContext(), qcApp.getUserBase().getCustomer_id(),null,this);
+		JPushInterface.setAliasAndTags(getApplicationContext(), qcApp.getUserPhone(),null,this);
 		//设置tags
 		Set<String> tagSet = new LinkedHashSet<String>();
-		for (String sTagItme : GlobalParameter.CLIENT_TAGS) {
+		for (String sTagItme : Constants.CLIENT_TAGS) {
 			
 			tagSet.add(sTagItme);
 		}
@@ -116,7 +133,7 @@ public class MainActivity extends Activity implements TagAliasCallback{
 	public void myinfo_onclick(View arg0)
 	{
 		Intent intent = new Intent();
-		intent.putExtra("FLAG", GlobalParameter.INIT_MYINFO);
+		intent.putExtra("FLAG", Constants.INIT_MYINFO);
 	    intent.setClass(MainActivity.this,LoadingActivity.class);
 		//增加翻页、下拉获取最新资讯功能
 	    //intent.setClass(MainActivity.this,MyInfoActivity.class);
@@ -130,7 +147,7 @@ public class MainActivity extends Activity implements TagAliasCallback{
 	public void myhome_onclick(View arg0)
 	{
 		Intent intent = new Intent();
-		intent.putExtra("FLAG", GlobalParameter.INIT_PROJECTPLAN);
+		intent.putExtra("FLAG", Constants.INIT_PROJECTPLAN);
 	    intent.setClass(MainActivity.this,LoadingActivity.class);
 	    startActivity(intent);
 	}
@@ -142,7 +159,7 @@ public class MainActivity extends Activity implements TagAliasCallback{
 	public void mycontract_onclick(View arg0)
 	{
 		Intent intent = new Intent();
-		intent.putExtra("FLAG", GlobalParameter.INIT_CONTRACT);
+		intent.putExtra("FLAG", Constants.INIT_CONTRACT);
 	    intent.setClass(MainActivity.this,LoadingActivity.class);
 	    startActivity(intent);
 	}
@@ -178,5 +195,26 @@ public class MainActivity extends Activity implements TagAliasCallback{
 		}
 	}
 	
-	
+	/**
+	 * 打开通知后的界面自动跳转
+	 */
+	private void jumpActivity()
+	{
+		switch (qcApp.getGoFlag())
+		{
+		case Constants.INIT_MYMESSAGE:
+			mymessage_onClick(null);
+			break;
+		case Constants.INIT_CONTRACT:
+			mycontract_onclick(null);
+			break;
+		case Constants.INIT_PROJECTPLAN:
+			myhome_onclick(null);
+			break;
+		case Constants.INIT_MYINFO:
+			myinfo_onclick(null);
+			break;
+		}
+	}
+
 }

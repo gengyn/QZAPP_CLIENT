@@ -19,7 +19,7 @@
             android:textColor="#ffffff"
             android:textSize="20sp" />
     </RelativeLayout>
-    <com.qingzhou.client.widget.PullToRefreshListView
+    <com.qingzhou.app.widget.PullToRefreshListView
         android:id="@+id/info_list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"/>

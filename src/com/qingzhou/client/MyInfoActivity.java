@@ -22,15 +22,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONArray;
-import com.qingzhou.client.MyInfoViewAdapter;
-import com.qingzhou.client.common.GlobalParameter;
+import com.qingzhou.app.utils.HttpUtils;
+import com.qingzhou.app.utils.StringUtils;
+import com.qingzhou.app.utils.ThreadPoolUtils;
+import com.qingzhou.app.widget.PullToRefreshListView;
+import com.qingzhou.client.adapter.MyInfoViewAdapter;
+import com.qingzhou.client.common.Constants;
 import com.qingzhou.client.common.QcApp;
 import com.qingzhou.client.common.RestService;
 import com.qingzhou.client.domain.Myinfo;
-import com.qingzhou.client.util.HttpUtils;
-import com.qingzhou.client.util.StringUtils;
-import com.qingzhou.client.util.ThreadPoolUtils;
-import com.qingzhou.client.widget.PullToRefreshListView;
 
 /**
  * 资讯活动
@@ -49,7 +49,7 @@ public class MyInfoActivity extends Activity {
 	private Handler infoHandler;
 	private MyInfoViewAdapter infoAdapter;
 	
-	private int pageSize = GlobalParameter.PAGESIZE;//默认分页每页行数
+	private int pageSize = Constants.PAGESIZE;//默认分页每页行数
 	private int pageNo = 1;//默认页数
 	
 	private static final int INFO_MORE = 0x01;//更多
@@ -172,7 +172,7 @@ public class MyInfoActivity extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (!StringUtils.isNull(myinfoJson))
+		if (!StringUtils.isEmpty(myinfoJson))
 			newInfo = JSONArray.parseArray(myinfoJson,Myinfo.class);
 		
 		return newInfo;

@@ -2,7 +2,9 @@ package com.qingzhou.client;
 
 import java.util.List;
 
-import com.qingzhou.client.common.GlobalParameter;
+import com.qingzhou.app.utils.DialogUtils;
+import com.qingzhou.client.adapter.ProcessListViewAdapter;
+import com.qingzhou.client.common.Constants;
 import com.qingzhou.client.common.QcApp;
 import com.qingzhou.client.domain.RestProjectPlan;
 import com.qingzhou.client.domain.RestProjectPlanDetail;
@@ -73,13 +75,13 @@ public class MyHomeActivity extends Activity {
 		String strExplain = "";
 		switch(rpp.getPlanStatus())
         {
-        case GlobalParameter.PROJECT_FINISH:
+        case Constants.PROJECT_FINISH:
         	strExplain = getResources().getString(R.string.project_finish);
         	break;
-        case GlobalParameter.PROJECT_NORMAL:
+        case Constants.PROJECT_NORMAL:
         	strExplain = String.format(getResources().getString(R.string.project_normal),rpp.getCurrPlanName());
         	break;
-        case GlobalParameter.PROJECT_DEFER:
+        case Constants.PROJECT_DEFER:
         	strExplain = String.format(getResources().getString(R.string.project_delay),rpp.getCurrPlanName());
         	break;
         default:
@@ -95,6 +97,7 @@ public class MyHomeActivity extends Activity {
 	private void initProcessList(List<RestProjectPlanDetail> processList)
 	{
 		processListView.setAdapter(new ProcessListViewAdapter(this,processList));
+		processListView.setSelection(rpp.getCurrID());
 		processListView.setOnItemClickListener(new OnItemClickListener()
 		{
 			@Override
@@ -121,24 +124,30 @@ public class MyHomeActivity extends Activity {
 	public void start_mycontract(View v)
 	{
 	    Intent intent = new Intent();
-		intent.putExtra("FLAG", GlobalParameter.INIT_CONTRACT);
+		intent.putExtra("FLAG", Constants.INIT_CONTRACT);
 	    intent.setClass(MyHomeActivity.this,LoadingActivity.class);
 	    startActivity(intent);
 	}
 	
 	/**
-	 * 工程溝通點擊事件
+	 * 工程联络人点击事件
 	 */
-	public void start_exchange()
+	private void start_exchange()
 	{
-		Builder builder = new AlertDialog.Builder(MyHomeActivity.this);
-		builder.setIcon(R.drawable.cm);
-		builder.setAdapter(new CMListAdapter(MyHomeActivity.this,qcApp.getUserBase()),null);
-		builder.setTitle(getResources().getString(R.string.project_exchange));
-		builder.create().show();  
+		DialogUtils.showAddressBookDialog(MyHomeActivity.this, qcApp.getUserBase());
 	}
 	
-
+	/**
+	 * 拨打电话
+	 * @param strPhone
+	 */
+	public void action_call(String strPhone)
+	{
+		Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+strPhone));
+		// 将意图传给操作系统
+		// startActivity方法专门将意图传给操作系统
+		MyHomeActivity.this.startActivity(intent);
+	}
 	
 	public void stylist_phone_onclick(View v)
 	{
@@ -155,44 +164,32 @@ public class MyHomeActivity extends Activity {
 		action_call(qcApp.getUserBase().getReg_customer_mgr_mobile());
 	}
 	
-	/**
-	 * 拨打电话
-	 * @param strPhone
-	 */
-	public void action_call(String strPhone)
-	{
-		Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+strPhone));
-		// 将意图传给操作系统
-		// startActivity方法专门将意图传给操作系统
-		MyHomeActivity.this.startActivity(intent);
-	}
-	
 	public void stylist_message_onclick(View v)
 	{
-		qcApp.getUserBase().getReg_stylist();
+		toMessage(MyHomeActivity.this,qcApp.getUserBase().getReg_stylist_mobile());
 	}
 	
 	public void project_mgr_message_onclick(View v)
 	{
-		qcApp.getUserBase().getReg_project_mgr();
+		toMessage(MyHomeActivity.this,qcApp.getUserBase().getReg_project_mgr_mobile());
 	}
 	
 	public void customer_mgr_message_onclick(View v)
 	{
-		qcApp.getUserBase().getReg_customer_mgr();
+		toMessage(MyHomeActivity.this,qcApp.getUserBase().getReg_customer_mgr_mobile());
 	}
+	
 	
 	/**
 	 * 到我的消息界面
 	 * @param worker
 	 */
-	private void toMessage(String worker)
+	private void toMessage(Context context,String worker)
 	{
 		Intent intent = new Intent();
-		intent.putExtra("WORKER", worker);
-		intent.putExtra("FLAG", 0);
-	    intent.setClass(MyHomeActivity.this,LoadingActivity.class);
-	    startActivity(intent);
+		intent.putExtra("OPPOSITE", worker);
+	    intent.setClass(context,ChatActivity.class);
+	    context.startActivity(intent);
 	}
 	
 	

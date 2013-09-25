@@ -8,9 +8,9 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 
 import com.alibaba.fastjson.JSONArray;
+import com.qingzhou.app.image.util.Utils;
+import com.qingzhou.app.photo.PhotoFragment;
 import com.qingzhou.client.domain.RestProjectPhoto;
-import com.qingzhou.client.image.util.Utils;
-import com.qingzhou.client.photo.PhotoFragment;
 
 public class ProjectPhotoActivity extends FragmentActivity{
 	

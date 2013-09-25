@@ -2,41 +2,124 @@ package com.qingzhou.client;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import com.qingzhou.app.utils.Logger;
+import com.qingzhou.app.utils.StringUtils;
+import com.qingzhou.client.MyMessageActivity.MessageReceiver;
+import com.qingzhou.client.adapter.ChatMsgViewAdapter;
+import com.qingzhou.client.common.Constants;
+import com.qingzhou.client.common.QcApp;
+import com.qingzhou.client.domain.ChatMsg;
+import com.qingzhou.client.domain.Interlocutor;
+import com.qingzhou.client.domain.MessageLog;
+import com.qingzhou.client.service.MessageService;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.LevelListDrawable;
+import android.content.IntentFilter;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class ChatActivity extends Activity implements OnClickListener{
-    /** Called when the activity is first created. */
+	private static final String TAG = "ChatActivity";
 
+	private QcApp qcApp;
 	private Button mBtnSend;
 	private Button mBtnBack;
 	private EditText mEditTextContent;
 	private ListView mListView;
+	private TextView mChat_name;
 	private ChatMsgViewAdapter mAdapter;
-	private List<ChatMsgEntity> mDataArrays = new ArrayList<ChatMsgEntity>();
+	private List<ChatMsg> mDataArrays = new ArrayList<ChatMsg>();
+	
+	private String myMobile = "";//我的电话
+	private String myName = "";//我的姓名
+	private String oppositeMobile = "";//对方的电话
+	private String oppositeName = "";//对方姓名
 	
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.chat_xiaohei);
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN); 
-        initView();
+        setContentView(R.layout.chatting);
+        qcApp = (QcApp)getApplication();
+        //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN); 
         
+        myMobile = qcApp.getUserPhone();
+        myName = qcApp.getAddressBook().get(myMobile);
+        oppositeMobile = getIntent().getStringExtra("OPPOSITE");
+        oppositeName = qcApp.getAddressBook().containsKey(oppositeMobile)?
+				qcApp.getAddressBook().get(oppositeMobile):oppositeMobile;
+        
+        initView();
         initData();
+        
+        //接收消息的广播
+        registerMessageReceiver();
+      
     }
     
+    @Override
+	public void onResume() {
+    	Logger.d(TAG, "chatActivity启动状态");
+    	Constants.chatActivity_isBackground = false;
+		super.onResume();
+	}
+
+	@Override
+	public void onPause() {
+		Logger.d(TAG, "chatActivity关闭状态");
+		Constants.chatActivity_isBackground = true;
+		super.onPause();
+	}
+	
+	@Override
+   	public void onDestroy() {
+   		Logger.v(TAG, "onDestroy()");
+   		unregisterReceiver(mMessageReceiver);
+
+   		super.onDestroy();
+    }
+	
+	//接收消息广播
+    public static final String MESSAGE_RECEIVED_BYID_ACTION = "com.qingzhou.app.MESSAGE_RECEIVED_BYID_ACTION";
+    private MessageReceiver mMessageReceiver;
+    
+    public void registerMessageReceiver() {
+		mMessageReceiver = new MessageReceiver();
+		IntentFilter filter = new IntentFilter();
+		filter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY);
+		filter.addAction(MESSAGE_RECEIVED_BYID_ACTION);
+		registerReceiver(mMessageReceiver, filter);
+	}
+    
+    public class MessageReceiver extends BroadcastReceiver {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			if (MESSAGE_RECEIVED_BYID_ACTION.equals(intent.getAction())) {
+				ChatMsg chatMsg = (ChatMsg) intent.getSerializableExtra(Constants.KEY_MESSAGE);
+				//Toast.makeText(getBaseContext(), "接收到消息"+chatMsg.getText()+"收件人为："+myMobile, Toast.LENGTH_LONG).show();
+				if (chatMsg.getSender().equals(oppositeMobile))
+				{
+					receiverMsg(chatMsg);
+				}
+
+			}
+		}
+	}
     
     public void initView()
     {
@@ -45,35 +128,40 @@ public class ChatActivity extends Activity implements OnClickListener{
     	mBtnSend.setOnClickListener(this);
     	mBtnBack = (Button) findViewById(R.id.btn_back);
     	mBtnBack.setOnClickListener(this);
+    	mChat_name = (TextView)findViewById(R.id.chat_name);
+    	mChat_name.setText(oppositeName);
     	
     	mEditTextContent = (EditText) findViewById(R.id.et_sendmessage);
     }
     
-    private String[]msgArray = new String[]{"hello", "hello", "吃了吗？", "吃了", 
-    										"还吃吗", "不吃了",
-    										"真的？", "欢迎您使用轻舟装饰客户端！"};
-    
-    private String[]dataArray = new String[]{"2012-09-01 18:00", "2012-09-01 18:10", 
-    										"2012-09-01 18:11", "2012-09-01 18:20", 
-    										"2012-09-01 18:30", "2012-09-01 18:35", 
-    										"2012-09-01 18:40", "2012-09-01 18:50"}; 
-    private final static int COUNT = 8;
+   /**
+    * 初始化对话数据
+    */
     public void initData()
     {
-    	for(int i = 0; i < COUNT; i++)
+    	MessageService messageService = new MessageService(this);
+    	List<MessageLog> messageList = messageService.listMyMessage(myMobile, oppositeMobile);
+    	
+    	for(int i = 0; i < messageList.size(); i++)
     	{
-    		ChatMsgEntity entity = new ChatMsgEntity();
-    		entity.setDate(dataArray[i]);
-    		if (i % 2 == 0)
+    		MessageLog msg = messageList.get(i);
+    		ChatMsg entity = new ChatMsg();
+    		if (msg.getSender_mobile().equals(myMobile))
     		{
-    			entity.setName("GIMP");
-    			entity.setMsgType(true);
-    		}else{
-    			entity.setName("FOOBAR");
-    			entity.setMsgType(false);
+    			entity.setSenderName(myName);
+    			entity.setComMeg(true);
+    		}
+    		else 
+    		{
+    			entity.setSenderName(oppositeName);
+    			entity.setComMeg(false);
     		}
     		
-    		entity.setText(msgArray[i]);
+    		entity.setDate(msg.getMsg_time());
+    		entity.setText(msg.getMsg_content());
+    		entity.setImg_url(msg.getImg_url());
+    		entity.setVoice_url(msg.getVoice_url());
+
     		mDataArrays.add(entity);
     	}
 
@@ -97,16 +185,23 @@ public class ChatActivity extends Activity implements OnClickListener{
 		}
 	}
 	
+	/**
+	 * 发送消息
+	 */
 	private void send()
 	{
-		String contString = mEditTextContent.getText().toString();
+		String contString = mEditTextContent.getText().toString().trim();
 		if (contString.length() > 0)
 		{
-			ChatMsgEntity entity = new ChatMsgEntity();
-			entity.setDate(getDate());
-			entity.setName("CIMP");
-			entity.setMsgType(false);
+			ChatMsg entity = new ChatMsg();
+			entity.setDate(StringUtils.getCurDate());
+			entity.setSender(myMobile);
+			entity.setSenderName(myName);
+			entity.setComMeg(true);
 			entity.setText(contString);
+			entity.setReceiver(oppositeMobile);
+			entity.setImg_url("");
+			entity.setVoice_url("");
 			
 			mDataArrays.add(entity);
 			mAdapter.notifyDataSetChanged();
@@ -114,24 +209,27 @@ public class ChatActivity extends Activity implements OnClickListener{
 			mEditTextContent.setText("");
 			
 			mListView.setSelection(mListView.getCount() - 1);
+			
+			//保存消息，发送消息
+			MessageService messageService = new MessageService(this);
+			messageService.sendMessage(entity);
+			
 		}
 	}
 	
-    private String getDate() {
-        Calendar c = Calendar.getInstance();
-
-        String year = String.valueOf(c.get(Calendar.YEAR));
-        String month = String.valueOf(c.get(Calendar.MONTH));
-        String day = String.valueOf(c.get(Calendar.DAY_OF_MONTH) + 1);
-        String hour = String.valueOf(c.get(Calendar.HOUR_OF_DAY));
-        String mins = String.valueOf(c.get(Calendar.MINUTE));
-        
-        
-        StringBuffer sbBuffer = new StringBuffer();
-        sbBuffer.append(year + "-" + month + "-" + day + " " + hour + ":" + mins); 
-        						
-        						
-        return sbBuffer.toString();
-    }
+	/**
+	 * 收到消息
+	 * @param entity
+	 */
+	public void receiverMsg(ChatMsg entity)
+	{
+		entity.setSenderName(oppositeMobile);
+		entity.setDate(StringUtils.getCurDate());
+		entity.setComMeg(false);
+		
+		mDataArrays.add(entity);
+		mAdapter.notifyDataSetChanged();
+		mListView.setSelection(mListView.getCount() - 1);
+	}
     
 }

@@ -40,7 +40,6 @@ public class MyInfoContentActivity extends Activity {
 //		content_webview.getSettings().setBuiltInZoomControls(true);
 //		content_webview.getSettings().setDefaultFontSize(15);
 		
-		Intent intent = getIntent();
 		Myinfo myinfo = (Myinfo)getIntent().getSerializableExtra("MYINFO");
 		initContent(myinfo);
 	}

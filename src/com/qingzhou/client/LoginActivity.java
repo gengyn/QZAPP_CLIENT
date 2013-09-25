@@ -14,11 +14,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.qingzhou.client.util.CustomerUtils;
-import com.qingzhou.client.util.DialogUtils;
-import com.qingzhou.client.util.FileUtils;
-import com.qingzhou.client.util.StringUtils;
-import com.qingzhou.client.common.GlobalParameter;
+import com.qingzhou.app.utils.CustomerUtils;
+import com.qingzhou.app.utils.DialogUtils;
+import com.qingzhou.app.utils.FileUtils;
+import com.qingzhou.app.utils.StringUtils;
+import com.qingzhou.client.common.Constants;
 import com.qingzhou.client.common.QcApp;
 
 import com.alibaba.fastjson.JSON;
@@ -93,7 +93,7 @@ public class LoginActivity extends Activity {
 	public void readLoginJSON()
 	{
 		String fileStr = FileUtils.readFile(filePath);
-		if (!StringUtils.isNull(fileStr))
+		if (!StringUtils.isEmpty(fileStr))
 		{
 			Map<String,String> loginMap = new HashMap<String,String>();
 			loginMap = (Map)JSON.parseObject(fileStr);
@@ -122,7 +122,7 @@ public class LoginActivity extends Activity {
 	private void toLoadingActivity()
 	{
 		Intent intent = new Intent();
-		intent.putExtra("FLAG", GlobalParameter.INIT_USERINFO);
+		intent.putExtra("FLAG", Constants.INIT_USERINFO);
         intent.setClass(LoginActivity.this,LoadingActivity.class);
         startActivity(intent);
         //LoginActivity.this.finish();
@@ -156,9 +156,9 @@ public class LoginActivity extends Activity {
 			toLoadingActivity();
              //Toast.makeText(getApplicationContext(), "登录成功", Toast.LENGTH_SHORT).show();
           }
-        else if(StringUtils.isNull(mUser.getText().toString()) 
-        		|| StringUtils.isNull(mPassword.getText().toString()) 
-        		|| StringUtils.isNull(mPhone.getText().toString())) 
+        else if(StringUtils.isEmpty(mUser.getText().toString()) 
+        		|| StringUtils.isEmpty(mPassword.getText().toString()) 
+        		|| StringUtils.isEmpty(mPhone.getText().toString())) 
         {
         	new AlertDialog.Builder(LoginActivity.this)
 			.setIcon(getResources().getDrawable(R.drawable.login_error_icon))

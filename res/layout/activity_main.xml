@@ -2,9 +2,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bkg_0001"
-    android:orientation="vertical">
-    
-     <RelativeLayout
+    android:orientation="vertical" >
+
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="45dp"
         android:background="@drawable/title_bar"
@@ -25,68 +25,79 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
             android:background="@drawable/title_btn_right"
-            android:text="切换"
+            android:onClick="reLogin"
+            android:text="@string/userchangetext"
             android:textColor="#fff"
-            android:textSize="15dp" 
-            android:onClick="reLogin"/>
+            android:textSize="12dp" />
     </RelativeLayout>
-	<LinearLayout
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-	    android:gravity="center"
-	    android:orientation="vertical" >
-		<LinearLayout
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:orientation="vertical" >
-	
-	        <LinearLayout
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:orientation="horizontal" >
-	
-	            <com.qingzhou.client.widget.MyImageView
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+			 <RelativeLayout
+			    android:layout_width="wrap_content"  
+			    android:layout_height="wrap_content" 
+			    android:gravity="center"  
+			    android:padding="5dp"> 
+	            <com.qingzhou.app.widget.MyImageView
 	                android:id="@+id/myhome"
 	                android:layout_width="wrap_content"
 	                android:layout_height="wrap_content"
 	                android:layout_margin="1dp"
+	                android:onClick="myhome_onclick"
 	                android:scaleType="matrix"
-	                android:src="@drawable/right" 
-	                android:onClick="myhome_onclick"/>
-	
-	            <LinearLayout
+	                android:src="@drawable/myproject" />
+			</RelativeLayout>
+			<RelativeLayout
+			    android:layout_width="wrap_content"  
+			    android:layout_height="wrap_content" 
+			    android:gravity="center"  
+			    android:padding="5dp"> 
+	            <com.qingzhou.app.widget.MyImageView
+	                android:id="@+id/mycontract"
 	                android:layout_width="wrap_content"
 	                android:layout_height="wrap_content"
-	                android:orientation="vertical" >
-	
-	                <com.qingzhou.client.widget.MyImageView
-	                    android:id="@+id/mymessage"
-	                    android:layout_width="wrap_content"
-	                    android:layout_height="wrap_content"
-	                    android:layout_margin="1dp"
-	                    android:scaleType="matrix"
-	                    android:src="@drawable/left_top"
-	                    android:onClick="mymessage_onClick"/>
-	
-	                <com.qingzhou.client.widget.MyImageView
-	                    android:id="@+id/mycontract"
-	                    android:layout_width="wrap_content"
-	                    android:layout_height="wrap_content"
-	                    android:layout_margin="1dp"
-	                    android:scaleType="matrix"
-	                    android:src="@drawable/left_bottom"
-	                    android:onClick="mycontract_onclick" />
-	            </LinearLayout>
-	        </LinearLayout>
-	
-	        <com.qingzhou.client.widget.MyImageView
-	            android:id="@+id/myinfo"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_margin="1dp"
-	            android:scaleType="matrix"
-	            android:src="@drawable/bottom" 
-	            android:onClick="myinfo_onclick"/>
-	    </LinearLayout>
-	</LinearLayout>
+	                android:layout_margin="1dp"
+	                android:onClick="mycontract_onclick"
+	                android:scaleType="matrix"
+	                android:src="@drawable/mycontract" />
+			</RelativeLayout>
+			<RelativeLayout
+			    android:layout_width="wrap_content"  
+			    android:layout_height="wrap_content" 
+			    android:gravity="center"  
+			    android:padding="5dp"> 
+	            <com.qingzhou.app.widget.MyImageView
+	                android:id="@+id/mymessage"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_margin="1dp"
+	                android:onClick="mymessage_onClick"
+	                android:scaleType="matrix"
+	                android:src="@drawable/mymessage" />
+			</RelativeLayout>
+			<RelativeLayout
+			    android:layout_width="wrap_content"  
+			    android:layout_height="wrap_content" 
+			    android:gravity="center"  
+			    android:padding="5dp"> 
+	            <com.qingzhou.app.widget.MyImageView
+	                android:id="@+id/myinfo"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_margin="1dp"
+	                android:onClick="myinfo_onclick"
+	                android:scaleType="matrix"
+	                android:src="@drawable/myinfo" />
+	        </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
 </LinearLayout>

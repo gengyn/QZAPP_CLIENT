@@ -16,11 +16,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.qingzhou.client.util.CustomerUtils;
-import com.qingzhou.client.util.DialogUtils;
-import com.qingzhou.client.util.FileUtils;
-import com.qingzhou.client.util.StringUtils;
-import com.qingzhou.client.common.GlobalParameter;
+import com.qingzhou.app.utils.CustomerUtils;
+import com.qingzhou.app.utils.DialogUtils;
+import com.qingzhou.app.utils.FileUtils;
+import com.qingzhou.app.utils.StringUtils;
+import com.qingzhou.client.common.Constants;
 import com.qingzhou.client.common.QcApp;
 import com.qingzhou.client.domain.PushExtras;
 

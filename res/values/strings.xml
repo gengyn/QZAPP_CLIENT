@@ -13,6 +13,7 @@
     <string name="returntext">返回</string>
     <string name="sendtext">发送</string>
     <string name="noticetext">通知</string>
+    <string name="userchangetext">切换</string>
     <!-- 轻舟资讯 -->
     <string name="infocontent">资讯内容</string>
     <string name="pull_to_refresh_pull_label">下拉可以刷新</string>

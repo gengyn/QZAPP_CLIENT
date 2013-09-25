@@ -1,8 +1,8 @@
 package com.qingzhou.client;
 
+import com.qingzhou.app.utils.DialogUtils;
+import com.qingzhou.app.utils.FileUtils;
 import com.qingzhou.client.common.QcApp;
-import com.qingzhou.client.util.FileUtils;
-import com.qingzhou.client.util.DialogUtils;
 import com.qingzhou.client.version.VersionUpdate;
 
 import android.os.Bundle;

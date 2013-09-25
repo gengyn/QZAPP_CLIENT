@@ -192,7 +192,9 @@
     <color name="gray">#808080</color>
  <!-- 黑色 -->
     <color name="black">#ff000000</color>
-    
+ <!-- 绿色 -->
+ 	<color name="green">#0EB62E</color>
+ 	
     <color name="grid_state_pressed">#BB7dbcd3</color>
     <color name="grid_state_focused">#777dbcd3</color>
     

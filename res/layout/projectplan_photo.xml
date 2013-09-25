@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
 
-    <com.qingzhou.client.image.ui.RecyclingImageView
+    <com.qingzhou.app.image.ui.RecyclingImageView
         android:id="@+id/photo_imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

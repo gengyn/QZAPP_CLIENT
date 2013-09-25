@@ -6,7 +6,13 @@ import org.apache.http.client.ClientProtocolException;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.qingzhou.client.common.GlobalParameter;
+import com.qingzhou.app.image.ui.ImageGridActivity;
+import com.qingzhou.app.utils.CustomerUtils;
+import com.qingzhou.app.utils.DialogUtils;
+import com.qingzhou.app.utils.HttpUtils;
+import com.qingzhou.app.utils.StringUtils;
+import com.qingzhou.app.utils.ThreadPoolUtils;
+import com.qingzhou.client.common.Constants;
 import com.qingzhou.client.common.QcApp;
 import com.qingzhou.client.common.RestService;
 import com.qingzhou.client.domain.LoginStatus;
@@ -15,12 +21,6 @@ import com.qingzhou.client.domain.RestProjectPlan;
 import com.qingzhou.client.domain.UserBase;
 import com.qingzhou.client.domain.Contract;
 import com.qingzhou.client.domain.RestProjectPhoto;
-import com.qingzhou.client.image.ui.ImageGridActivity;
-import com.qingzhou.client.util.CustomerUtils;
-import com.qingzhou.client.util.HttpUtils;
-import com.qingzhou.client.util.StringUtils;
-import com.qingzhou.client.util.ThreadPoolUtils;
-import com.qingzhou.client.util.DialogUtils;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -38,7 +38,7 @@ public class LoadingActivity extends Activity{
 	private static final int FINISH_MESSAGE = 0x01;
 	private static final int ERROR_MESSAGE = 0x02;
 	
-	private int pageSize = GlobalParameter.PAGESIZE;//默认分页每页行数
+	private int pageSize = Constants.PAGESIZE;//默认分页每页行数
 	private int pageNo = 1;//默认页数
 	
 	@Override
@@ -81,7 +81,7 @@ public class LoadingActivity extends Activity{
 					
 		HttpUtils httpUtil = new HttpUtils();
 		String userBaseJson = httpUtil.httpPostExecute(RestService.POST_LOGIN_URL, JSON.toJSONString(loginStatus));
-		if (!StringUtils.isNull(userBaseJson))
+		if (!StringUtils.isEmpty(userBaseJson))
 		{
 			//设置客户令牌及客户基本信息
 			qcApp.setUserToken(userToken);
@@ -103,7 +103,7 @@ public class LoadingActivity extends Activity{
 		HttpUtils httpUtil = new HttpUtils();
 		String contractJson = httpUtil.httpGetExecute(
 				RestService.GET_CONTRACT_URL+"/"+qcApp.getUserBase().getFormal_contract_id());
-		if (!StringUtils.isNull(contractJson))
+		if (!StringUtils.isEmpty(contractJson))
 		{
 			Contract contract = JSON.parseObject(contractJson, Contract.class);
 			qcApp.setContract(contract);
@@ -122,7 +122,7 @@ public class LoadingActivity extends Activity{
 		HttpUtils httpUtil = new HttpUtils();
 		String projectPlanJson = httpUtil.httpGetExecute(
 				RestService.GET_PROJECTPLAN_URL+qcApp.getUserBase().getCustomer_id());
-		if (!StringUtils.isNull(projectPlanJson))
+		if (!StringUtils.isEmpty(projectPlanJson))
 		{
 			RestProjectPlan restProjectPlan = JSON.parseObject(projectPlanJson, RestProjectPlan.class);
 			qcApp.setProjectPlan(restProjectPlan);
@@ -161,7 +161,7 @@ public class LoadingActivity extends Activity{
 				"/" + pageNo + "/" + pageSize);
 		//暂时不访问网络，内置资讯数据
 		//String myinfoJson = "[{\"info_id\":\"1\",\"info_title\":\"什么是轻舟装饰完整家装？\",\"info_type\":\"家装常识\",\"info_url\":\"file:///android_asset/html/2013090901.html\",\"info_date\":\"2013-09-09\"},{\"info_id\":\"2\",\"info_title\":\"轻舟装饰完整家装有哪些优势？\",\"info_type\":\"家装常识\",\"info_url\":\"file:///android_asset/html/2013090902.html\",\"info_date\":\"2013-09-09\"},{\"info_id\":\"3\",\"info_title\":\"完整家装必须包含哪些项目？\",\"info_type\":\"家装常识\",\"info_url\":\"file:///android_asset/html/2013090903.html\",\"info_date\":\"2013-09-09\"},{\"info_id\":\"4\",\"info_title\":\"完整家装设计、施工质量如何保障？\",\"info_type\":\"家装常识\",\"info_url\":\"file:///android_asset/html/2013090904.html\",\"info_date\":\"2013-09-09\"},{\"info_id\":\"5\",\"info_title\":\"完整家装售后服务如何保障？\",\"info_type\":\"家装常识\",\"info_url\":\"file:///android_asset/html/2013090905.html\",\"info_date\":\"2013-09-09\"},{\"info_id\":\"6\",\"info_title\":\"完整家装设计费收取方式？\",\"info_type\":\"家装常识\",\"info_url\":\"file:///android_asset/html/2013090906.html\",\"info_date\":\"2013-09-09\"}]";
-		if(!StringUtils.isNull(myinfoJson))
+		if(!StringUtils.isEmpty(myinfoJson))
 		{
 			qcApp.setInfoList(JSONArray.parseArray(myinfoJson,Myinfo.class));
 			Intent intent = new Intent (LoadingActivity.this,MyInfoTempActivity.class);
@@ -179,19 +179,19 @@ public class LoadingActivity extends Activity{
 			try {
 		        switch(flag)
 		        {
-		        case GlobalParameter.INIT_USERINFO:
+		        case Constants.INIT_USERINFO:
 		        	initUserBase();
 		        	break;
-		        case GlobalParameter.INIT_CONTRACT:
+		        case Constants.INIT_CONTRACT:
 		        	initContract();
 		        	break;
-		        case GlobalParameter.INIT_PROJECTPLAN:
+		        case Constants.INIT_PROJECTPLAN:
 		        	initProjectPlan();
 		        	break;
-		        case GlobalParameter.SHOW_PHOTO:
+		        case Constants.SHOW_PHOTO:
 		        	showPhoto();
 		        	break;
-		        case GlobalParameter.INIT_MYINFO:
+		        case Constants.INIT_MYINFO:
 		        	initMyinfo();
 		        	break;
 		        default:

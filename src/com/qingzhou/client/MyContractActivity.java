@@ -3,11 +3,12 @@ package com.qingzhou.client;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.qingzhou.app.utils.StringUtils;
+import com.qingzhou.client.adapter.FavorableViewAdapter;
 import com.qingzhou.client.common.QcApp;
 
 import com.qingzhou.client.domain.Contract;
 import com.qingzhou.client.domain.ContractDiscount;
-import com.qingzhou.client.util.StringUtils;
 
 import android.app.Activity;
 import android.os.Bundle;

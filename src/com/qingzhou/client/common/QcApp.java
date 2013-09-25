@@ -1,6 +1,9 @@
 package com.qingzhou.client.common;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
 import org.apache.http.HttpVersion;
 import org.apache.http.client.HttpClient;
@@ -18,6 +21,7 @@ import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.qingzhou.client.domain.RestProjectPlan;
 import com.qingzhou.client.domain.Myinfo;
@@ -43,6 +47,49 @@ public class QcApp extends Application {
 	
 	
 	List<Myinfo> infoList;//资讯列表
+	
+	Map<String,String> addressBook = new HashMap<String,String>();//通讯录
+	
+	/**
+	 * 读取配置信息
+	 * @return
+	 */
+	private Properties loadProperties() {
+	
+        Properties props = new Properties();
+        try {
+            int id = this.getResources().getIdentifier("qcapp", "raw",
+    		this.getPackageName());
+		    props.load(this.getResources().openRawResource(id));
+		} catch (Exception e) {
+		    Log.e("QCAPP", "Could not find the properties file.", e);
+		 }
+		return props;
+	}
+	
+	/**
+	 * 获得通讯录
+	 * @return
+	 */
+	public Map<String,String> getAddressBook()
+	{
+		//客户自己
+		addressBook.put(getUserPhone(), "我");
+		//设计师
+		addressBook.put(
+				getUserBase().getReg_stylist_mobile(), 
+				getUserBase().getReg_stylist_name());
+		//客户经理
+		addressBook.put(
+				getUserBase().getReg_customer_mgr_mobile(), 
+				getUserBase().getReg_customer_mgr_name());
+		//项目经理
+		addressBook.put(
+				getUserBase().getReg_project_mgr_mobile(), 
+				getUserBase().getReg_project_mgr_name());
+		
+		return addressBook;
+	}
 	
 	public int getGoFlag() {
 		return goFlag;

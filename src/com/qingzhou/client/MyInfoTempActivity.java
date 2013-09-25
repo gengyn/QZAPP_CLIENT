@@ -22,15 +22,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONArray;
-import com.qingzhou.client.MyInfoViewAdapter;
-import com.qingzhou.client.common.GlobalParameter;
+import com.qingzhou.app.utils.HttpUtils;
+import com.qingzhou.app.utils.StringUtils;
+import com.qingzhou.app.utils.ThreadPoolUtils;
+import com.qingzhou.app.widget.PullToRefreshListView;
+import com.qingzhou.client.adapter.MyInfoViewAdapter;
+import com.qingzhou.client.common.Constants;
 import com.qingzhou.client.common.QcApp;
 import com.qingzhou.client.common.RestService;
 import com.qingzhou.client.domain.Myinfo;
-import com.qingzhou.client.util.HttpUtils;
-import com.qingzhou.client.util.StringUtils;
-import com.qingzhou.client.util.ThreadPoolUtils;
-import com.qingzhou.client.widget.PullToRefreshListView;
 
 /**
  * 资讯活动

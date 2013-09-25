@@ -2,7 +2,8 @@ package com.qingzhou.client;
 
 import java.util.List;
 
-import com.qingzhou.client.common.GlobalParameter;
+import com.qingzhou.client.adapter.ProcessListViewAdapter;
+import com.qingzhou.client.common.Constants;
 import com.qingzhou.client.common.QcApp;
 import com.qingzhou.client.domain.RestProjectPlan;
 import com.qingzhou.client.domain.RestProjectPlanDetail;

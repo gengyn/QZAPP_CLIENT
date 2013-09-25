@@ -1,7 +1,7 @@
 package com.qingzhou.client.version;
 
+import com.qingzhou.app.utils.FileUtils;
 import com.qingzhou.client.R;
-import com.qingzhou.client.util.FileUtils;
 
 import android.net.Uri;
 import android.os.Bundle;
