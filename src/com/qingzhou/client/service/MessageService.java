@@ -62,6 +62,9 @@ public class MessageService {
 	 */
 	private void pushMsg() throws ClientProtocolException, Exception
 	{
+		//保存消息
+		saveMsgDB(mContext,chatMsg,true);
+		
 		MyMessage message = new MyMessage();
 		message.setTarget_flag(1);//发送给员工
 		message.setMessage_type("00");
@@ -149,7 +152,7 @@ public class MessageService {
     		switch (msg.what) {
 			case FINISH_MESSAGE:
 				//成功后保存消息
-				saveMsgDB(mContext,chatMsg,true);
+				//saveMsgDB(mContext,chatMsg,true);
 				break;
 			case ERROR_MESSAGE:
 				Toast.makeText(mContext, "消息未送达，可能对方未在线", Toast.LENGTH_LONG).show();
@@ -216,11 +219,20 @@ public class MessageService {
     public List<MessageLog> listMyMessage(String myMobile,String otherMobile)
     {
     	//先置标识，不需要在一个事务里
-    	InterlocutorDao interlocutorDao = new InterlocutorDao(mContext);
-    	interlocutorDao.updateReadFlag(otherMobile);
+    	setReadFlag(otherMobile);
     	
     	MessageLogDao messageLogDao = new MessageLogDao(mContext);
     	return messageLogDao.listMsg(myMobile, otherMobile);
+    }
+    
+    /**
+     * 设置消息未已读
+     * @param op
+     */
+    public void setReadFlag(String op)
+    {
+    	InterlocutorDao interlocutorDao = new InterlocutorDao(mContext);
+    	interlocutorDao.updateReadFlag(op);
     }
     
     

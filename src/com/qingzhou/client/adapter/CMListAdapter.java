@@ -2,6 +2,7 @@ package com.qingzhou.client.adapter;
 
 import java.util.List;
 
+import com.qingzhou.app.utils.StringUtils;
 import com.qingzhou.client.R;
 import com.qingzhou.client.R.id;
 import com.qingzhou.client.R.layout;
@@ -48,11 +49,11 @@ public class CMListAdapter extends BaseAdapter {
 		convertView.setTag(viewHolder);
 		
 		viewHolder.stylist.setText(String.format(ctx.getResources().getString(R.string.stylist)
-				,user.getReg_stylist_name()));
+				,StringUtils.defaultPerson(user.getReg_stylist_name())));
 		viewHolder.project_mgr.setText(String.format(ctx.getResources().getString(R.string.project_mgr)
-				,user.getReg_project_mgr_name()));
+				,StringUtils.defaultPerson(user.getReg_project_mgr_name())));
 		viewHolder.customer_mgr.setText(String.format(ctx.getResources().getString(R.string.customer_mgr)
-				,user.getReg_customer_mgr_name()));
+				,StringUtils.defaultPerson(user.getReg_customer_mgr_name())));
 		
 		return convertView;
 	}

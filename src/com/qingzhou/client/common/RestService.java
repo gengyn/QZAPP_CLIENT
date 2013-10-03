@@ -12,6 +12,7 @@ public class RestService {
 	public final static String GET_PHOTO_URL = SERVICE_URL + "projectplan/photo/";//获取图片
 	public final static String GET_MYINFO_URL = SERVICE_URL + "info/";//获取轻舟资讯
 	public final static String POST_SENDMESSAGE_URL = SERVICE_URL + "push/message";//即时通讯、发送消息
-	public final static String POST_SENDNOTICE_URL = SERVICE_URL + "push/notice";//即时通讯、发送消息
+	public final static String POST_SENDNOTICE_URL = SERVICE_URL + "push/notice";//发送通知
+	public final static String GET_RESENDMSG_URL = SERVICE_URL + "push/message/";//消息重发
 	
 }

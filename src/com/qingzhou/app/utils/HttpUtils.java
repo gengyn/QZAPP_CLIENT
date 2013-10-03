@@ -1,17 +1,11 @@
 package com.qingzhou.app.utils;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
+
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -28,9 +22,9 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Log;
+
+import com.qingzhou.app.utils.Logger;
+import com.qingzhou.client.common.AppException;
 
 /**
  * 网络通讯http协议工具类，主要使用了org.apache.http.client,统一返回字符串格式，服务器返回值的格式根据调用的服务不同而不同，不都是JSON
@@ -39,6 +33,7 @@ import android.util.Log;
  */
 public class HttpUtils {
 	
+	private static final String TAG = "HttpUtils";
 	/**
 	 * 在网络上获取图片
 	 * @param urlPath
@@ -49,7 +44,7 @@ public class HttpUtils {
 		InputStream is = null;
 		try {
 			url = new URL(urlPath);
-			Log.e("url", urlPath);
+			Logger.e("url", urlPath);
 			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 			conn.connect();
 			int length = conn.getContentLength();
@@ -80,7 +75,7 @@ public class HttpUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	public String toJsonString(HttpResponse response) throws Exception
+	public String toJsonString(HttpResponse response) throws AppException
 	{
 		StringBuilder jsonSb = new StringBuilder();
 		HttpEntity entity = response.getEntity();
@@ -93,11 +88,18 @@ public class HttpUtils {
 					jsonSb.append(line + "\n");// 按行读取放入StringBuilder中
 				}
 				reader.close();
+				
+				if (isErrorCode(jsonSb.toString())) throw new AppException(jsonSb.toString());
 			}
-		}catch(Exception ex)
+		}catch(AppException ex)
 		{
-			System.err.printf("toJsonString", ex.toString());
-			throw ex;
+			Logger.e("toJsonString", ex.getCode());
+			throw new AppException(ex.getCode());
+		}
+		catch(Exception ex)
+		{
+			Logger.e("toJsonString",ex.getMessage());
+			throw new AppException(ex);
 		}
 		return jsonSb.toString();
 	}
@@ -107,16 +109,23 @@ public class HttpUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	public String toJsonString(HttpEntity entity) throws Exception
+	public String toJsonString(HttpEntity entity) throws AppException
 	{
 		String returnStr = "";
 		try{
 			if (entity != null)
 				returnStr = EntityUtils.toString(entity,HTTP.UTF_8);
-		}catch(Exception ex)
+			
+			if (isErrorCode(returnStr)) throw new AppException(returnStr);
+		}catch(AppException ex)
 		{
-			System.err.printf("toJsonString", ex.toString());
-			throw ex;
+			Logger.e("toJsonString", ex.getCode());
+			throw new AppException(ex.getCode());
+		}
+		catch(Exception ex)
+		{
+			Logger.e("toJsonString", ex.toString());
+			throw new AppException(ex);
 		}
 		return returnStr;
 	}
@@ -128,7 +137,7 @@ public class HttpUtils {
 	 * @throws ClientProtocolException
 	 * @throws Exception
 	 */
-	public String httpGetExecute(String url) throws ClientProtocolException, Exception
+	public String httpGetExecute(String url) throws AppException
 	{
 		String returnStr = "";
 		HttpClient client = this.getHttpClient();
@@ -136,10 +145,15 @@ public class HttpUtils {
 		try{
 			response = client.execute(new HttpGet(url));
 			returnStr = this.toJsonString(response.getEntity());
-		}catch(Exception ex)
+		}catch(AppException ex)
 		{
-			System.err.printf("HTTPGET{0}", ex.toString());
-			throw ex;
+			Logger.e("HTTPGET{0}", ex.getCode());
+			throw new AppException(ex.getCode());
+		}
+		catch(Exception ex)
+		{
+			Logger.e("HTTPGET{0}", ex.toString());
+			throw new AppException(ex);
 		}finally
 		{
 			client.getConnectionManager().shutdown();
@@ -156,7 +170,7 @@ public class HttpUtils {
 	 * @throws ClientProtocolException
 	 * @throws Exception
 	 */
-	public String httpPostExecute(String url,String inputJson) throws ClientProtocolException, Exception
+	public String httpPostExecute(String url,String inputJson) throws AppException
 	{
 		String returnStr = "";
 		HttpClient client = this.getHttpClient();
@@ -169,10 +183,15 @@ public class HttpUtils {
 			response = client.execute(httpRequest);
 			returnStr = this.toJsonString(response.getEntity());
 			
-		}catch(Exception ex)
+		}catch(AppException ex)
 		{
-			System.err.printf("HTTPPOST{0}", ex.toString());
-			throw ex;
+			Logger.e("HTTPPOST{0}", ex.getCode());
+			throw new AppException(ex.getCode());
+		}
+		catch(Exception ex)
+		{
+			Logger.e("HTTPPOST{0}", ex.toString());
+			throw new AppException(ex);
 		}finally
 		{
 			client.getConnectionManager().shutdown();
@@ -189,7 +208,7 @@ public class HttpUtils {
 	 * @throws ClientProtocolException
 	 * @throws Exception
 	 */
-	public String httpPutExecute(String url,String inputJson) throws ClientProtocolException, Exception
+	public String httpPutExecute(String url,String inputJson) throws AppException
 	{
 		String returnStr = "";
 		HttpClient client = this.getHttpClient();
@@ -201,10 +220,15 @@ public class HttpUtils {
 			httpRequest.setEntity(input);
 			response = client.execute(httpRequest);
 			returnStr = this.toJsonString(response.getEntity());
-		}catch(Exception ex)
+		}catch(AppException ex)
 		{
-			System.err.printf("HTTPPUT{0}", ex.toString());
-			throw ex;
+			Logger.e("HTTPPUT{0}", ex.getCode());
+			throw new AppException(ex.getCode());
+		}
+		catch(Exception ex)
+		{
+			Logger.e("HTTPPUT{0}", ex.toString());
+			throw new AppException(ex);
 		}finally
 		{
 			client.getConnectionManager().shutdown();
@@ -220,7 +244,7 @@ public class HttpUtils {
 	 * @throws ClientProtocolException
 	 * @throws Exception
 	 */
-	public String httpDelExecute(String url) throws ClientProtocolException, Exception
+	public String httpDelExecute(String url) throws AppException
 	{
 		String returnStr = "";
 		HttpClient client = this.getHttpClient();
@@ -228,16 +252,33 @@ public class HttpUtils {
 		try{
 			response = client.execute(new HttpDelete(url));
 			returnStr = this.toJsonString(response.getEntity());
-		}catch(Exception ex)
+		}catch(AppException ex)
 		{
-			System.err.printf("HTTPDEL{0}", ex.toString());
-			throw ex;
+			Logger.e("HTTPDEL{0}", ex.getCode());
+			throw new AppException(ex.getCode());
+		}
+		catch(Exception ex)
+		{
+			Logger.e("HTTPDEL{0}", ex.toString());
+			throw new AppException(ex);
 		}finally
 		{
 			client.getConnectionManager().shutdown();
 		}
 		
 		return returnStr;
+	}
+	
+	/**
+	 * 是否错误码，等于空 或者 （长度等于4 并且 首位是9）
+	 * @param src
+	 * @return
+	 */
+	private Boolean isErrorCode(String src)
+	{
+		if ((src.length() == 4 && src.indexOf("9") == 1))
+			return true;
+		return false;
 	}
 
 }

@@ -86,15 +86,19 @@ public class StringUtils {
     public static String getCurDate() {
         Calendar c = Calendar.getInstance();
 
-        String year = String.valueOf(c.get(Calendar.YEAR));
-        String month = String.valueOf(c.get(Calendar.MONTH) + 1);
-        String day = String.valueOf(c.get(Calendar.DAY_OF_MONTH));
-        String hour = String.valueOf(c.get(Calendar.HOUR_OF_DAY));
-        String mins = String.valueOf(c.get(Calendar.MINUTE));
-        String second = String.valueOf(c.get(Calendar.SECOND));
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH) + 1;
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int mins = c.get(Calendar.MINUTE);
+        int second = c.get(Calendar.SECOND);
 
+        
+        DecimalFormat decimalformat = new DecimalFormat("00");
         StringBuffer sbBuffer = new StringBuffer();
-        sbBuffer.append(year + "-" + month + "-" + day + " " + hour + ":" + mins + ":" + second); 
+        sbBuffer.append(year + "-" + decimalformat.format(month) + "-" 
+        + decimalformat.format(day) + " " + decimalformat.format(hour) + ":" 
+        + decimalformat.format(mins) + ":" + decimalformat.format(second)); 
 						
         return sbBuffer.toString();
     }
@@ -154,6 +158,17 @@ public class StringUtils {
     		str = "无折扣";
     	}
     	return str;
+    }
+    
+    /**
+     * 人员显示默认处理
+     * @return
+     */
+    public static String defaultPerson(String src)
+    {
+    	if (StringUtils.isEmpty(src))
+    		return "暂缺";
+    	else return src;
     }
 
     

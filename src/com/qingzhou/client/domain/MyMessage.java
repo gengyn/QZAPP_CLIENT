@@ -1,6 +1,7 @@
 package com.qingzhou.client.domain;
 
 public class MyMessage {
+	private String user_token;
 	private String message_id;
 	private String sender;
 	private String receiver;
@@ -12,6 +13,12 @@ public class MyMessage {
 	private String voice_url;
 	private int target_flag = 0;//目标标识，发送给客户还是员工,0为客户
 	
+	public String getUser_token() {
+		return user_token;
+	}
+	public void setUser_token(String user_token) {
+		this.user_token = user_token;
+	}
 	public int getTarget_flag() {
 		return target_flag;
 	}

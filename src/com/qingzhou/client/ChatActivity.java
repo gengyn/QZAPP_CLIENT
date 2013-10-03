@@ -29,6 +29,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +44,7 @@ public class ChatActivity extends Activity implements OnClickListener{
 	private ListView mListView;
 	private TextView mChat_name;
 	private ChatMsgViewAdapter mAdapter;
+	private RelativeLayout chat_layout;
 	private List<ChatMsg> mDataArrays = new ArrayList<ChatMsg>();
 	
 	private String myMobile = "";//我的电话
@@ -55,7 +57,7 @@ public class ChatActivity extends Activity implements OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chatting);
         qcApp = (QcApp)getApplication();
-        //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN); 
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN); 
         
         myMobile = qcApp.getUserPhone();
         myName = qcApp.getAddressBook().get(myMobile);
@@ -132,6 +134,18 @@ public class ChatActivity extends Activity implements OnClickListener{
     	mChat_name.setText(oppositeName);
     	
     	mEditTextContent = (EditText) findViewById(R.id.et_sendmessage);
+    	chat_layout = (RelativeLayout) findViewById(R.id.chat_layout);
+    	chat_layout.setClickable(true);
+    	chat_layout.setOnClickListener(new OnClickListener()
+    	{
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Toast.makeText(getBaseContext(), "点击背景", Toast.LENGTH_LONG).show();
+				getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN); 
+			}
+    		
+    	});
     }
     
    /**
@@ -190,29 +204,40 @@ public class ChatActivity extends Activity implements OnClickListener{
 	 */
 	private void send()
 	{
-		String contString = mEditTextContent.getText().toString().trim();
-		if (contString.length() > 0)
+		//频率控制
+		if (Constants.LAST_MYMESSAGE != -1 && 
+				System.currentTimeMillis() - Constants.LAST_MYMESSAGE < Constants.LIMIT_MYMESSAGE )
+			Toast.makeText(getBaseContext(), "发送频率过快", Toast.LENGTH_SHORT).show();
+		else
 		{
-			ChatMsg entity = new ChatMsg();
-			entity.setDate(StringUtils.getCurDate());
-			entity.setSender(myMobile);
-			entity.setSenderName(myName);
-			entity.setComMeg(true);
-			entity.setText(contString);
-			entity.setReceiver(oppositeMobile);
-			entity.setImg_url("");
-			entity.setVoice_url("");
-			
-			mDataArrays.add(entity);
-			mAdapter.notifyDataSetChanged();
-			
-			mEditTextContent.setText("");
-			
-			mListView.setSelection(mListView.getCount() - 1);
-			
-			//保存消息，发送消息
-			MessageService messageService = new MessageService(this);
-			messageService.sendMessage(entity);
+		//---------------------------------------------
+		
+			String contString = mEditTextContent.getText().toString().trim();
+			if (contString.length() > 0)
+			{
+				ChatMsg entity = new ChatMsg();
+				entity.setDate(StringUtils.getCurDate());
+				entity.setSender(myMobile);
+				entity.setSenderName(myName);
+				entity.setComMeg(true);
+				entity.setText(contString);
+				entity.setReceiver(oppositeMobile);
+				entity.setImg_url("");
+				entity.setVoice_url("");
+				
+				mDataArrays.add(entity);
+				mAdapter.notifyDataSetChanged();
+				
+				mEditTextContent.setText("");
+				
+				mListView.setSelection(mListView.getCount() - 1);
+				
+				//保存消息，发送消息
+				MessageService messageService = new MessageService(this);
+				messageService.sendMessage(entity);
+				//频率控制
+				Constants.LAST_MYMESSAGE = System.currentTimeMillis();
+			}
 			
 		}
 	}
@@ -223,9 +248,12 @@ public class ChatActivity extends Activity implements OnClickListener{
 	 */
 	public void receiverMsg(ChatMsg entity)
 	{
-		entity.setSenderName(oppositeMobile);
+		entity.setSenderName(oppositeName);
 		entity.setDate(StringUtils.getCurDate());
 		entity.setComMeg(false);
+		//设置为已读
+		MessageService msgService = new MessageService(this);
+		msgService.setReadFlag(oppositeMobile);
 		
 		mDataArrays.add(entity);
 		mAdapter.notifyDataSetChanged();

@@ -10,6 +10,7 @@ public class Constants {
 	public final static int INIT_MYMESSAGE = 0x04;//初始化我的消息标识
 	public final static int SHOW_PHOTO = 0x04;//查看图片
 	public final static int INIT_MYINFO = 0X05;//初始化资讯
+	public final static int INIT_EXITAPP = 0X06;//退出APP
 
 	//工程状态
 	public final static int PROJECT_NORMAL = 0x11; //正常
@@ -44,4 +45,16 @@ public class Constants {
 	
 	public static final boolean NOTIFICATION_NEED_SOUND = false;//通知是否需要声音
     public static final boolean NOTIFICATION_NEED_VIBRATE = true;//通知是否需要震动
+    
+    //服务访问频率控制
+    public static double LIMIT_USERBASE = 2000;
+    public static double LAST_USERBASE = -1;
+    public static double LIMIT_MYINFO = 10000;
+    public static double LAST_MYINFO = -1;
+    public static double LIMIT_MYPROJECT = 2000;
+    public static double LAST_MYPROJECT = -1;
+    public static double LIMIT_MYCONTRACT = 2000;
+    public static double LAST_MYCONTRACT = -1;
+    public static double LIMIT_MYMESSAGE = 2000;
+    public static double LAST_MYMESSAGE = -1;
 }

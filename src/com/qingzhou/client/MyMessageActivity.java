@@ -37,6 +37,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -49,6 +50,7 @@ public class MyMessageActivity extends Activity {
 	private List<Interlocutor> mChatList = new ArrayList<Interlocutor>();
 	private ChatListViewAdapter mAdapter;
 	private Button btn_addressbook;
+	private TextView nodata;
 
 
     @Override
@@ -240,6 +242,8 @@ public class MyMessageActivity extends Activity {
 	 */
 	public void action_call(String strPhone)
 	{
+		if (StringUtils.isEmpty(strPhone))
+			return;
 		Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+strPhone));
 		// 将意图传给操作系统
 		// startActivity方法专门将意图传给操作系统
@@ -283,6 +287,8 @@ public class MyMessageActivity extends Activity {
 	 */
 	private void toMessage(Context context,String worker)
 	{
+		if (StringUtils.isEmpty(worker))
+			return;
 		Intent intent = new Intent();
 		intent.putExtra("OPPOSITE", worker);
 	    intent.setClass(context,ChatActivity.class);

@@ -60,7 +60,7 @@ public class WelCome extends Activity{
 		//检查SD卡
 		if (!FileUtils.checkSD(this.getResources().getText(R.string.savePath).toString()))
 		{
-			DialogUtils.showErrDialog(this,this.getResources().getText(R.string.sdErr).toString());
+			DialogUtils.showLongToask(this,this.getResources().getText(R.string.sdErr).toString());
 		}else
 		{
 			//是否进行版本检查的开关
@@ -89,7 +89,7 @@ public class WelCome extends Activity{
 				}, 2000);
 			}else
 			{
-				DialogUtils.showErrDialog(this,this.getResources().getText(R.string.networkErr).toString());
+				DialogUtils.showLongToask(this,this.getResources().getText(R.string.networkErr).toString());
 			}
 		}
    }

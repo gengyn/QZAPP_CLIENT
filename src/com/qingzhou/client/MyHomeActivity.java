@@ -3,6 +3,7 @@ package com.qingzhou.client;
 import java.util.List;
 
 import com.qingzhou.app.utils.DialogUtils;
+import com.qingzhou.app.utils.StringUtils;
 import com.qingzhou.client.adapter.ProcessListViewAdapter;
 import com.qingzhou.client.common.Constants;
 import com.qingzhou.client.common.QcApp;
@@ -143,6 +144,8 @@ public class MyHomeActivity extends Activity {
 	 */
 	public void action_call(String strPhone)
 	{
+		if (StringUtils.isEmpty(strPhone))
+			return;
 		Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+strPhone));
 		// 将意图传给操作系统
 		// startActivity方法专门将意图传给操作系统
@@ -186,6 +189,8 @@ public class MyHomeActivity extends Activity {
 	 */
 	private void toMessage(Context context,String worker)
 	{
+		if (StringUtils.isEmpty(worker))
+			return;
 		Intent intent = new Intent();
 		intent.putExtra("OPPOSITE", worker);
 	    intent.setClass(context,ChatActivity.class);
