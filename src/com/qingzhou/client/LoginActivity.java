@@ -5,9 +5,7 @@ import java.util.Map;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.CheckBox;
@@ -55,7 +53,7 @@ public class LoginActivity extends Activity {
         mIsAuto = (CheckBox) findViewById(R.id.autoLogin_box);
         qcApp = (QcApp)getApplication();
         
-        filePath = this.getResources().getText(R.string.savePath).toString() + filePath;//定义客户文件位置
+        filePath = Constants.CACHE_DIR + filePath;//定义客户文件位置
         //读取登录信息,如是切换用户登录则不读取
         if(!isReLogin) readLoginJSON();
         
@@ -160,19 +158,21 @@ public class LoginActivity extends Activity {
         		|| StringUtils.isEmpty(mPassword.getText().toString()) 
         		|| StringUtils.isEmpty(mPhone.getText().toString())) 
         {
-        	new AlertDialog.Builder(LoginActivity.this)
-			.setIcon(getResources().getDrawable(R.drawable.login_error_icon))
-			.setTitle("提醒")
-			.setMessage(getResources().getText(R.string.loginInputErrorText).toString())
-			.create().show();
+//        	new AlertDialog.Builder(LoginActivity.this)
+//			.setIcon(getResources().getDrawable(R.drawable.login_error_icon))
+//			.setTitle("提醒")
+//			.setMessage(getResources().getText(R.string.loginInputErrorText).toString())
+//			.create().show();
+        	DialogUtils.showLongToask(getApplication(), getResources().getText(R.string.loginInputErrorText).toString());
          }
         else{
            
-        	new AlertDialog.Builder(LoginActivity.this)
-			.setIcon(getResources().getDrawable(R.drawable.login_error_icon))
-			.setTitle("失败")
-			.setMessage(getResources().getText(R.string.loginErrorText).toString())
-			.create().show();
+//        	new AlertDialog.Builder(LoginActivity.this)
+//			.setIcon(getResources().getDrawable(R.drawable.login_error_icon))
+//			.setTitle("失败")
+//			.setMessage(getResources().getText(R.string.loginErrorText).toString())
+//			.create().show();
+        	DialogUtils.showLongToask(getApplication(), getResources().getText(R.string.loginErrorText).toString());
         }
     	
      }  

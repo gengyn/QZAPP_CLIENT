@@ -2,13 +2,11 @@ package com.qingzhou.app.utils;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 /**
@@ -46,18 +44,17 @@ public class FileUtils {
 	 */
 	public static boolean mkDir(String dirPath,boolean isReadOnly)
 	{
+		boolean isOk = true;
 		try{
 			File dirFile = new File(dirPath);
-			if (!dirFile.exists()) dirFile.mkdir();
+			if (!dirFile.exists()) isOk = dirFile.mkdirs();
 			if (isReadOnly) dirFile.setReadOnly();
-			return true;
+			return isOk;
 		}catch(Exception ex)
 		{
 			System.err.println(ex.toString());
-			return false;
+			return isOk;
 		}
-		
-		
 	}
 	/**
 	 * 读取文件，返回文件内容的字符串

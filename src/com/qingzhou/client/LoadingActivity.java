@@ -93,6 +93,8 @@ public class LoadingActivity extends Activity{
 			qcApp.setUserBase(JSON.parseObject(userBaseJson,UserBase.class));
 			Intent intent = new Intent (LoadingActivity.this,MainActivity.class);			
 			startActivity(intent);
+			//切换动画
+			overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
 			LoginActivity._instance.finish();
 		}else throw new AppException("9996");
 		//---------------------------------------------
@@ -133,6 +135,8 @@ public class LoadingActivity extends Activity{
 			qcApp.setContract(contract);
 			Intent intent = new Intent (LoadingActivity.this,MyContractActivity.class);			
 			startActivity(intent);
+			//切换动画
+			overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
 		}else throw new AppException("9995");
 		//---------------------------------------------
 		//频率控制
@@ -160,6 +164,8 @@ public class LoadingActivity extends Activity{
 			qcApp.setProjectPlan(restProjectPlan);
 			Intent intent = new Intent (LoadingActivity.this,MyHomeActivity.class);			
 			startActivity(intent);
+			//切换动画
+			overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
 		}else throw new AppException("9994");
 		//---------------------------------------------
 		//频率控制
@@ -182,6 +188,8 @@ public class LoadingActivity extends Activity{
 		//先缩略图列表，后整图
 		intent.setClass(LoadingActivity.this,ImageGridActivity.class);
 		startActivity(intent);
+		//切换动画
+		overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
 	}
 	
 	/**
@@ -206,6 +214,8 @@ public class LoadingActivity extends Activity{
 			qcApp.setInfoList(JSONArray.parseArray(myinfoJson,Myinfo.class));
 			Intent intent = new Intent (LoadingActivity.this,MyInfoTempActivity.class);
 			startActivity(intent);
+			//切换动画
+			overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
 		}else throw new AppException("9993");
 		//频率控制
 		Constants.LAST_MYINFO = System.currentTimeMillis();
@@ -218,10 +228,9 @@ public class LoadingActivity extends Activity{
 	 */
 	public void exitApp() throws ClientProtocolException, Exception
 	{
-//		HttpUtils httpUtil = new HttpUtils();
-//		String delStatus = httpUtil.httpDelExecute(RestService.DEL_LOGIN_URL+qcApp.getUserToken());
-		
-		System.exit(0);
+		HttpUtils httpUtil = new HttpUtils();
+		String delStatus = httpUtil.httpDelExecute(RestService.DEL_LOGIN_URL+qcApp.getUserToken());
+		//System.exit(0);
 		//android.os.Process.killProcess(android.os.Process.myPid());
 	}
 	
@@ -273,8 +282,11 @@ public class LoadingActivity extends Activity{
 	/**
 	 * 处理
 	 */
-	private Handler mHandler = new Handler(){
+	private Handler mHandler = new Handler(){			
     	public void handleMessage(Message msg) {
+    		if (flag == Constants.INIT_EXITAPP)
+    			System.exit(0);
+    		
     		switch (msg.what) {
 			case FINISH_MESSAGE:
 				LoadingActivity.this.finish();
@@ -287,6 +299,7 @@ public class LoadingActivity extends Activity{
 			default:
 				break;
 			}
+    		
     	};
     };
 }

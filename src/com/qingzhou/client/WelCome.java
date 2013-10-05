@@ -2,6 +2,7 @@ package com.qingzhou.client;
 
 import com.qingzhou.app.utils.DialogUtils;
 import com.qingzhou.app.utils.FileUtils;
+import com.qingzhou.client.common.Constants;
 import com.qingzhou.client.common.QcApp;
 import com.qingzhou.client.version.VersionUpdate;
 
@@ -34,31 +35,9 @@ public class WelCome extends Activity{
 		Intent intent = getIntent();
 		qcApp.setGoFlag(intent.getIntExtra("FLAG",0));
 		
-//		final View view = View.inflate(this, R.layout.welcome, null);
-//		setContentView(view);
-//		
-//		//渐变展示启动屏
-//		AlphaAnimation aa = new AlphaAnimation(0.3f,1.0f);
-//		aa.setDuration(2000);
-//		view.startAnimation(aa);
-//		aa.setAnimationListener(new AnimationListener()
-//		{
-//			@Override
-//			public void onAnimationEnd(Animation arg0) {
-//				Intent intent = new Intent (WelCome.this,LoginActivity.class);			
-//				startActivity(intent);			
-//				WelCome.this.finish();
-//			}
-//			@Override
-//			public void onAnimationRepeat(Animation animation) {}
-//			@Override
-//			public void onAnimationStart(Animation animation) {}
-//			
-//		});
-		
 		//检查项目现在包括SD卡、网络
 		//检查SD卡
-		if (!FileUtils.checkSD(this.getResources().getText(R.string.savePath).toString()))
+		if (!FileUtils.checkSD(Constants.CACHE_DIR))
 		{
 			DialogUtils.showLongToask(this,this.getResources().getText(R.string.sdErr).toString());
 		}else

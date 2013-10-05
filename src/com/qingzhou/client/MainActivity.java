@@ -124,6 +124,7 @@ public class MainActivity extends Activity implements TagAliasCallback{
 		Intent intent = new Intent();
 	    intent.setClass(MainActivity.this,MyMessageActivity.class);
 	    startActivity(intent);
+	    overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
 		
 	}
 	/**
@@ -174,6 +175,7 @@ public class MainActivity extends Activity implements TagAliasCallback{
 		intent.putExtra("isReLogin", true);
 		intent.setClass(MainActivity.this,LoginActivity.class);
 		startActivity(intent);
+		 overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
 		MainActivity.this.finish();
 	}
 

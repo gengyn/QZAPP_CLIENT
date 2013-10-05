@@ -2,8 +2,10 @@ package com.qingzhou.client.version;
 
 import java.io.File;
 
+import com.qingzhou.app.utils.Logger;
 import com.qingzhou.client.R;
 import com.qingzhou.client.WelCome;
+import com.qingzhou.client.common.Constants;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -24,12 +26,16 @@ public class ReplaceBroadcastReceiver extends BroadcastReceiver{
 	
 	@Override
 	public void onReceive(Context arg0, Intent arg1) {
-		savePath = arg0.getResources().getText(R.string.savePath).toString();
-		deleteApk();
-		Log.i(TAG, "删除APK成功！");
-		Toast.makeText(arg0, "重新回到轻舟客户版", Toast.LENGTH_SHORT).show();
-		restarApp(arg0);
-		Log.i(TAG,"启动应用成功；");
+		Logger.i(TAG, "执行action:"+ arg1.getAction());
+		if (arg1.getDataString().equals("package:" + arg0.getPackageName()))
+		{
+			savePath = Constants.CACHE_DIR;
+			deleteApk();
+			Logger.i(TAG, "删除APK成功！");
+			Toast.makeText(arg0, "欢迎重新回到掌上轻舟", Toast.LENGTH_SHORT).show();
+			restarApp(arg0);
+			Logger.i(TAG,"启动应用成功；");
+		}
 	}
 	
 	/**

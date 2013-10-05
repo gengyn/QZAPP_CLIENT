@@ -6,8 +6,10 @@
   
   <ProgressBar
   	android:id="@+id/progress"
+  	android:progressDrawable="@drawable/barcolor"
   	android:layout_width="fill_parent"
   	android:layout_height="wrap_content"
+  	android:layout_gravity="center"
   	style="?android:attr/progressBarStyleHorizontal"
   />
 </LinearLayout>

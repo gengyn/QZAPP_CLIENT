@@ -1,35 +1,25 @@
 package com.qingzhou.client.version;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import com.alibaba.fastjson.JSON;
 
 import com.qingzhou.app.utils.HttpUtils;
 import com.qingzhou.app.utils.ThreadPoolUtils;
 import com.qingzhou.client.R;
+import com.qingzhou.client.common.Constants;
 import com.qingzhou.client.domain.Version;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.AlertDialog.Builder;
-import android.content.BroadcastReceiver;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -37,7 +27,6 @@ import android.content.DialogInterface.OnClickListener;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -73,8 +62,6 @@ public class VersionUpdate {
 	private int progress;
 	private static final int DOWN_UPDATE = 1;
     private static final int DOWN_OVER = 2;
-    
-    private Thread downLoadThread;
 	
 	private Dialog netWorkInvalidDialog;
 	private Dialog noticeDialog;
@@ -87,7 +74,7 @@ public class VersionUpdate {
 	{
 		this.mContext = context;
 		version_download_url = mContext.getResources().getText(R.string.version_download_url).toString();
-		savePath = mContext.getResources().getText(R.string.savePath).toString();
+		savePath = Constants.CACHE_DIR;
 		appPackName = mContext.getResources().getText(R.string.appPackName).toString();
 		versionJSON = mContext.getResources().getText(R.string.versionJSON).toString();
 	}
@@ -163,8 +150,9 @@ public class VersionUpdate {
 				isNew = true;
 				showUpdateNoticeDialog();
 			}
-		}else 
-			showNetWorkInvalidDialog();
+		}
+//		else 
+//			showNetWorkInvalidDialog();
 		
 		return isNew;
 	}
@@ -219,7 +207,8 @@ public class VersionUpdate {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
-				showDownloadDialog();			
+				//showDownloadDialog();			
+				showProcessDialog();
 			}
 		});
 		if (forceUpdate.equals("1"))
@@ -243,6 +232,33 @@ public class VersionUpdate {
 		noticeDialog = builder.create();
 		noticeDialog.setCanceledOnTouchOutside(false);//点击屏幕不消失
 		noticeDialog.show();
+	}
+	
+	private ProgressDialog progressDialog;
+	
+	/**
+	 * 下载进度条
+	 */
+	private void showProcessDialog()
+	{
+		progressDialog = new ProgressDialog(mContext);  
+		progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		progressDialog.setTitle("软件版本更新");//设置标题  
+		progressDialog.setIndeterminate(false);//设置进度条是否为不明确  
+		//progressDialog.setCancelable(true);//设置进度条是否可以按退回键取消  
+		progressDialog.setButton("取消", new OnClickListener()
+		{
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				progressDialog.dismiss();
+				interceptFlag = true;
+			}
+		});
+		progressDialog.setCanceledOnTouchOutside(false);
+		progressDialog.show();  
+		
+		downloadApk();
 	}
 	
 	/**
@@ -334,10 +350,12 @@ public class VersionUpdate {
     	public void handleMessage(Message msg) {
     		switch (msg.what) {
 			case DOWN_UPDATE:
-				mProgress.setProgress(progress);
+				//mProgress.setProgress(progress);
+				progressDialog.setProgress(progress);
 				break;
 			case DOWN_OVER:
-				downloadDialog.dismiss();
+				//downloadDialog.dismiss();
+				progressDialog.dismiss();
 				installApk();
 				break;
 			default:

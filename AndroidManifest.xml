@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.qingzhou.client"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="Beta" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -87,7 +87,9 @@
             android:name="com.qingzhou.client.MyInfoTempActivity" 
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name="com.qingzhou.client.MyInfoContentActivity" >
+        <activity android:name="com.qingzhou.client.MyInfoContentActivity" 
+            android:screenOrientation="portrait">
+            
         </activity>
         <activity android:name="com.qingzhou.client.LoadingActivity" android:theme="@style/MyDialogStyle">
         </activity>
@@ -111,7 +113,7 @@
         </activity>
 
         <!-- 在安装成功后广播 -->
-        <!--
+        
           <receiver android:name="com.qingzhou.client.version.ReplaceBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_ADDED"/>
@@ -119,7 +121,7 @@
                 <data android:scheme="package"/>
             </intent-filter>
   		</receiver>
-        -->
+        
         <!-- 推送使用 -->
         <!-- Required SDK核心功能-->
         <activity

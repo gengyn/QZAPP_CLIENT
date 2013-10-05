@@ -65,7 +65,7 @@ public class HttpUtils {
 		HttpClient client = new DefaultHttpClient();// 新建http客户端
 		HttpParams httpParams = client.getParams();
 		HttpConnectionParams.setConnectionTimeout(httpParams, 2000);// 设置连接超时范围
-		HttpConnectionParams.setSoTimeout(httpParams, 4000);
+		HttpConnectionParams.setSoTimeout(httpParams, 5000);
 		return client;
 	}
 	
@@ -276,7 +276,7 @@ public class HttpUtils {
 	 */
 	private Boolean isErrorCode(String src)
 	{
-		if ((src.length() == 4 && src.indexOf("9") == 1))
+		if (!StringUtils.isEmpty(src) && (src.length() == 4 && src.indexOf("9") == 0))
 			return true;
 		return false;
 	}

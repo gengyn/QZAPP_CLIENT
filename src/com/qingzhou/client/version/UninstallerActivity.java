@@ -2,6 +2,7 @@ package com.qingzhou.client.version;
 
 import com.qingzhou.app.utils.FileUtils;
 import com.qingzhou.client.R;
+import com.qingzhou.client.common.Constants;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -31,7 +32,7 @@ public class UninstallerActivity extends Activity{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		//setContentView(R.layout.welcome);
-		savePath = this.getResources().getText(R.string.savePath).toString();
+		savePath = Constants.CACHE_DIR;
 		showUnDialog(this);
    }
 	

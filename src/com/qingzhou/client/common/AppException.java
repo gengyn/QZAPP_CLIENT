@@ -41,6 +41,8 @@ public class AppException extends RuntimeException {
 	
 	public AppException(Exception ex) {
 		super(ex);
+		this.code = "9999";
+		this.message = "9999";
 	}
 	
 	public static String getMessage(String code)
@@ -62,7 +64,7 @@ public class AppException extends RuntimeException {
 			exception.put("1013", "content-type 只支持 application/x-www-form-urlencoded");
 			
 			exception.put("9999", "网络繁忙，请稍后重试");
-			exception.put("9998", "您的访问不合法");
+			exception.put("9998", "您的客户信息已过期，请重新登录");
 			exception.put("9997", "您的访问频率过快，请稍后");
 			exception.put("9996", "没有您的客户信息");
 			exception.put("9995", "没有您的合同信息");

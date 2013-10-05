@@ -1,8 +1,6 @@
 package com.qingzhou.app.utils;
 
 import com.qingzhou.client.LoadingActivity;
-import com.qingzhou.client.MainActivity;
-import com.qingzhou.client.MyHomeActivity;
 import com.qingzhou.client.R;
 import com.qingzhou.client.adapter.CMListAdapter;
 import com.qingzhou.client.common.Constants;
@@ -36,8 +34,8 @@ public class DialogUtils {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
-				exitApp(context);
-				//System.exit(0);
+				//exitApp(context);
+				System.exit(0);
 				//另外一种关闭应用的方式
 				//android.os.Process.killProcess(android.os.Process.myPid());
 			}

@@ -24,7 +24,7 @@ public class Constants {
 	
 	//缓存存放位置，SD卡中
 	public final static String CACHE_DIR = 
-			Environment.getExternalStorageDirectory().toString() + "/QZ/cache/";
+			Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.qingzhou.client/cache/";
 	
 	//分页默认值
 	public final static int PAGESIZE = 10;//默认分页每页行数
@@ -47,14 +47,14 @@ public class Constants {
     public static final boolean NOTIFICATION_NEED_VIBRATE = true;//通知是否需要震动
     
     //服务访问频率控制
-    public static double LIMIT_USERBASE = 2000;
+    public static double LIMIT_USERBASE = 3000;
     public static double LAST_USERBASE = -1;
-    public static double LIMIT_MYINFO = 10000;
+    public static double LIMIT_MYINFO = 5000;
     public static double LAST_MYINFO = -1;
-    public static double LIMIT_MYPROJECT = 2000;
+    public static double LIMIT_MYPROJECT = 3000;
     public static double LAST_MYPROJECT = -1;
-    public static double LIMIT_MYCONTRACT = 2000;
+    public static double LIMIT_MYCONTRACT = 3000;
     public static double LAST_MYCONTRACT = -1;
-    public static double LIMIT_MYMESSAGE = 2000;
+    public static double LIMIT_MYMESSAGE = 3000;
     public static double LAST_MYMESSAGE = -1;
 }
