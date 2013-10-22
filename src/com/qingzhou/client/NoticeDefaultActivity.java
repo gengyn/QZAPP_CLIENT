@@ -31,7 +31,7 @@ import com.alibaba.fastjson.JSON;
  * @author hihi
  *
  */
-public class NoticeDefaultActivity extends Activity {
+public class NoticeDefaultActivity extends BaseActivity {
 	
 	private TextView notice_content;
 	private WebView notice_url;

@@ -32,7 +32,7 @@
     <string name="info_data_toast_none">没有新更新</string>
     <!-- 轻舟资讯 -->
     <!-- 我的家装相关 -->
-    <string name="project_photo_url">http://192.168.1.9:9090/appService/uploadFile/</string>
+    <string name="project_photo_url">http://218.59.147.66:9090/appService/uploadFile/</string>
     <string name="project_finish">工程已竣工</string>
     <string name="project_normal">工程已进入 %1$s，工期正常</string>
     <string name="project_delay">工程已进入 %1$s，工期有延误</string>
@@ -67,7 +67,7 @@
     
     <!-- 版本相关 -->
     <string name="isupdate">true</string><!-- 是否进行版本检查的开关，false代表不检查，在正式发布时应设置为true -->
-    <string name="version_download_url">http://192.168.1.9:9090/qzapp/</string>
+    <string name="version_download_url">http://218.59.147.66:9090/qzapp/</string>
     <!--rest/service/version/0/C  -->
     <string name="versionJSON">qcversion.json</string>    
     <string name="appPackName">com.qingzhou.client</string>

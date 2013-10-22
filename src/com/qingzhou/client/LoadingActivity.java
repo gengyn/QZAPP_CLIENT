@@ -17,6 +17,7 @@ import com.qingzhou.client.common.AppException;
 import com.qingzhou.client.common.Constants;
 import com.qingzhou.client.common.QcApp;
 import com.qingzhou.client.common.RestService;
+import com.qingzhou.client.dao.CacheDao;
 import com.qingzhou.client.domain.LoginStatus;
 import com.qingzhou.client.domain.Myinfo;
 import com.qingzhou.client.domain.RestProjectPlan;
@@ -26,12 +27,9 @@ import com.qingzhou.client.domain.Contract;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
-import android.widget.Toast;
 
-public class LoadingActivity extends Activity{
+public class LoadingActivity extends BaseActivity{
 
 	private QcApp qcApp;
 	int flag;
@@ -48,7 +46,7 @@ public class LoadingActivity extends Activity{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);	
 		setContentView(R.layout.loading);
-
+		
 		qcApp = (QcApp)getApplication();
 		
 		//取得启动该Activity的Intent对象
@@ -85,12 +83,27 @@ public class LoadingActivity extends Activity{
 		loginStatus.setUser_phone(qcApp.getUserPhone());
 					
 		HttpUtils httpUtil = new HttpUtils();
-		String userBaseJson = httpUtil.httpPostExecute(RestService.POST_LOGIN_URL, JSON.toJSONString(loginStatus));
+		String userBaseJson = "";
+		CacheDao cacheDao = new CacheDao(this);
+		try{
+			userBaseJson = httpUtil.httpPostExecute(RestService.POST_LOGIN_URL, JSON.toJSONString(loginStatus));
+			
+		}catch(Exception ex)
+		{
+			//访问内置数据库，是否能获取到缓存数据
+			userBaseJson = cacheDao.queryCache(qcApp.getUserName(), qcApp.getUserPhone(), "00");
+			if (StringUtils.isEmpty(userBaseJson))
+				throw new AppException(ex);
+		}
 		if (!StringUtils.isEmpty(userBaseJson))
 		{
 			//设置客户令牌及客户基本信息
 			qcApp.setUserToken(userToken);
 			qcApp.setUserBase(JSON.parseObject(userBaseJson,UserBase.class));
+			//新增客户基本信息缓存
+			cacheDao.delCache(qcApp.getUserName(), qcApp.getUserPhone(), "00");
+			cacheDao.insertCache(qcApp.getUserName(), qcApp.getUserPhone(), "00", userBaseJson);
+			
 			Intent intent = new Intent (LoadingActivity.this,MainActivity.class);			
 			startActivity(intent);
 			//切换动画

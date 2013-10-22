@@ -10,6 +10,7 @@ import java.net.URL;
 
 import com.alibaba.fastjson.JSON;
 
+import com.qingzhou.app.utils.DialogUtils;
 import com.qingzhou.app.utils.HttpUtils;
 import com.qingzhou.app.utils.ThreadPoolUtils;
 import com.qingzhou.client.R;
@@ -139,6 +140,7 @@ public class VersionUpdate {
 	public boolean checkNewVersion()
 	{
 		boolean isNew = false;
+		
 		curVersionCode = getCurVersion();
 		Log.i("网络是否正常！",isValid+"");
 		Log.i("服务端版本号：",serverVersionCode+"");
@@ -152,7 +154,7 @@ public class VersionUpdate {
 			}
 		}
 //		else 
-//			showNetWorkInvalidDialog();
+//			DialogUtils.showLongToask(mContext,mContext.getText(R.string.networkErr).toString());
 		
 		return isNew;
 	}

@@ -16,7 +16,7 @@ import android.widget.Toast;
  * @author hihi
  *
  */
-public class MyInfoContentActivity extends Activity {
+public class MyInfoContentActivity extends BaseActivity {
 
 	private QcApp qcApp;
 	private TextView content_title;

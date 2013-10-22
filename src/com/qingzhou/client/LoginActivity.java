@@ -26,7 +26,7 @@ import com.alibaba.fastjson.JSON;
  * @author hihi
  *
  */
-public class LoginActivity extends Activity {
+public class LoginActivity extends BaseActivity {
 	private EditText mUser;  //客户名称
 	private EditText mPhone; //客户电话
 	private EditText mPassword; //客户密码
@@ -41,6 +41,7 @@ public class LoginActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+     		
         _instance = this;
         //取得启动该Activity的Intent对象
         Intent intent = getIntent();

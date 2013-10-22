@@ -51,6 +51,10 @@ public class PhotoFragment extends Fragment implements AdapterView.OnItemClickLi
     private TextView count;
     private ImageView photo_imageView;
 
+
+    public PhotoFragment() {
+    	
+    }
     /**
      * 初始化,传入图片地址
      * @param photoList

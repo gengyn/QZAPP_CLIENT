@@ -29,7 +29,7 @@ import android.widget.TextView;
  * @author hihi
  *
  */
-public class MainActivity extends Activity implements TagAliasCallback{
+public class MainActivity extends BaseActivity implements TagAliasCallback{
 
 	private static final String TAG = "MainActivity";
 	public static MainActivity _instance = null; 

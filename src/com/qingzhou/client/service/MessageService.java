@@ -167,10 +167,10 @@ public class MessageService {
      * 获取对话人列表
      * @return
      */
-    public List<Interlocutor> listInterlocutor()
+    public List<Interlocutor> listInterlocutor(String my_mobile)
     {
     	InterlocutorDao interlocutorDao = new InterlocutorDao(mContext);
-    	return interlocutorDao.listInterlocutor();
+    	return interlocutorDao.listInterlocutor(my_mobile);
     }
     
     /**
@@ -178,7 +178,7 @@ public class MessageService {
      * @param i_mobile
      * @return
      */
-    public int delMessage(String i_mobile)
+    public int delMessage(String my_mobile,String i_mobile)
     {
     	DBHelper dbHelper = new DBHelper(mContext, Configuration.DB_NAME,
 				null, Configuration.DB_VERSION);
@@ -188,11 +188,11 @@ public class MessageService {
 		try
 		{
 			InterlocutorDao interlocutorDao = new InterlocutorDao(mContext,db);
-			count = interlocutorDao.delInterlocutor(i_mobile);
+			count = interlocutorDao.delInterlocutor(my_mobile,i_mobile);
 			if (count > 0)
 			{
 				MessageLogDao messageLogDao = new MessageLogDao(mContext,db);
-				count = messageLogDao.delMessage(i_mobile);
+				count = messageLogDao.delMessage(my_mobile,i_mobile);
 			}
 			
 			db.setTransactionSuccessful();
@@ -219,7 +219,7 @@ public class MessageService {
     public List<MessageLog> listMyMessage(String myMobile,String otherMobile)
     {
     	//先置标识，不需要在一个事务里
-    	setReadFlag(otherMobile);
+    	setReadFlag(myMobile,otherMobile);
     	
     	MessageLogDao messageLogDao = new MessageLogDao(mContext);
     	return messageLogDao.listMsg(myMobile, otherMobile);
@@ -229,10 +229,10 @@ public class MessageService {
      * 设置消息未已读
      * @param op
      */
-    public void setReadFlag(String op)
+    public void setReadFlag(String myMobile,String otherMobile)
     {
     	InterlocutorDao interlocutorDao = new InterlocutorDao(mContext);
-    	interlocutorDao.updateReadFlag(op);
+    	interlocutorDao.updateReadFlag(myMobile,otherMobile);
     }
     
     

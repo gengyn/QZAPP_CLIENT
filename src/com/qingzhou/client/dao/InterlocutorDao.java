@@ -30,11 +30,13 @@ public class InterlocutorDao extends BaseDao<Interlocutor>{
 		ContentValues cv = new ContentValues();
 		if (isSend)
 		{
+			cv.put("MY_MOBILE", chatMsg.getSender());
 			cv.put("I_MOBILE", chatMsg.getReceiver());
 			cv.put("ISREADED", "1");
 		}
 		else 
 		{
+			cv.put("MY_MOBILE", chatMsg.getReceiver());
 			cv.put("I_MOBILE", chatMsg.getSender());
 			cv.put("ISREADED", "0");
 		}
@@ -48,18 +50,20 @@ public class InterlocutorDao extends BaseDao<Interlocutor>{
 		ContentValues cv = new ContentValues();
 		if (isSend)
 		{
+			cv.put("MY_MOBILE", chatMsg.getSender());
 			cv.put("I_MOBILE", chatMsg.getReceiver());
 			cv.put("ISREADED", "1");
 		}
 		else 
 		{
+			cv.put("MY_MOBILE", chatMsg.getReceiver());
 			cv.put("I_MOBILE", chatMsg.getSender());
 			cv.put("ISREADED", "0");
 		}
 		cv.put("LAST_MESSAGE", chatMsg.getText());
 		cv.put("LAST_TIME", StringUtils.getCurDate());
 		
-		return super.update(tableName, cv, "i_mobile=?", new String[]{(String) cv.get("I_MOBILE")});
+		return super.update(tableName, cv, "my_mobile=? and i_mobile=?", new String[]{(String) cv.get("MY_MOBILE"),(String) cv.get("I_MOBILE")});
 	}
 	
 	/**
@@ -67,24 +71,24 @@ public class InterlocutorDao extends BaseDao<Interlocutor>{
 	 * @param i_mobile
 	 * @return
 	 */
-	public int updateReadFlag(String i_mobile)
+	public int updateReadFlag(String my_mobile,String i_mobile)
 	{
 		ContentValues cv = new ContentValues();
 		cv.put("ISREADED", "1");
-		return super.update(tableName,cv,"i_mobile=?",new String[]{i_mobile});
+		return super.update(tableName,cv,"my_mobile=? and i_mobile=?",new String[]{my_mobile,i_mobile});
 	}
 	
 	/**
 	 * 获取对话人列表及最新的消息内容
 	 * @return
 	 */
-	public List<Interlocutor> listInterlocutor()
+	public List<Interlocutor> listInterlocutor(String my_mobile)
 	{
 		return (List<Interlocutor>) super.queryList
 				(Interlocutor.class,
 						tableName, 
 						new String[]{"i_mobile","last_message","last_time","isreaded"}, 
-						null, null, "LAST_TIME desc",null,null);
+						"my_mobile=?", new String[]{my_mobile}, "LAST_TIME desc",null,null);
 	}
 	
 	/**
@@ -92,9 +96,9 @@ public class InterlocutorDao extends BaseDao<Interlocutor>{
 	 * @param i_mobile
 	 * @return
 	 */
-	public int delInterlocutor(String i_mobile)
+	public int delInterlocutor(String my_mobile,String i_mobile)
 	{
-		return super.delete(tableName, "i_mobile=?", new String[]{i_mobile});
+		return super.delete(tableName, "my_mobile=? and i_mobile=?", new String[]{my_mobile,i_mobile});
 	}
 
 }

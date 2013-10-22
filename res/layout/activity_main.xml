@@ -1,7 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bkg_0001"
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -18,15 +17,15 @@
             android:textColor="#ffffff"
             android:textSize="15sp" />
 
-        <Button
+        <ImageButton
             android:layout_width="67dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
             android:background="@drawable/title_btn_right"
+            android:src="@drawable/mm_title_btn_contact_normal"
             android:onClick="reLogin"
-            android:text="@string/userchangetext"
             android:textColor="#fff"
             android:textSize="12dp" />
     </RelativeLayout>
@@ -44,13 +43,12 @@
 			 <RelativeLayout
 			    android:layout_width="wrap_content"  
 			    android:layout_height="wrap_content" 
-			    android:gravity="center"  
-			    android:padding="5dp"> 
+			    android:gravity="center"
+			    android:background="@drawable/myproject_bg" > 
 	            <com.qingzhou.app.widget.MyImageView
 	                android:id="@+id/myhome"
 	                android:layout_width="wrap_content"
 	                android:layout_height="wrap_content"
-	                android:layout_margin="1dp"
 	                android:onClick="myhome_onclick"
 	                android:scaleType="matrix"
 	                android:src="@drawable/myproject" />
@@ -58,13 +56,12 @@
 			<RelativeLayout
 			    android:layout_width="wrap_content"  
 			    android:layout_height="wrap_content" 
-			    android:gravity="center"  
-			    android:padding="5dp"> 
+			    android:gravity="center"
+			    android:background="@drawable/mycontract_bg"> 
 	            <com.qingzhou.app.widget.MyImageView
 	                android:id="@+id/mycontract"
 	                android:layout_width="wrap_content"
 	                android:layout_height="wrap_content"
-	                android:layout_margin="1dp"
 	                android:onClick="mycontract_onclick"
 	                android:scaleType="matrix"
 	                android:src="@drawable/mycontract" />
@@ -72,13 +69,12 @@
 			<RelativeLayout
 			    android:layout_width="wrap_content"  
 			    android:layout_height="wrap_content" 
-			    android:gravity="center"  
-			    android:padding="5dp"> 
+			    android:gravity="center"
+			    android:background="@drawable/mymessage_bg" > 
 	            <com.qingzhou.app.widget.MyImageView
 	                android:id="@+id/mymessage"
 	                android:layout_width="wrap_content"
 	                android:layout_height="wrap_content"
-	                android:layout_margin="1dp"
 	                android:onClick="mymessage_onClick"
 	                android:scaleType="matrix"
 	                android:src="@drawable/mymessage" />
@@ -86,16 +82,21 @@
 			<RelativeLayout
 			    android:layout_width="wrap_content"  
 			    android:layout_height="wrap_content" 
-			    android:gravity="center"  
-			    android:padding="5dp"> 
+			    android:gravity="center"
+			    android:background="@drawable/myinfo_bg"> 
 	            <com.qingzhou.app.widget.MyImageView
 	                android:id="@+id/myinfo"
 	                android:layout_width="wrap_content"
 	                android:layout_height="wrap_content"
-	                android:layout_margin="1dp"
 	                android:onClick="myinfo_onclick"
 	                android:scaleType="matrix"
 	                android:src="@drawable/myinfo" />
+	        </RelativeLayout>
+	        <RelativeLayout
+			    android:layout_width="wrap_content"  
+			    android:layout_height="wrap_content" 
+			    android:gravity="center"
+			    android:background="@drawable/main_bottom_bg">
 	        </RelativeLayout>
         </LinearLayout>
     </LinearLayout>

@@ -38,7 +38,7 @@ import com.qingzhou.client.domain.Myinfo;
  * @author hihi
  * 
  */
-public class MyInfoTempActivity extends Activity {
+public class MyInfoTempActivity extends BaseActivity {
 
 	private QcApp qcApp;
 	private ListView infoListView;

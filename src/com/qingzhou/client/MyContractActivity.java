@@ -35,7 +35,7 @@ import android.widget.TextView;
  * @author hihi
  * 
  */
-public class MyContractActivity extends Activity {
+public class MyContractActivity extends BaseActivity {
 
 	public static MyContractActivity instance = null;
 	private QcApp qcApp;
@@ -193,14 +193,23 @@ public class MyContractActivity extends Activity {
 		mTab2.setOnClickListener(new MyOnClickListener(1));
 		mTab3.setOnClickListener(new MyOnClickListener(2));
 		mTab4.setOnClickListener(new MyOnClickListener(3));
+		
 		DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
+        //计算增量,如果屏幕大小的四分子一比图片的宽度122还大，计算一个增量
+        if ((width/4 - 122) > 0)
+        {
+        	zero = (width/4 - 122)/2;
+        	 //定义初始位置
+            mTabImg.setPadding(zero, 0, 0, 0);
+        }
         one = width/4; 
-        two = one*2;
-        three = one*3;
-
+        two = one*2 ;
+        three = one*3 ;
+       
+        
 		LayoutInflater mLi = LayoutInflater.from(this);
 		View view1 = mLi.inflate(R.layout.mycontract_base, null);
 		initBaseData(view1);

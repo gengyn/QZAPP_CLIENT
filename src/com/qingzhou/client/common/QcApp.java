@@ -23,6 +23,7 @@ import org.apache.http.protocol.HTTP;
 import android.app.Application;
 import android.util.Log;
 
+import com.qingzhou.client.domain.RestProjectPhoto;
 import com.qingzhou.client.domain.RestProjectPlan;
 import com.qingzhou.client.domain.Myinfo;
 import com.qingzhou.client.domain.UserBase;
@@ -43,9 +44,9 @@ public class QcApp extends Application {
 	Contract contract;//合同信息
 	RestProjectPlan projectPlan;//工程进度信息
 	
+	
 	int goFlag = 0;//跳转标识
-	
-	
+
 	List<Myinfo> infoList;//资讯列表
 	
 	Map<String,String> addressBook = new HashMap<String,String>();//通讯录
@@ -141,6 +142,5 @@ public class QcApp extends Application {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
 	
 }

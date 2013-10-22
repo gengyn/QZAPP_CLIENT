@@ -22,10 +22,14 @@ public class CustomerUtils {
 		if (!StringUtils.isEmpty(str) && str.length() > 11)
 		{
 			//passwd = Base64.encodeBase64String(str.getBytes());
-			passwd = new String(Base64.encodeBase64(str.getBytes()));
+			//passwd = new String(Base64.encodeBase64(str.getBytes()));
+			passwd = MD5.Md5(str);
+
 			passwd = passwd.substring(2, 5) + passwd.substring(passwd.length()-1-3,passwd.length()-1);
+			passwd = passwd.toUpperCase().replaceAll("/", "A");
+			passwd = passwd.toUpperCase().replaceAll("=", "B");
 		}
-		return passwd.toUpperCase().replaceAll("/", "A");
+		return passwd;
 	}
 	
 	/**

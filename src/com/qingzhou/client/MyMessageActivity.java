@@ -41,7 +41,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class MyMessageActivity extends Activity {
+/**
+ * 我的消息Activity
+ * @author hihi
+ *
+ */
+public class MyMessageActivity extends BaseActivity {
 	
 	private static final String TAG = "MyMessageActivity";
 	private QcApp qcApp;
@@ -136,14 +141,13 @@ public class MyMessageActivity extends Activity {
     private List<Interlocutor> listChat()
     {
     	MessageService messageService = new MessageService(this);
-    	return messageService.listInterlocutor();
+    	return messageService.listInterlocutor(qcApp.getUserPhone());
     }
     /**
      * 初始化对话人列表
      */
 	private void initChatList()
 	{
-		mChatList = listChat();
 		mAdapter = new ChatListViewAdapter(this,mChatList,qcApp.getAddressBook());
 		mListView.setAdapter(mAdapter);
 		mListView.setOnItemClickListener(new OnItemClickListener()
@@ -166,7 +170,7 @@ public class MyMessageActivity extends Activity {
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
 				// TODO Auto-generated method stub
-				showItemDelDialog(MyMessageActivity.this, mChatList.get(arg2).getI_mobile());
+				showItemDelDialog(MyMessageActivity.this, qcApp.getUserPhone(),mChatList.get(arg2).getI_mobile());
 				return false;
 			}
 			
@@ -191,7 +195,7 @@ public class MyMessageActivity extends Activity {
 //        return super.onContextItemSelected(item);  
 //    }  
 	
-	public void showItemDelDialog(final Context context,final String delItem) {  
+	public void showItemDelDialog(final Context context,final String my_mobile,final String other_mobile) {  
 		AlertDialog.Builder builder = new Builder(context);  
 		builder.setMessage("确定删除吗?");  
 		builder.setTitle("提示");  
@@ -200,7 +204,7 @@ public class MyMessageActivity extends Activity {
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
 				MessageService messageService = new MessageService(context);
-				messageService.delMessage(delItem);
+				messageService.delMessage(my_mobile,other_mobile);
 				reLoadChat();
 			}
 		});
@@ -244,7 +248,7 @@ public class MyMessageActivity extends Activity {
 	{
 		if (StringUtils.isEmpty(strPhone))
 			return;
-		Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+strPhone));
+		Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+strPhone));
 		// 将意图传给操作系统
 		// startActivity方法专门将意图传给操作系统
 		MyMessageActivity.this.startActivity(intent);

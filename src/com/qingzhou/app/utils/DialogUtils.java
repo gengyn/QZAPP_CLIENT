@@ -1,11 +1,16 @@
 package com.qingzhou.app.utils;
 
+import java.util.Stack;
+
+import com.qingzhou.client.AppManager;
 import com.qingzhou.client.LoadingActivity;
 import com.qingzhou.client.R;
 import com.qingzhou.client.adapter.CMListAdapter;
 import com.qingzhou.client.common.Constants;
 import com.qingzhou.client.domain.UserBase;
 
+import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -34,8 +39,9 @@ public class DialogUtils {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
-				//exitApp(context);
-				System.exit(0);
+				//退出应用
+				AppManager.getAppManager().AppExit(context);
+				//System.exit(0);
 				//另外一种关闭应用的方式
 				//android.os.Process.killProcess(android.os.Process.myPid());
 			}
@@ -65,7 +71,9 @@ public class DialogUtils {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
-				System.exit(0);//退出应用
+				//System.exit(0);
+				//退出应用
+				AppManager.getAppManager().AppExit(context);
 			}
 		});
 		builder.create().show();
@@ -114,16 +122,18 @@ public class DialogUtils {
 		builder.create().show();  
 	}
 	
+	
 	/**
 	 * 退出APP
 	 * @param context
 	 */
-	public static void exitApp(Context context)
+	public void exitApp(Context context)
 	{
-		Intent intent = new Intent();
-		intent.putExtra("FLAG", Constants.INIT_EXITAPP);
-	    intent.setClass(context,LoadingActivity.class);
-	    context.startActivity(intent);
+//		Intent intent = new Intent();
+//		intent.putExtra("FLAG", Constants.INIT_EXITAPP);
+//	    intent.setClass(context,LoadingActivity.class);
+//	    context.startActivity(intent);
+	
 	}
 	
 }

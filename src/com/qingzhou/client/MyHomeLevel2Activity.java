@@ -28,7 +28,7 @@ import android.widget.AdapterView.OnItemClickListener;
  * @author hihi
  *
  */
-public class MyHomeLevel2Activity extends Activity {
+public class MyHomeLevel2Activity extends BaseActivity {
 
 	private QcApp qcApp;
 	private RestProjectPlan rpp;

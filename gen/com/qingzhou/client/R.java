@@ -398,50 +398,56 @@ public final class R {
         public static final int login_edit_pressed=0x7f02002f;
         public static final int login_editbox=0x7f020030;
         public static final int login_error_icon=0x7f020031;
-        public static final int message=0x7f020032;
-        public static final int mm_listitem=0x7f020033;
-        public static final int mm_listitem_grey_normal=0x7f020034;
-        public static final int mm_listitem_normal=0x7f020035;
-        public static final int mm_listitem_pressed=0x7f020036;
-        public static final int mm_listitem_simple=0x7f020037;
-        public static final int mm_title_back_focused=0x7f020038;
-        public static final int mm_title_back_normal=0x7f020039;
-        public static final int mm_title_back_pressed=0x7f02003a;
-        public static final int mm_title_btn_focused=0x7f02003b;
-        public static final int mm_title_btn_normal=0x7f02003c;
-        public static final int mm_title_btn_pressed=0x7f02003d;
-        public static final int mycontract=0x7f02003e;
-        public static final int myinfo=0x7f02003f;
-        public static final int mymessage=0x7f020040;
-        public static final int myproject=0x7f020041;
-        public static final int phone=0x7f020042;
-        public static final int photogrid_list_selector=0x7f020043;
-        public static final int preference_first_item=0x7f020044;
-        public static final int preference_item=0x7f020045;
-        public static final int preference_last_item=0x7f020046;
-        public static final int preference_single_item=0x7f020047;
-        public static final int preview=0x7f020048;
-        public static final int search_bar_bg=0x7f020049;
-        public static final int search_bar_edit_bg=0x7f02004a;
-        public static final int search_bar_edit_normal=0x7f02004b;
-        public static final int search_bar_edit_pressed=0x7f02004c;
-        public static final int search_bar_icon_normal=0x7f02004d;
-        public static final int tab_amount_normal=0x7f02004e;
-        public static final int tab_amount_pressed=0x7f02004f;
-        public static final int tab_base_normal=0x7f020050;
-        public static final int tab_base_pressed=0x7f020051;
-        public static final int tab_bg=0x7f020052;
-        public static final int tab_favorable_normal=0x7f020053;
-        public static final int tab_favorable_pressed=0x7f020054;
-        public static final int tab_project_normal=0x7f020055;
-        public static final int tab_project_pressed=0x7f020056;
-        public static final int title_bar=0x7f020057;
-        public static final int title_btn_back=0x7f020058;
-        public static final int title_btn_right=0x7f020059;
-        public static final int voice_rcd_btn_nor=0x7f02005a;
-        public static final int voice_rcd_btn_pressed=0x7f02005b;
-        public static final int welcome=0x7f02005c;
-        public static final int widget_new_icon=0x7f02005d;
+        public static final int main_bottom_bg=0x7f020032;
+        public static final int message=0x7f020033;
+        public static final int mm_listitem=0x7f020034;
+        public static final int mm_listitem_grey_normal=0x7f020035;
+        public static final int mm_listitem_normal=0x7f020036;
+        public static final int mm_listitem_pressed=0x7f020037;
+        public static final int mm_listitem_simple=0x7f020038;
+        public static final int mm_title_back_focused=0x7f020039;
+        public static final int mm_title_back_normal=0x7f02003a;
+        public static final int mm_title_back_pressed=0x7f02003b;
+        public static final int mm_title_btn_contact_normal=0x7f02003c;
+        public static final int mm_title_btn_focused=0x7f02003d;
+        public static final int mm_title_btn_normal=0x7f02003e;
+        public static final int mm_title_btn_pressed=0x7f02003f;
+        public static final int mycontract=0x7f020040;
+        public static final int mycontract_bg=0x7f020041;
+        public static final int myinfo=0x7f020042;
+        public static final int myinfo_bg=0x7f020043;
+        public static final int mymessage=0x7f020044;
+        public static final int mymessage_bg=0x7f020045;
+        public static final int myproject=0x7f020046;
+        public static final int myproject_bg=0x7f020047;
+        public static final int phone=0x7f020048;
+        public static final int photogrid_list_selector=0x7f020049;
+        public static final int preference_first_item=0x7f02004a;
+        public static final int preference_item=0x7f02004b;
+        public static final int preference_last_item=0x7f02004c;
+        public static final int preference_single_item=0x7f02004d;
+        public static final int preview=0x7f02004e;
+        public static final int search_bar_bg=0x7f02004f;
+        public static final int search_bar_edit_bg=0x7f020050;
+        public static final int search_bar_edit_normal=0x7f020051;
+        public static final int search_bar_edit_pressed=0x7f020052;
+        public static final int search_bar_icon_normal=0x7f020053;
+        public static final int tab_amount_normal=0x7f020054;
+        public static final int tab_amount_pressed=0x7f020055;
+        public static final int tab_base_normal=0x7f020056;
+        public static final int tab_base_pressed=0x7f020057;
+        public static final int tab_bg=0x7f020058;
+        public static final int tab_favorable_normal=0x7f020059;
+        public static final int tab_favorable_pressed=0x7f02005a;
+        public static final int tab_project_normal=0x7f02005b;
+        public static final int tab_project_pressed=0x7f02005c;
+        public static final int title_bar=0x7f02005d;
+        public static final int title_btn_back=0x7f02005e;
+        public static final int title_btn_right=0x7f02005f;
+        public static final int voice_rcd_btn_nor=0x7f020060;
+        public static final int voice_rcd_btn_pressed=0x7f020061;
+        public static final int welcome=0x7f020062;
+        public static final int widget_new_icon=0x7f020063;
     }
     public static final class id {
         public static final int action_settings=0x7f0b007b;
@@ -702,13 +708,11 @@ public final class R {
         Base application theme for API 11+. This theme completely replaces
         AppBaseTheme from res/values/styles.xml on API 11+ devices.
     
- API 11 theme customizations can go here. 
 
         Base application theme for API 14+. This theme completely replaces
         AppBaseTheme from BOTH res/values/styles.xml and
         res/values-v11/styles.xml on API 14+ devices.
     
- API 14 theme customizations can go here. 
          */
         public static final int AppBaseTheme=0x7f090000;
         /**  Application theme. 

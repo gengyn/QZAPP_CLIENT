@@ -10,10 +10,6 @@ import com.qingzhou.client.common.QcApp;
 import com.qingzhou.client.domain.RestProjectPlan;
 import com.qingzhou.client.domain.RestProjectPlanDetail;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -32,7 +28,7 @@ import android.widget.AdapterView.OnItemClickListener;
  * @author hihi
  *
  */
-public class MyHomeActivity extends Activity {
+public class MyHomeActivity extends BaseActivity {
 
 	private QcApp qcApp;
 	private RestProjectPlan rpp;
@@ -146,7 +142,8 @@ public class MyHomeActivity extends Activity {
 	{
 		if (StringUtils.isEmpty(strPhone))
 			return;
-		Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+strPhone));
+		//ACTION_CALL
+		Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+strPhone));
 		// 将意图传给操作系统
 		// startActivity方法专门将意图传给操作系统
 		MyHomeActivity.this.startActivity(intent);

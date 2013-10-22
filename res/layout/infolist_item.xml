@@ -49,8 +49,7 @@
     		android:layout_width="wrap_content" 
            	android:layout_height="wrap_content" 
            	android:layout_marginLeft="10dip"
-           	android:textSize="12sp"            
-            android:text="日期"/>
+           	android:textSize="12sp"/>
        	
        	<TextView android:id="@+id/info_date"  
     		android:layout_width="wrap_content" 

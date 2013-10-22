@@ -34,7 +34,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class ChatActivity extends Activity implements OnClickListener{
+public class ChatActivity extends BaseActivity implements OnClickListener{
 	private static final String TAG = "ChatActivity";
 
 	private QcApp qcApp;
@@ -253,7 +253,7 @@ public class ChatActivity extends Activity implements OnClickListener{
 		entity.setComMeg(false);
 		//设置为已读
 		MessageService msgService = new MessageService(this);
-		msgService.setReadFlag(oppositeMobile);
+		msgService.setReadFlag(myMobile,oppositeMobile);
 		
 		mDataArrays.add(entity);
 		mAdapter.notifyDataSetChanged();

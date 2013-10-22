@@ -1,3 +1,6 @@
+drop table APP_INTERLOCUTOR;
+drop table APP_MESSAGE_LOG;
+
 CREATE TABLE APP_INTERLOCUTOR  (
    MY_MOBILE            VARCHAR2(20) NOT NULL,  
    I_MOBILE             VARCHAR2(20) NOT NULL,
@@ -15,12 +18,4 @@ CREATE TABLE APP_MESSAGE_LOG  (
    MSG_TIME             DATETIME DEFAULT (datetime('now','localtime')),
    IMG_URL				VARCHAR2(200),
    VOICE_URL			VARCHAR2(200)
-);
-
-CREATE TABLE APP_CACHE  (
-   USERNAME             VARCHAR2(30)                    NOT NULL,
-   USERPHONE            NUMBER(11)                      NOT NULL,
-   CACHE_TYPE           CHAR(2)                         NOT NULL,
-   CACHE_CONTENT        TEXT,
-   CONSTRAINT PK_APP_CACHE PRIMARY KEY (USERNAME, USERPHONE, CACHE_TYPE)
 );

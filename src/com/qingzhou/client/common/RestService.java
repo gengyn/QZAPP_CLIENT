@@ -2,7 +2,7 @@ package com.qingzhou.client.common;
 
 public class RestService {
 
-	final static String SERVICE_URL = "http://192.168.1.9:9090/appService/rest/service/";
+	final static String SERVICE_URL = "http://218.59.147.66:9090/appService/rest/service/";
 	public final static String LAST_VERSION_URL = SERVICE_URL + "version/";//最新版本服务地址,暂没有使用
 	public final static String POST_LOGIN_URL = SERVICE_URL + "login";//新增客户登录信息
 	public final static String PUT_LOGIN_URL = SERVICE_URL + "login";//更新最新操作时间
@@ -14,5 +14,4 @@ public class RestService {
 	public final static String POST_SENDMESSAGE_URL = SERVICE_URL + "push/message";//即时通讯、发送消息
 	public final static String POST_SENDNOTICE_URL = SERVICE_URL + "push/notice";//发送通知
 	public final static String GET_RESENDMSG_URL = SERVICE_URL + "push/message/";//消息重发
-	
 }

@@ -1,5 +1,6 @@
 package com.qingzhou.client;
 
+
 import com.qingzhou.app.utils.DialogUtils;
 import com.qingzhou.app.utils.FileUtils;
 import com.qingzhou.client.common.Constants;
@@ -29,7 +30,6 @@ public class WelCome extends Activity{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);	
 		setContentView(R.layout.welcome);
-		
 		qcApp = (QcApp)getApplication();
 		
 		Intent intent = getIntent();
@@ -56,21 +56,21 @@ public class WelCome extends Activity{
 						}
 					}.start();
 				}
-				
-				//自动跳转登录界面
-				new Handler().postDelayed(new Runnable(){
-					@Override
-					public void run(){
-						Intent intent = new Intent (WelCome.this,LoginActivity.class);			
-						startActivity(intent);			
-						WelCome.this.finish();
-					}
-				}, 2000);
-			}else
-			{
-				DialogUtils.showLongToask(this,this.getResources().getText(R.string.networkErr).toString());
+			
 			}
 		}
+		
+		//跳转登录界面
+		new Handler().postDelayed(new Runnable(){
+			@Override
+			public void run(){
+					Intent intent = new Intent (WelCome.this,LoginActivity.class);			
+					startActivity(intent);			
+					finish();
+			}
+		}, 2000);
    }
+	
+	
 	
 }

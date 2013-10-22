@@ -4,11 +4,18 @@ import java.io.Serializable;
 
 public class Interlocutor  implements Serializable{
 	
+	private String my_mobile;
 	private String i_mobile;
 	private String last_message;
 	private String last_time;
 	private String isreaded;
 	
+	public String getMy_mobile() {
+		return my_mobile;
+	}
+	public void setMy_mobile(String my_mobile) {
+		this.my_mobile = my_mobile;
+	}
 	public String getI_mobile() {
 		return i_mobile;
 	}

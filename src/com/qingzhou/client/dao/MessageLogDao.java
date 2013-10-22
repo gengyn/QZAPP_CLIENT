@@ -32,8 +32,8 @@ public class MessageLogDao extends BaseDao<MessageLog>{
 		cv.put("RECEIVER_MOBILE", chatMsg.getReceiver());
 		cv.put("MSG_CONTENT",chatMsg.getText());
 		cv.put("MSG_TIME", StringUtils.getCurDate());
-		cv.put("IMG_URL", chatMsg.getImg_url().replaceAll("http", "file"));
-		cv.put("VOICE_URL", chatMsg.getVoice_url().replaceAll("http", "file"));
+		cv.put("IMG_URL", chatMsg.getImg_url());
+		cv.put("VOICE_URL", chatMsg.getVoice_url());
 		super.insert(tableName, cv);
 	}
 	
@@ -56,8 +56,10 @@ public class MessageLogDao extends BaseDao<MessageLog>{
 	 * @param mobile
 	 * @return
 	 */
-	public int delMessage(String mobile)
+	public int delMessage(String myMobile,String otherMobile)
 	{
-		return super.delete(tableName, "sender_mobile=? or receiver_mobile=?", new String[]{mobile,mobile});
+		return super.delete(tableName, 
+				"(sender_mobile=? and receiver_mobile=?) or (sender_mobile=? and receiver_mobile=?)",
+				new String[]{myMobile,otherMobile,otherMobile,myMobile});
 	}
 }

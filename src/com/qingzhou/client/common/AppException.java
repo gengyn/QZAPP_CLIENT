@@ -63,7 +63,7 @@ public class AppException extends RuntimeException {
 			exception.put("1012", "iOS 不支持推送自定义消息。只有 Android 支持推送自定义消息。");
 			exception.put("1013", "content-type 只支持 application/x-www-form-urlencoded");
 			
-			exception.put("9999", "网络繁忙，请稍后重试");
+			exception.put("9999", "网络不给力，请稍后重试");
 			exception.put("9998", "您的客户信息已过期，请重新登录");
 			exception.put("9997", "您的访问频率过快，请稍后");
 			exception.put("9996", "没有您的客户信息");

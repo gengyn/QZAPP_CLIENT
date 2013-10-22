@@ -106,7 +106,7 @@ public class PushReceiver extends BroadcastReceiver {
 	}
 	
 	/**
-	 * 预留消息的处理方法
+	 * 消息的处理方法
 	 * @param context
 	 * @param bundle
 	 */

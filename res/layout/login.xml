@@ -67,7 +67,7 @@
 	    android:maxLength="6"
 	    android:singleLine="true"
 	    android:hint="@string/passwd"
-	    android:text="UWMROE"/>
+	    android:text="09852D"/>
 	<CheckBox
 	    android:id="@+id/autoLogin_box"
 	    android:layout_width="fill_parent"

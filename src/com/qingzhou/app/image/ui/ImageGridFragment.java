@@ -45,6 +45,10 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
     private ImageAdapter mAdapter;
     private ImageFetcher mImageFetcher;
 
+   
+    public ImageGridFragment() {
+    	
+    }
     /**
      * 初始化GridFragment,传入图片地址
      * @param photoList
@@ -70,19 +74,13 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
         mImageFetcher = new ImageFetcher(getActivity(), mImageThumbSize);
         mImageFetcher.setLoadingImage(R.drawable.empty_photo);
         mImageFetcher.addImageCache(getActivity().getSupportFragmentManager(), cacheParams);
-        
-        /**
-         * 如果只有一张图片，默认显示，不再显示图片列表
-         */
-        if (Images.getImageUrls().size() == 1)
-        	defaultShow();
     }
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        final View v = inflater.inflate(R.layout.image_grid_fragment, container, false);
+    	final View v = inflater.inflate(R.layout.image_grid_fragment, container, false);
         final GridView mGridView = (GridView) v.findViewById(R.id.gridView);
         mGridView.setAdapter(mAdapter);
         mGridView.setOnItemClickListener(this);
@@ -122,6 +120,12 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
                         }
                     }
                 });
+        
+        /**
+         * 如果只有一张图片，默认显示，不再显示图片列表
+         */
+        if (Images.getImageUrls().size() == 1)
+        	defaultShow();
 
         return v;
     }

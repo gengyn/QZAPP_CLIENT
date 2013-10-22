@@ -38,7 +38,7 @@ import com.qingzhou.client.domain.Myinfo;
  * @author hihi
  * 
  */
-public class MyInfoActivity extends Activity {
+public class MyInfoActivity extends BaseActivity {
 
 	private QcApp qcApp;
 	private List<Myinfo> mInfo = new ArrayList<Myinfo>();
