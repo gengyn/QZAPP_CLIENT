@@ -1,6 +1,7 @@
 CREATE TABLE APP_INTERLOCUTOR  (
    MY_MOBILE            VARCHAR2(20) NOT NULL,  
    I_MOBILE             VARCHAR2(20) NOT NULL,
+   I_NAME               VARCHAR2(100),
    LAST_MESSAGE         VARCHAR2(300),
    LAST_TIME            DATETIME DEFAULT (datetime('now','localtime')),
    ISREADED             CHAR(1) DEFAULT '0',
@@ -10,6 +11,7 @@ CREATE TABLE APP_INTERLOCUTOR  (
 CREATE TABLE APP_MESSAGE_LOG  (
    MSG_ID               INTEGER    PRIMARY KEY AUTOINCREMENT,
    SENDER_MOBILE        VARCHAR2(20),
+   SENDER_NAME          VARCHAR2(100),
    RECEIVER_MOBILE      VARCHAR2(20),
    MSG_CONTENT          VARCHAR2(300),
    MSG_TIME             DATETIME DEFAULT (datetime('now','localtime')),

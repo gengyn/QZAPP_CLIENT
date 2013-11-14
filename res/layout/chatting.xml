@@ -1,81 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/chat_layout"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent"
-  android:background="@drawable/chat_bg_default" >
-    
-    <RelativeLayout 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/chat_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/chat_bg_default" >
+
+    <RelativeLayout
         android:id="@+id/rl_layout"
-  			android:layout_width="fill_parent"
-  			android:layout_height="45dp"
-  			android:background="@drawable/title_bar"
-  			android:gravity="center_vertical"  > 
-  			<Button
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/title_bar"
+        android:gravity="center_vertical" >
+
+        <ImageButton
             android:id="@+id/btn_back"
-            android:layout_width="70dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="@string/returntext"
-            android:textSize="14sp"
-            android:textColor="#fff"
-            android:background="@drawable/title_btn_back"
-		    />    
-      		<TextView
-      		    android:id="@+id/chat_name"
-        		android:layout_width="wrap_content" 
-        		android:layout_height="wrap_content" 
-        		android:layout_centerInParent="true"
-        		android:textSize="20sp"		
-				android:textColor="#ffffff" />      
-		</RelativeLayout>
-    
-	  
-   <RelativeLayout
+            android:background="@drawable/title_go_back"/>
+
+        <TextView
+            android:id="@+id/chat_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/rl_bottom"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/chat_footer_bg" >
-        
+        android:background="@drawable/chat_footer_bg"
+        android:visibility="gone">"
+
         <Button
-        android:id="@+id/btn_send"
-        android:layout_width="60dp"
-        android:layout_height="40dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
-        android:layout_centerVertical="true"
-        android:text="@string/sendtext"
-        android:background="@drawable/chat_send_btn" />
-         
-        
+            android:id="@+id/btn_send"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/chat_send_btn"
+            android:text="@string/sendtext" />
+
         <EditText
-        android:id="@+id/et_sendmessage"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/btn_send"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/login_edit_normal"
-        android:layout_centerVertical="true"
-        android:textSize="15sp"
-        android:maxLength="70"
-        android:scrollbars="vertical"/>
-         
+            android:id="@+id/et_sendmessage"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/btn_send"
+            android:background="@drawable/login_edit_normal"
+            android:maxLength="70"
+            android:scrollbars="vertical"
+            android:textSize="15sp" />
     </RelativeLayout>
-    
-        
+
     <ListView
-    android:id="@+id/listview"
-    android:layout_below="@id/rl_layout"
-    android:layout_above="@id/rl_bottom"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"    
-	android:divider="@null"
-    android:dividerHeight="5dp"
-    android:stackFromBottom="true"
-    android:scrollbarStyle="outsideOverlay" 
-    android:cacheColorHint="#0000"/>
-    
+        android:id="@+id/listview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/rl_bottom"
+        android:layout_below="@id/rl_layout"
+        android:cacheColorHint="#0000"
+        android:divider="@null"
+        android:dividerHeight="5dp"
+        android:scrollbarStyle="outsideOverlay"
+        android:stackFromBottom="true" />
+
 </RelativeLayout>

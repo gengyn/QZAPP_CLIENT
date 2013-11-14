@@ -61,7 +61,7 @@
 	            android:layout_below="@id/iv_userhead"
 	            android:layout_alignParentRight="true"
 	            android:layout_toRightOf="@id/tv_chatcontent"
-	            android:textSize="15sp"
+	            android:textSize="12sp"
 	            android:gravity="center"
 	            android:textColor="#818181"/>
 	        

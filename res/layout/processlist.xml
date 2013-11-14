@@ -41,8 +41,7 @@
         android:layout_height="50dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="5dp"
-        android:onClick="photoClick"/>
+        android:layout_marginRight="5dp"/>
     
      <TextView
         android:id="@+id/process_photo"

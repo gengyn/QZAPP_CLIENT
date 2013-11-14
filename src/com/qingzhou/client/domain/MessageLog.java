@@ -5,13 +5,19 @@ public class MessageLog {
 
 	private int msg_id;
 	private String sender_mobile;
+	private String sender_name;
 	private String receiver_mobile;
 	private String msg_content;
 	private String msg_time;
 	private String img_url;
 	private String voice_url;
 	
-	
+	public String getSender_name() {
+		return sender_name;
+	}
+	public void setSender_name(String sender_name) {
+		this.sender_name = sender_name;
+	}
 	public String getImg_url() {
 		return img_url;
 	}

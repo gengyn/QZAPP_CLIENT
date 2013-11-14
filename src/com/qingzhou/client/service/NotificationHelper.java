@@ -7,6 +7,7 @@ import org.apache.http.client.ClientProtocolException;
 import com.alibaba.fastjson.JSON;
 import com.qingzhou.app.utils.HttpUtils;
 import com.qingzhou.app.utils.Logger;
+import com.qingzhou.app.utils.StringUtils;
 import com.qingzhou.app.utils.ThreadPoolUtils;
 import com.qingzhou.client.MainActivity;
 import com.qingzhou.client.MyMessageActivity;
@@ -57,11 +58,18 @@ public class NotificationHelper {
 		}
         PendingIntent contentIntent = PendingIntent.getActivity(context, 0, select, PendingIntent.FLAG_UPDATE_CURRENT);
         
+        //组合通知的内容
+        String msg_content = "";
+        if (StringUtils.isEmpty(chatMsg.getSenderName()))
+        	msg_content = chatMsg.getText();
+        else 
+        	msg_content = chatMsg.getSenderName()+":"+chatMsg.getText();
+        
         Notification.Builder builder = new Notification.Builder(context)
         .setTicker("收到新消息")
         .setSmallIcon(R.drawable.ic_launcher)
         .setContentTitle("我的消息")
-        .setContentText(chatMsg.getText())
+        .setContentText(msg_content)
         .setAutoCancel(true)
         .setContentIntent(contentIntent);
         

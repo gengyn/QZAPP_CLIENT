@@ -14,6 +14,8 @@
     <string name="sendtext">发送</string>
     <string name="noticetext">通知</string>
     <string name="userchangetext">切换</string>
+    <string name="callphonetext">拨打电话</string>
+    <string name="sendmessagetext">发送消息</string>
     <!-- 我的消息相关 -->
     <string name="nodatatext">尚无对话</string>
     <!-- 我的消息相关 -->
@@ -37,7 +39,7 @@
     <string name="project_normal">工程已进入 %1$s，工期正常</string>
     <string name="project_delay">工程已进入 %1$s，工期有延误</string>
     <string name="process_nostart">未开始</string>
-    <string name="process_end">已完工</string>
+    <string name="process_end">已完成</string>
     <string name="process_going">进行中</string>
     <string name="project_contract">合同</string>
     <string name="project_exchange">联络人</string>

@@ -35,6 +35,7 @@ import android.view.View.OnCreateContextMenuListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -56,7 +57,7 @@ public class MyMessageActivity extends BaseActivity {
 	private ChatListViewAdapter mAdapter;
 	private Button btn_addressbook;
 	private TextView nodata;
-
+	private ImageButton btn_back;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,14 @@ public class MyMessageActivity extends BaseActivity {
         setContentView(R.layout.mymessage);
         qcApp = (QcApp)getApplication();
         instance = this;
+        
+      //close button
+		btn_back = (ImageButton) this.findViewById(R.id.btn_back);
+		btn_back.setOnClickListener(new Button.OnClickListener(){//创建监听    
+		      public void onClick(View v) {    
+		    	  MyMessageActivity.this.finish();
+		      }    
+		});
         
         mListView = (ListView) findViewById(R.id.chat_list);
         initChatList();
@@ -159,6 +168,7 @@ public class MyMessageActivity extends BaseActivity {
 				//Toast.makeText(getBaseContext(), "selectd:" +arg2 +" id:"+arg3, Toast.LENGTH_LONG).show();
 				Intent intent = new Intent();
 				intent.putExtra("OPPOSITE", mChatList.get(arg2).getI_mobile());
+				intent.putExtra("OPPOSITENAME", mChatList.get(arg2).getI_name());
 				intent.setClass(MyMessageActivity.this, ChatActivity.class);
 				startActivity(intent);
 				
@@ -240,63 +250,34 @@ public class MyMessageActivity extends BaseActivity {
 		DialogUtils.showAddressBookDialog(MyMessageActivity.this, qcApp.getUserBase());
 	}
 	
-	/**
-	 * 拨打电话
-	 * @param strPhone
-	 */
-	public void action_call(String strPhone)
-	{
-		if (StringUtils.isEmpty(strPhone))
-			return;
-		Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+strPhone));
-		// 将意图传给操作系统
-		// startActivity方法专门将意图传给操作系统
-		MyMessageActivity.this.startActivity(intent);
-	}
-	
 	public void stylist_phone_onclick(View v)
 	{
-		action_call(qcApp.getUserBase().getReg_stylist_mobile());
+		DialogUtils.action_call(MyMessageActivity.this,qcApp.getUserBase().getReg_stylist_mobile());
 	}
 	
 	public void project_mgr_phone_onclick(View v)
 	{
-		action_call(qcApp.getUserBase().getReg_project_mgr_mobile());
+		DialogUtils.action_call(MyMessageActivity.this,qcApp.getUserBase().getReg_project_mgr_mobile());
 	}
 	
 	public void customer_mgr_phone_onclick(View v)
 	{
-		action_call(qcApp.getUserBase().getReg_customer_mgr_mobile());
+		DialogUtils.action_call(MyMessageActivity.this,qcApp.getUserBase().getReg_customer_mgr_mobile());
 	}
 	
 	public void stylist_message_onclick(View v)
 	{
-		toMessage(MyMessageActivity.this,qcApp.getUserBase().getReg_stylist_mobile());
+		DialogUtils.toMessage(MyMessageActivity.this,qcApp.getUserBase().getReg_stylist_mobile());
 	}
 	
 	public void project_mgr_message_onclick(View v)
 	{
-		toMessage(MyMessageActivity.this,qcApp.getUserBase().getReg_project_mgr_mobile());
+		DialogUtils.toMessage(MyMessageActivity.this,qcApp.getUserBase().getReg_project_mgr_mobile());
 	}
 	
 	public void customer_mgr_message_onclick(View v)
 	{
-		toMessage(MyMessageActivity.this,qcApp.getUserBase().getReg_customer_mgr_mobile());
-	}
-	
-	
-	/**
-	 * 到我的消息界面
-	 * @param worker
-	 */
-	private void toMessage(Context context,String worker)
-	{
-		if (StringUtils.isEmpty(worker))
-			return;
-		Intent intent = new Intent();
-		intent.putExtra("OPPOSITE", worker);
-	    intent.setClass(context,ChatActivity.class);
-	    context.startActivity(intent);
+		DialogUtils.toMessage(MyMessageActivity.this,qcApp.getUserBase().getReg_customer_mgr_mobile());
 	}
 }
     

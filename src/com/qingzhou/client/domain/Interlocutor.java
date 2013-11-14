@@ -6,10 +6,17 @@ public class Interlocutor  implements Serializable{
 	
 	private String my_mobile;
 	private String i_mobile;
+	private String i_name;
 	private String last_message;
 	private String last_time;
 	private String isreaded;
 	
+	public String getI_name() {
+		return i_name;
+	}
+	public void setI_name(String i_name) {
+		this.i_name = i_name;
+	}
 	public String getMy_mobile() {
 		return my_mobile;
 	}

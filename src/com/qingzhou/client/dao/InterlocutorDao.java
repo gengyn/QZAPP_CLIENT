@@ -38,6 +38,7 @@ public class InterlocutorDao extends BaseDao<Interlocutor>{
 		{
 			cv.put("MY_MOBILE", chatMsg.getReceiver());
 			cv.put("I_MOBILE", chatMsg.getSender());
+			cv.put("I_NAME", chatMsg.getSenderName());
 			cv.put("ISREADED", "0");
 		}
 		cv.put("LAST_MESSAGE", chatMsg.getText());
@@ -58,6 +59,7 @@ public class InterlocutorDao extends BaseDao<Interlocutor>{
 		{
 			cv.put("MY_MOBILE", chatMsg.getReceiver());
 			cv.put("I_MOBILE", chatMsg.getSender());
+			cv.put("I_NAME", chatMsg.getSenderName());
 			cv.put("ISREADED", "0");
 		}
 		cv.put("LAST_MESSAGE", chatMsg.getText());
@@ -87,7 +89,7 @@ public class InterlocutorDao extends BaseDao<Interlocutor>{
 		return (List<Interlocutor>) super.queryList
 				(Interlocutor.class,
 						tableName, 
-						new String[]{"i_mobile","last_message","last_time","isreaded"}, 
+						new String[]{"i_mobile","i_name","last_message","last_time","isreaded"}, 
 						"my_mobile=?", new String[]{my_mobile}, "LAST_TIME desc",null,null);
 	}
 	

@@ -3,6 +3,7 @@ package com.qingzhou.client;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.qingzhou.app.utils.DialogUtils;
 import com.qingzhou.app.utils.StringUtils;
 import com.qingzhou.client.adapter.FavorableViewAdapter;
 import com.qingzhou.client.common.QcApp;
@@ -23,6 +24,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -40,13 +43,15 @@ public class MyContractActivity extends BaseActivity {
 	public static MyContractActivity instance = null;
 	private QcApp qcApp;
 	private ViewPager mTabPager;
-	private ImageView mTabImg;
+	//private ImageView mTabImg;
 	private ImageView mTab1, mTab2, mTab3, mTab4;
 	private int zero = 0;
 	private int currIndex = 0;
 	private int one;
 	private int two;
 	private int three;
+	
+	private ImageButton btn_back;
 	
 		
 	Contract contract;
@@ -56,6 +61,14 @@ public class MyContractActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.mycontract);
+		
+		//close button
+		btn_back = (ImageButton) this.findViewById(R.id.btn_back);
+		btn_back.setOnClickListener(new Button.OnClickListener(){//创建监听    
+            public void onClick(View v) {    
+            	MyContractActivity.this.finish();
+            }    
+        });
 
 		getWindow().setSoftInputMode(
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -82,11 +95,8 @@ public class MyContractActivity extends BaseActivity {
 		TextView reg_village_name;
 		TextView reg_construct_address;
 		TextView reg_customer_mgr_name;
-		TextView reg_customer_mgr_mobile;
 		TextView reg_stylist_name;
-		TextView reg_stylist_mobile;
 		TextView reg_project_mgr_name;
-		TextView reg_project_mgr_mobile;
 		
 		contract_num = (TextView) v.findViewById(R.id.contract_num);
 		contract_type_name = (TextView) v.findViewById(R.id.contract_type_name);
@@ -96,11 +106,11 @@ public class MyContractActivity extends BaseActivity {
 		reg_village_name = (TextView) v.findViewById(R.id.reg_village_name);
 		reg_construct_address = (TextView) v.findViewById(R.id.reg_construct_address);
 		reg_customer_mgr_name =  (TextView) v.findViewById(R.id.reg_customer_mgr_name);
-		reg_customer_mgr_mobile = (TextView) v.findViewById(R.id.reg_customer_mgr_mobile);
+		//reg_customer_mgr_mobile = (TextView) v.findViewById(R.id.reg_customer_mgr_mobile);
 		reg_stylist_name = (TextView) v.findViewById(R.id.reg_stylist_name);
-		reg_stylist_mobile = (TextView) v.findViewById(R.id.reg_stylist_mobile);
+		//reg_stylist_mobile = (TextView) v.findViewById(R.id.reg_stylist_mobile);
 		reg_project_mgr_name = (TextView) v.findViewById(R.id.reg_project_mgr_name);
-		reg_project_mgr_mobile = (TextView) v.findViewById(R.id.reg_project_mgr_mobile);
+		//reg_project_mgr_mobile = (TextView) v.findViewById(R.id.reg_project_mgr_mobile);
 		
 		
 		contract_num.setText(contract.getContract_num());
@@ -111,11 +121,40 @@ public class MyContractActivity extends BaseActivity {
 		reg_village_name.setText(contract.getReg_village_name());
 		reg_construct_address.setText(contract.getReg_construct_address());
 		reg_customer_mgr_name.setText(contract.getReg_customer_mgr_name());
-		reg_customer_mgr_mobile.setText(contract.getReg_customer_mgr_mobile());
+		//reg_customer_mgr_mobile.setText(contract.getReg_customer_mgr_mobile());
 		reg_stylist_name.setText(contract.getReg_stylist_name());
-		reg_stylist_mobile.setText(contract.getReg_stylist_mobile());
+		//reg_stylist_mobile.setText(contract.getReg_stylist_mobile());
 		reg_project_mgr_name.setText(contract.getReg_project_mgr_name());
-		reg_project_mgr_mobile.setText(contract.getReg_project_mgr_mobile());
+		//reg_project_mgr_mobile.setText(contract.getReg_project_mgr_mobile());
+	}
+	
+	/**
+	 * 显示项目经理的沟通方式
+	 * @param v
+	 */
+	public void show_project_mgr(View v)
+	{
+		if (!StringUtils.isEmpty(contract.getReg_project_mgr_mobile()))
+			DialogUtils.showAddressBookItemDialog(this, contract.getReg_project_mgr_name(), contract.getReg_project_mgr_mobile());
+	}
+	/**
+	 * 显示客户经理的沟通方式
+	 * @param v
+	 */
+	public void show_customer_mgr(View v)
+	{
+		if (!StringUtils.isEmpty(contract.getReg_customer_mgr_mobile()))
+			DialogUtils.showAddressBookItemDialog(this, contract.getReg_customer_mgr_name(), contract.getReg_customer_mgr_mobile());
+	}
+	
+	/**
+	 * 显示设计师的沟通方式
+	 * @param v
+	 */
+	public void show_stylist(View v)
+	{
+		if (!StringUtils.isEmpty(contract.getReg_stylist_mobile()))
+			DialogUtils.showAddressBookItemDialog(this, contract.getReg_stylist_name(), contract.getReg_stylist_mobile());
 	}
 	
 	/**
@@ -188,7 +227,7 @@ public class MyContractActivity extends BaseActivity {
 		mTab2 = (ImageView) findViewById(R.id.img_project_date);
 		mTab3 = (ImageView) findViewById(R.id.img_amount);
 		mTab4 = (ImageView) findViewById(R.id.img_favorable);
-		mTabImg = (ImageView) findViewById(R.id.img_tab_now);
+		//mTabImg = (ImageView) findViewById(R.id.img_tab_now);
 		mTab1.setOnClickListener(new MyOnClickListener(0));
 		mTab2.setOnClickListener(new MyOnClickListener(1));
 		mTab3.setOnClickListener(new MyOnClickListener(2));
@@ -199,15 +238,15 @@ public class MyContractActivity extends BaseActivity {
         int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
         //计算增量,如果屏幕大小的四分子一比图片的宽度122还大，计算一个增量
-        if ((width/4 - 122) > 0)
-        {
-        	zero = (width/4 - 122)/2;
-        	 //定义初始位置
-            mTabImg.setPadding(zero, 0, 0, 0);
-        }
-        one = width/4; 
-        two = one*2 ;
-        three = one*3 ;
+//        if ((width/4 - 122) > 0)
+//        {
+//        	zero = (width/4 - 122)/2;
+//        	 //定义初始位置
+//            mTabImg.setPadding(zero, 0, 0, 0);
+//        }
+//        one = width/4; 
+//        two = one*2 ;
+//        three = one*3 ;
        
         
 		LayoutInflater mLi = LayoutInflater.from(this);
@@ -345,7 +384,7 @@ public class MyContractActivity extends BaseActivity {
 			currIndex = arg0;
 			animation.setFillAfter(true);
 			animation.setDuration(150);
-			mTabImg.startAnimation(animation);
+			//mTabImg.startAnimation(animation);
 		}
 
 		@Override

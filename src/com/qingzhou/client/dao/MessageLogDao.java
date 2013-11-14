@@ -29,6 +29,7 @@ public class MessageLogDao extends BaseDao<MessageLog>{
 	{
 		ContentValues cv = new ContentValues();
 		cv.put("SENDER_MOBILE", chatMsg.getSender());
+		cv.put("SENDER_NAME", chatMsg.getSenderName());
 		cv.put("RECEIVER_MOBILE", chatMsg.getReceiver());
 		cv.put("MSG_CONTENT",chatMsg.getText());
 		cv.put("MSG_TIME", StringUtils.getCurDate());

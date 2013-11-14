@@ -76,9 +76,12 @@ public class ChatListViewAdapter extends BaseAdapter {
 		viewHolder.chat_row = (RelativeLayout)convertView.findViewById(R.id.chat_row);
 		convertView.setTag(viewHolder);
 		
-		//如通讯录中不存在，则显示具体号码
-		viewHolder.chat_opposite.setText(
-				addressBook.containsKey(entity.getI_mobile())?addressBook.get(entity.getI_mobile()):entity.getI_mobile());
+		//默认显示消息中的发送人姓名，如发送人姓名为空，则在通讯录中寻找，如通讯录中不存在，则显示具体号码
+		if (StringUtils.isEmpty(entity.getI_name()))
+			viewHolder.chat_opposite.setText(
+					addressBook.containsKey(entity.getI_mobile())?addressBook.get(entity.getI_mobile()):entity.getI_mobile());
+		else viewHolder.chat_opposite.setText(entity.getI_name());
+		
 		viewHolder.chat_lasttime.setText(entity.getLast_time());
 		viewHolder.chat_lastmsg.setText(entity.getLast_message());
 		if (entity.getIsreaded().equals("0"))

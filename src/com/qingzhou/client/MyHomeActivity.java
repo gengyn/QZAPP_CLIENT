@@ -106,6 +106,7 @@ public class MyHomeActivity extends BaseActivity {
 				{
 					Intent intent = new Intent();
 					intent.putExtra("INDEX", arg2);
+					intent.putExtra("TITLE", rpp.getProjectPlanDetailList().get(arg2).getProject_process_name());
 				    intent.setClass(MyHomeActivity.this,MyHomeLevel2Activity.class);
 				    startActivity(intent);
 				}
@@ -134,66 +135,36 @@ public class MyHomeActivity extends BaseActivity {
 		DialogUtils.showAddressBookDialog(MyHomeActivity.this, qcApp.getUserBase());
 	}
 	
-	/**
-	 * 拨打电话
-	 * @param strPhone
-	 */
-	public void action_call(String strPhone)
-	{
-		if (StringUtils.isEmpty(strPhone))
-			return;
-		//ACTION_CALL
-		Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+strPhone));
-		// 将意图传给操作系统
-		// startActivity方法专门将意图传给操作系统
-		MyHomeActivity.this.startActivity(intent);
-	}
 	
 	public void stylist_phone_onclick(View v)
 	{
-		action_call(qcApp.getUserBase().getReg_stylist_mobile());
+		DialogUtils.action_call(MyHomeActivity.this,qcApp.getUserBase().getReg_stylist_mobile());
 	}
 	
 	public void project_mgr_phone_onclick(View v)
 	{
-		action_call(qcApp.getUserBase().getReg_project_mgr_mobile());
+		DialogUtils.action_call(MyHomeActivity.this,qcApp.getUserBase().getReg_project_mgr_mobile());
 	}
 	
 	public void customer_mgr_phone_onclick(View v)
 	{
-		action_call(qcApp.getUserBase().getReg_customer_mgr_mobile());
+		DialogUtils.action_call(MyHomeActivity.this,qcApp.getUserBase().getReg_customer_mgr_mobile());
 	}
 	
 	public void stylist_message_onclick(View v)
 	{
-		toMessage(MyHomeActivity.this,qcApp.getUserBase().getReg_stylist_mobile());
+		DialogUtils.toMessage(MyHomeActivity.this,qcApp.getUserBase().getReg_stylist_mobile());
 	}
 	
 	public void project_mgr_message_onclick(View v)
 	{
-		toMessage(MyHomeActivity.this,qcApp.getUserBase().getReg_project_mgr_mobile());
+		DialogUtils.toMessage(MyHomeActivity.this,qcApp.getUserBase().getReg_project_mgr_mobile());
 	}
 	
 	public void customer_mgr_message_onclick(View v)
 	{
-		toMessage(MyHomeActivity.this,qcApp.getUserBase().getReg_customer_mgr_mobile());
+		DialogUtils.toMessage(MyHomeActivity.this,qcApp.getUserBase().getReg_customer_mgr_mobile());
 	}
-	
-	
-	/**
-	 * 到我的消息界面
-	 * @param worker
-	 */
-	private void toMessage(Context context,String worker)
-	{
-		if (StringUtils.isEmpty(worker))
-			return;
-		Intent intent = new Intent();
-		intent.putExtra("OPPOSITE", worker);
-	    intent.setClass(context,ChatActivity.class);
-	    context.startActivity(intent);
-	}
-	
 	
 	
 }

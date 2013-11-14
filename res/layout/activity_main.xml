@@ -1,7 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:background="@drawable/bkg_0003">
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -15,7 +17,8 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:textColor="#ffffff"
-            android:textSize="15sp" />
+            android:textSize="20sp" 
+            android:text="@string/app_name"/>
 
         <ImageButton
             android:layout_width="67dp"
@@ -29,22 +32,21 @@
             android:textColor="#fff"
             android:textSize="12dp" />
     </RelativeLayout>
-
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:gravity="center"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="horizontal">"
 			 <RelativeLayout
 			    android:layout_width="wrap_content"  
 			    android:layout_height="wrap_content" 
 			    android:gravity="center"
-			    android:background="@drawable/myproject_bg" > 
+			    android:padding="25dp"> 
 	            <com.qingzhou.app.widget.MyImageView
 	                android:id="@+id/myhome"
 	                android:layout_width="wrap_content"
@@ -52,12 +54,20 @@
 	                android:onClick="myhome_onclick"
 	                android:scaleType="matrix"
 	                android:src="@drawable/myproject" />
+	            <TextView 
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:text="@string/myhome"
+	                android:textColor="@color/black"
+	                android:layout_centerHorizontal="true"
+	                android:layout_below="@id/myhome"
+	                />
 			</RelativeLayout>
 			<RelativeLayout
 			    android:layout_width="wrap_content"  
 			    android:layout_height="wrap_content" 
 			    android:gravity="center"
-			    android:background="@drawable/mycontract_bg"> 
+			    android:padding="25dp"> 
 	            <com.qingzhou.app.widget.MyImageView
 	                android:id="@+id/mycontract"
 	                android:layout_width="wrap_content"
@@ -65,40 +75,64 @@
 	                android:onClick="mycontract_onclick"
 	                android:scaleType="matrix"
 	                android:src="@drawable/mycontract" />
-			</RelativeLayout>
-			<RelativeLayout
-			    android:layout_width="wrap_content"  
-			    android:layout_height="wrap_content" 
-			    android:gravity="center"
-			    android:background="@drawable/mymessage_bg" > 
-	            <com.qingzhou.app.widget.MyImageView
-	                android:id="@+id/mymessage"
+	            <TextView 
 	                android:layout_width="wrap_content"
 	                android:layout_height="wrap_content"
-	                android:onClick="mymessage_onClick"
-	                android:scaleType="matrix"
-	                android:src="@drawable/mymessage" />
+	                android:text="@string/mycontract"
+	                android:textColor="@color/black"
+	                android:layout_centerHorizontal="true"
+	                android:layout_below="@id/mycontract"
+	                />
 			</RelativeLayout>
-			<RelativeLayout
-			    android:layout_width="wrap_content"  
-			    android:layout_height="wrap_content" 
-			    android:gravity="center"
-			    android:background="@drawable/myinfo_bg"> 
-	            <com.qingzhou.app.widget.MyImageView
-	                android:id="@+id/myinfo"
-	                android:layout_width="wrap_content"
-	                android:layout_height="wrap_content"
-	                android:onClick="myinfo_onclick"
-	                android:scaleType="matrix"
-	                android:src="@drawable/myinfo" />
-	        </RelativeLayout>
-	        <RelativeLayout
-			    android:layout_width="wrap_content"  
-			    android:layout_height="wrap_content" 
-			    android:gravity="center"
-			    android:background="@drawable/main_bottom_bg">
-	        </RelativeLayout>
+			
         </LinearLayout>
+         <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+	        <RelativeLayout
+				    android:layout_width="wrap_content"  
+				    android:layout_height="wrap_content" 
+				    android:gravity="center" 
+				    android:padding="25dp"> 
+		            <com.qingzhou.app.widget.MyImageView
+		                android:id="@+id/mymessage"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:onClick="mymessage_onClick"
+		                android:scaleType="matrix"
+		                android:src="@drawable/mymessage" />
+		            <TextView 
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:text="@string/mymessage"
+		                android:textColor="@color/black"
+		                android:layout_centerHorizontal="true"
+		                android:layout_below="@id/mymessage"
+	                />
+				</RelativeLayout>
+				<RelativeLayout
+				    android:layout_width="wrap_content"  
+				    android:layout_height="wrap_content" 
+				    android:gravity="center"
+				    android:padding="25dp"> 
+		            <com.qingzhou.app.widget.MyImageView
+		                android:id="@+id/myinfo"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:onClick="myinfo_onclick"
+		                android:scaleType="matrix"
+		                android:src="@drawable/myinfo" />
+		            <TextView 
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:text="@string/myinfo"
+		                android:textColor="@color/black"
+		                android:layout_centerHorizontal="true"
+		                android:layout_below="@id/myinfo"
+	                />
+		        </RelativeLayout>
+	        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

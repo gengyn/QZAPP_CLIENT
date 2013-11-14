@@ -45,7 +45,7 @@ public class MainActivity extends BaseActivity implements TagAliasCallback{
 		 _instance = this;
 		qcApp = (QcApp)getApplication();
 		main_title = (TextView) this.findViewById(R.id.main_title);
-		main_title.setText(String.format(getResources().getString(R.string.hello),qcApp.getUserName()));
+		//main_title.setText(String.format(getResources().getString(R.string.hello),qcApp.getUserName()));
 		
 		//初始化 JPush
 		initJpush();

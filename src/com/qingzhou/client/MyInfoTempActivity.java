@@ -1,10 +1,7 @@
 package com.qingzhou.client;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import org.apache.http.client.ClientProtocolException;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,24 +9,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.alibaba.fastjson.JSONArray;
-import com.qingzhou.app.utils.HttpUtils;
-import com.qingzhou.app.utils.StringUtils;
-import com.qingzhou.app.utils.ThreadPoolUtils;
-import com.qingzhou.app.widget.PullToRefreshListView;
 import com.qingzhou.client.adapter.MyInfoViewAdapter;
-import com.qingzhou.client.common.Constants;
 import com.qingzhou.client.common.QcApp;
-import com.qingzhou.client.common.RestService;
 import com.qingzhou.client.domain.Myinfo;
 
 /**
@@ -44,12 +31,22 @@ public class MyInfoTempActivity extends BaseActivity {
 	private ListView infoListView;
 	List<Myinfo> mInfo = new ArrayList<Myinfo>();
 	
+	private ImageButton btn_back;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.myinfo);
 		qcApp = (QcApp)getApplication();
+		
+		//close button
+		btn_back = (ImageButton) this.findViewById(R.id.btn_back);
+		btn_back.setOnClickListener(new Button.OnClickListener(){//创建监听    
+            public void onClick(View v) {    
+            	MyInfoTempActivity.this.finish();
+            }    
+        });
 		initInfoList();
 	}
 

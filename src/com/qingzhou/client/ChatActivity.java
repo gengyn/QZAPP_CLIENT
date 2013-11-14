@@ -28,29 +28,35 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
+/**
+ * 即时消息对话活动
+ * @author hihi
+ *
+ */
 
 public class ChatActivity extends BaseActivity implements OnClickListener{
 	private static final String TAG = "ChatActivity";
 
 	private QcApp qcApp;
 	private Button mBtnSend;
-	private Button mBtnBack;
+	private ImageButton mBtnBack;
 	private EditText mEditTextContent;
 	private ListView mListView;
 	private TextView mChat_name;
 	private ChatMsgViewAdapter mAdapter;
-	private RelativeLayout chat_layout;
+	private RelativeLayout rl_bottom;
 	private List<ChatMsg> mDataArrays = new ArrayList<ChatMsg>();
 	
 	private String myMobile = "";//我的电话
 	private String myName = "";//我的姓名
 	private String oppositeMobile = "";//对方的电话
 	private String oppositeName = "";//对方姓名
+	private boolean canReply = false;//是否可以回复
 	
 	
     public void onCreate(Bundle savedInstanceState) {
@@ -62,8 +68,17 @@ public class ChatActivity extends BaseActivity implements OnClickListener{
         myMobile = qcApp.getUserPhone();
         myName = qcApp.getAddressBook().get(myMobile);
         oppositeMobile = getIntent().getStringExtra("OPPOSITE");
-        oppositeName = qcApp.getAddressBook().containsKey(oppositeMobile)?
-				qcApp.getAddressBook().get(oppositeMobile):oppositeMobile;
+        //消息中带有发送人姓名，则不能回复
+        if(StringUtils.isEmpty(getIntent().getStringExtra("OPPOSITENAME")))
+        {
+	        oppositeName = qcApp.getAddressBook().containsKey(oppositeMobile)?
+					qcApp.getAddressBook().get(oppositeMobile):oppositeMobile;
+			canReply = true;
+        }else
+        {
+        	oppositeName = getIntent().getStringExtra("OPPOSITENAME");
+        	canReply = false;
+        }
         
         initView();
         initData();
@@ -126,26 +141,22 @@ public class ChatActivity extends BaseActivity implements OnClickListener{
     public void initView()
     {
     	mListView = (ListView) findViewById(R.id.listview);
+    	//mListView.setOnClickListener(this);
     	mBtnSend = (Button) findViewById(R.id.btn_send);
     	mBtnSend.setOnClickListener(this);
-    	mBtnBack = (Button) findViewById(R.id.btn_back);
+    	mBtnBack = (ImageButton) findViewById(R.id.btn_back);
     	mBtnBack.setOnClickListener(this);
     	mChat_name = (TextView)findViewById(R.id.chat_name);
     	mChat_name.setText(oppositeName);
     	
     	mEditTextContent = (EditText) findViewById(R.id.et_sendmessage);
-    	chat_layout = (RelativeLayout) findViewById(R.id.chat_layout);
-    	chat_layout.setClickable(true);
-    	chat_layout.setOnClickListener(new OnClickListener()
-    	{
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Toast.makeText(getBaseContext(), "点击背景", Toast.LENGTH_LONG).show();
-				getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN); 
-			}
-    		
-    	});
+    	
+    	//如不能回复，则不显示消息发送框
+    	rl_bottom = (RelativeLayout) findViewById(R.id.rl_bottom);
+    	if (canReply)
+    		rl_bottom.setVisibility(View.VISIBLE);
+    	else
+    		rl_bottom.setVisibility(View.GONE);
     }
     
    /**
@@ -167,7 +178,8 @@ public class ChatActivity extends BaseActivity implements OnClickListener{
     		}
     		else 
     		{
-    			entity.setSenderName(oppositeName);
+    			//如消息中带有发送人姓名，就先使用消息中的
+    			entity.setSenderName(StringUtils.isEmpty(msg.getSender_name())?oppositeName:msg.getSender_name());
     			entity.setComMeg(false);
     		}
     		
@@ -195,6 +207,9 @@ public class ChatActivity extends BaseActivity implements OnClickListener{
 			break;
 		case R.id.btn_back:
 			finish();
+			break;
+		case R.id.listview:
+			getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN); 
 			break;
 		}
 	}
@@ -248,7 +263,9 @@ public class ChatActivity extends BaseActivity implements OnClickListener{
 	 */
 	public void receiverMsg(ChatMsg entity)
 	{
-		entity.setSenderName(oppositeName);
+		if (StringUtils.isEmpty(entity.getSenderName()))
+			entity.setSenderName(oppositeName);
+		
 		entity.setDate(StringUtils.getCurDate());
 		entity.setComMeg(false);
 		//设置为已读
