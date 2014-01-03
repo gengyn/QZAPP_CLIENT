@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" 
+    android:background="@drawable/bkg_0003"
+    android:gravity="center_horizontal">
+
+    <RelativeLayout
+        android:id="@+id/myhome_title"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/title_bar"
+        android:gravity="center_vertical" >
+
+        <ImageButton
+            android:id="@id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/title_go_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/myhome"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="300dp"
+        android:layout_below="@id/myhome_title"
+        android:layout_marginTop="50dp">
+
+        <TextView
+            android:id="@+id/previous_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="5dp"
+            android:text="@string/previous_title"
+            android:textColor="@color/green"
+            android:textSize="16sp" />
+        <TextView
+            android:id="@+id/previous_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/previous_title"
+            android:textColor="@color/green"
+            android:textSize="16sp" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="150dp"
+            android:layout_centerInParent="true"
+            android:gravity="center_vertical"
+            android:background="@drawable/preference_item"
+            android:onClick="goProcess" >
+            
+         <ImageView 
+             android:id="@+id/project_img"
+             android:src="@drawable/tab_base_pressed"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentLeft="true"
+             android:layout_marginLeft="16dp"/>"
+         <TextView
+            android:id="@+id/project_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/project_img"
+            android:textSize="20sp" 
+            android:singleLine="true"/>
+
+        <TextView
+            android:id="@+id/project_explain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/project_img"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="10dp"
+            android:textSize="16sp" />
+         <TextView
+            android:id="@+id/base_detail_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/project_explain"
+            android:layout_below="@id/project_explain"
+            android:layout_marginTop="10dp"
+            android:text="@string/base_detail_title"/>
+         <TextView
+            android:id="@+id/base_detail_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/base_detail_title"
+            android:layout_alignBaseline="@id/base_detail_title"
+            android:text="Y1000.00"
+            android:textColor="@color/gray"/>
+         <ImageView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentRight="true"
+             android:layout_centerVertical="true"
+             android:clickable="true"
+             android:scaleType="matrix"
+             android:src="@drawable/mm_submenu" />
+
+        <TextView
+            android:id="@+id/main_detail_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/base_detail_title"
+            android:layout_below="@id/base_detail_title"
+            android:layout_marginTop="10dp"
+            android:text="@string/main_detail_title"/>
+        <TextView
+            android:id="@+id/main_detail_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/main_detail_title"
+            android:layout_alignBaseline="@id/main_detail_title"
+            android:text="Y2000.00"
+            android:textColor="@color/gray"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/next_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:textColor="@color/gray"
+            android:textSize="16sp"/>
+        <TextView
+            android:id="@+id/next_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/next_value"
+            android:layout_alignParentBottom="true"
+            android:text="@string/next_title" 
+            android:textColor="@color/gray"
+            android:textSize="16sp"/>
+
+    </RelativeLayout>
+	
+
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_alignParentBottom="true">
+        <Button
+		    android:id="@+id/btn_mycon"
+		    android:layout_width="0dp"
+		    android:layout_weight=".50"
+		    android:layout_height="match_parent"
+		    android:onClick="start_mycontract"
+		    android:text="@string/project_contract"
+		    android:textColor="#fff"
+		    android:textSize="14sp" />
+        <Button
+		    android:id="@+id/btn_exchange"
+		    android:layout_width="0dp"
+		    android:layout_weight=".50"
+		    android:layout_height="match_parent"
+		    android:text="@string/project_exchange"
+		    android:textColor="#fff"
+		    android:textSize="14sp" />
+    </LinearLayout>
+
+</RelativeLayout>

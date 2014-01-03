@@ -2,55 +2,89 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/list_row"
     android:layout_width="match_parent"
-    android:layout_height="55dp"
-    android:background="@drawable/mm_listitem"
-    android:clickable="false"
+    android:layout_height="match_parent"
     android:gravity="center_vertical">
-    <TextView
-        android:id="@+id/process_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:padding="7dp"
-        android:layout_marginLeft="15dp"
-        android:textColor="#000" />
-
-    <TextView
-        android:id="@+id/process_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@id/process_name"
-        android:padding="3dp"
-        android:textColor="#666" />
-    
-    <TextView
-        android:id="@+id/process_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_alignTop="@id/process_name"
-        android:padding="7dp"
-        android:textColor="#666" />
-    
-     <ImageView
-        android:id="@+id/process_logo"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="5dp"/>
-    
-     <TextView
-        android:id="@+id/process_photo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="25dp"
-        android:textColor="#FF0000" />
-
+    <RelativeLayout 
+        android:layout_width="match_parent"
+   		android:layout_height="80dp">
+	    <TextView
+	        android:id="@+id/process_name"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentTop="true"
+	        android:layout_marginLeft="15dp"
+	        android:layout_marginTop="10dp"
+	        android:textSize="16sp"
+	        android:textColor="#000" />
+	
+	    <TextView
+	        android:id="@+id/process_date"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@id/process_name"
+	        android:layout_centerVertical="true"
+	        android:textColor="#666" 
+	        android:textSize="12sp"/>
+	    
+	    <TextView
+	        android:id="@+id/process_status"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentTop="true"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginTop="10dp"
+	        android:textSize="16sp"
+	        android:textColor="#666" />
+	     <ImageView
+	        android:id="@+id/process_logo"
+	        android:layout_width="50dp"
+	        android:layout_height="50dp"
+	        android:layout_alignParentRight="true"
+	        android:layout_centerVertical="true"
+	        android:layout_marginRight="5dp"/>
+	    
+	     <TextView
+	        android:id="@+id/process_photo"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentRight="true"
+	        android:layout_centerVertical="true"
+	        android:layout_marginRight="25dp"
+	        android:textColor="#FF0000" />
+	     <ImageView
+	        android:id="@+id/process_sub"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_toLeftOf="@id/process_logo"
+	        android:layout_centerVertical="true"
+	        android:clickable="true"
+	        android:scaleType="matrix"
+	        android:src="@drawable/mm_submenu" 
+	        android:visibility="gone"/>
+	     <TextView
+	        android:id="@+id/material_money"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+			android:layout_alignLeft="@id/process_name"
+			android:layout_below="@id/process_date"
+	        android:textColor="#666" 
+	        android:textSize="12sp"/>
+	     <TextView
+	        android:id="@+id/basic_money"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+			android:layout_alignBaseline="@id/material_money"
+	        android:layout_alignLeft="@id/process_status"
+	        android:textColor="#666" 
+	        android:textSize="12sp"/>
+	     <TextView
+	        android:id="@+id/material_status"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@id/process_name"
+	        android:layout_alignParentBottom="true"
+	        android:textColor="#666" 
+	        android:textSize="12sp"/>
+	</RelativeLayout>
 </RelativeLayout>
-

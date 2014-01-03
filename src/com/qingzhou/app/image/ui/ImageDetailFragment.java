@@ -1,4 +1,3 @@
-
 package com.qingzhou.app.image.ui;
 
 import android.os.Bundle;

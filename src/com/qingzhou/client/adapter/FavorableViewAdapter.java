@@ -68,10 +68,18 @@ public class FavorableViewAdapter extends BaseAdapter {
 		
 		viewHolder.discount_type_name.setText(entity.getDiscount_type_name());
 		viewHolder.discount_mode_name.setText(entity.getDiscount_mode_name());
+		//优惠方式为打折时
 		if (entity.getDiscount_mode().equals("4"))
 			viewHolder.discount_content.setText(StringUtils.formatDiscount(entity.getDiscount_content()));
 		else viewHolder.discount_content.setText(entity.getDiscount_content());
-		viewHolder.item_value.setText(StringUtils.formatDecimal(entity.getItem_value()));
+		//优惠方式为赠送时
+		if (entity.getDiscount_mode().equals("2"))
+		{
+			viewHolder.discount_content.setText(entity.getDiscount_content()+"("+StringUtils.formatDecimal(entity.getItem_value())+")");
+			viewHolder.item_value.setText(StringUtils.formatDecimal("0"));
+		}
+		else
+			viewHolder.item_value.setText(StringUtils.formatDecimal(entity.getItem_value()));
 		viewHolder.f_count.setText(String.format(ctx.getResources().getString(R.string.favorable_title),position+1+""));
 		
 		return convertView;

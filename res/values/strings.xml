@@ -4,6 +4,7 @@
     <string name="app_name">掌上轻舟</string>
     <string name="loading_text">Loading...</string>
     <string name="action_settings">设置</string>
+    <string name="myconfig_title">我</string>
     <string name="hello">%1$s，您好</string>
     <string name="mymessage">我的消息</string>
     <string name="myinfo">轻舟资讯</string>
@@ -13,7 +14,7 @@
     <string name="returntext">返回</string>
     <string name="sendtext">发送</string>
     <string name="noticetext">通知</string>
-    <string name="userchangetext">切换</string>
+    <string name="userchangetext">其他客户登录</string>
     <string name="callphonetext">拨打电话</string>
     <string name="sendmessagetext">发送消息</string>
     <!-- 我的消息相关 -->
@@ -34,24 +35,53 @@
     <string name="info_data_toast_none">没有新更新</string>
     <!-- 轻舟资讯 -->
     <!-- 我的家装相关 -->
-    <string name="project_photo_url">http://218.59.147.66:9090/appService/uploadFile/</string>
+    <!--  <string name="project_photo_url">http://218.59.147.66:9090/appService/uploadFile/</string>-->
+    
+    <string name="project_photo_url">http://112.124.5.252:8086/</string>
     <string name="project_finish">工程已竣工</string>
+    <!-- 
     <string name="project_normal">工程已进入 %1$s，工期正常</string>
     <string name="project_delay">工程已进入 %1$s，工期有延误</string>
+     -->
+    <string name="project_normal">工程已进入 %1$s，工期%2$s天</string>
+    <string name="project_delay">工程已进入 %1$s，工期%2$s天</string>
     <string name="process_nostart">未开始</string>
     <string name="process_end">已完成</string>
     <string name="process_going">进行中</string>
-    <string name="project_contract">合同</string>
+    <string name="project_contract">查看合同</string>
     <string name="project_exchange">联络人</string>
-    <string name="process_date">%1$s至%2$s</string>
+    <string name="process_date">完工于%1$s</string>
     <string name="stylist">设计师：%1$s</string>
     <string name="project_mgr">项目经理：%1$s</string>
     <string name="customer_mgr">客户经理：%1$s</string>
+    <string name="previous_title">前一阶段:</string>
+    <string name="next_title">后一阶段:</string>
+    <string name="base_detail_title">基础明细</string>
+    <string name="main_detail_title">主材明细</string>
     <string name="imageview_description">图片</string>
+    <string name="main_detail">主材明细%1$s</string>
+    <string name="base_detail">基础明细%1$s</string>
+    <string name="main_status">主材状态：%1$s</string>
+    <string name="project_name">项目名称：%1$s</string>
+    <string name="unit_price_title">单价%1$s</string>
+    <string name="count_title">数量:%1$s</string>
+    <string name="price_title">金额%1$s</string>
+    <string name="brand_title">品牌:%1$s</string>
     <!-- 我的家装相关 -->
     
     <!-- 合同相关 -->
     <string name="favorable_title">优惠 %1$s</string>
+    <string name="payable_title">应缴 %1$s</string>
+    <string name="paid_title">已缴 %1$s</string>
+    <string name="nopaid_title">未缴 %1$s</string>
+    <string name="base_inventory_title">基础结算清单</string>
+    <string name="main_inventory_title">主材结算清单</string>
+    <string name="contracePrice_title">合同金额%1$s</string>
+    <string name="changePrice_title">增减金额%1$s</string>
+    <string name="updownprice_title">增减%1$s</string>
+    <string name="privilegePrice_title">优惠金额%1$s</string>
+    <string name="practicalPrice_title">实际金额%1$s</string>
+    
     <!-- 合同相关 -->
     <!-- 登录相关 -->
     <string name="loginTitle">客户登录</string>
@@ -69,7 +99,7 @@
     
     <!-- 版本相关 -->
     <string name="isupdate">true</string><!-- 是否进行版本检查的开关，false代表不检查，在正式发布时应设置为true -->
-    <string name="version_download_url">http://218.59.147.66:9090/qzapp/</string>
+    <string name="version_download_url">http://218.59.147.66:80/qzapp/</string>
     <!--rest/service/version/0/C  -->
     <string name="versionJSON">qcversion.json</string>    
     <string name="appPackName">com.qingzhou.client</string>

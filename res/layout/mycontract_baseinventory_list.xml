@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout 
+        android:layout_width="match_parent"
+   		android:layout_height="80dp">
+	    <TextView
+	        android:id="@+id/basName"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentTop="true"
+	        android:layout_marginLeft="15dp"
+	        android:layout_marginTop="10dp"
+	        android:textSize="14sp"
+	        android:textColor="#000"/>
+
+	    <TextView
+	        android:id="@+id/basePrice"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@id/basName"
+	        android:layout_below="@id/basName"
+	        android:textSize="12sp"
+	        android:textColor="#666"/>
+
+	     <TextView
+	        android:id="@+id/contracePrice"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerHorizontal="true"
+	        android:layout_alignTop="@id/basePrice"
+			android:paddingLeft="50dp"
+	        android:textSize="12sp"
+	        android:textColor="#666"/>
+	     <TextView
+	        android:id="@+id/changePrice"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/basePrice"
+	        android:layout_alignLeft="@id/basePrice"
+	        android:layout_marginTop="10dp"
+	        android:textSize="12sp"
+	        android:textColor="#666"/>
+	     <TextView
+	        android:id="@+id/practicalPrice"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@id/contracePrice"
+	        android:layout_alignTop="@id/changePrice"
+	        android:paddingLeft="50dp"
+	        android:textSize="12sp"
+	        android:textColor="#666"/>
+	     
+	</RelativeLayout>
+</RelativeLayout>

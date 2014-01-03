@@ -28,7 +28,7 @@
             android:layout_marginRight="5dp"
             android:background="@drawable/title_btn_right"
             android:src="@drawable/mm_title_btn_contact_normal"
-            android:onClick="reLogin"
+            android:onClick="myConfig"
             android:textColor="#fff"
             android:textSize="12dp" />
     </RelativeLayout>

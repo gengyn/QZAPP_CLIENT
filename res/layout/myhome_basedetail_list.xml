@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout 
+        android:layout_width="match_parent"
+   		android:layout_height="60dp">
+	    <TextView
+	        android:id="@+id/basName"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentTop="true"
+	        android:layout_marginLeft="15dp"
+	        android:layout_marginTop="10dp"
+	        android:textSize="14sp"
+	        android:textColor="#000"
+	        android:text="名称"/>
+
+	    <TextView
+	        android:id="@+id/basePrice"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@id/basName"
+	        android:layout_below="@id/basName"
+	        android:textSize="12sp"
+	        android:textColor="#666"
+	        android:text="单价"/>
+
+	     <TextView
+	        android:id="@+id/practicalcount"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@id/basePrice"
+	        android:layout_below="@id/basePrice"
+	        android:textSize="12sp"
+	        android:textColor="#666"
+	        android:text="数量"/>
+	     <TextView
+	        android:id="@+id/colflag"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerHorizontal="true"
+	        android:layout_alignTop="@id/basePrice"
+	        android:textSize="12sp"
+	        android:textColor="#666"/>
+	     <TextView
+	        android:id="@+id/practicalprice"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@id/colflag"
+	        android:layout_alignTop="@id/practicalcount"
+	        android:textColor="#666" 
+	        android:textSize="12sp"
+	        android:text="实际金额"/>
+	     
+	</RelativeLayout>
+</RelativeLayout>

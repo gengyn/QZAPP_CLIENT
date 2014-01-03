@@ -1,16 +1,17 @@
 package com.qingzhou.client;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.qingzhou.client.domain.BaseDetail;
 import com.qingzhou.app.image.ui.ImageGridActivity;
 import com.qingzhou.app.utils.CustomerUtils;
 import com.qingzhou.app.utils.DialogUtils;
 import com.qingzhou.app.utils.HttpUtils;
-import com.qingzhou.app.utils.Logger;
 import com.qingzhou.app.utils.StringUtils;
 import com.qingzhou.app.utils.ThreadPoolUtils;
 import com.qingzhou.client.common.AppException;
@@ -18,7 +19,10 @@ import com.qingzhou.client.common.Constants;
 import com.qingzhou.client.common.QcApp;
 import com.qingzhou.client.common.RestService;
 import com.qingzhou.client.dao.CacheDao;
+import com.qingzhou.client.domain.BaseInventory;
 import com.qingzhou.client.domain.LoginStatus;
+import com.qingzhou.client.domain.MainDetail;
+import com.qingzhou.client.domain.MaterialInventory;
 import com.qingzhou.client.domain.Myinfo;
 import com.qingzhou.client.domain.RestProjectPlan;
 import com.qingzhou.client.domain.UserBase;
@@ -27,6 +31,7 @@ import com.qingzhou.client.domain.Contract;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.content.Intent;
 
 public class LoadingActivity extends BaseActivity{
@@ -34,6 +39,7 @@ public class LoadingActivity extends BaseActivity{
 	private QcApp qcApp;
 	int flag;
 	String schedetail_id = "";
+	String process_id = "";//工程进度号
 	private static final int FINISH_MESSAGE = 0x01;
 	private static final int ERROR_MESSAGE = 0x02;
 	
@@ -54,8 +60,10 @@ public class LoadingActivity extends BaseActivity{
         //取出Intent中附加的数据
         flag = intent.getIntExtra("FLAG",0);
         schedetail_id = intent.getStringExtra("schedetail_id");
+        process_id = intent.getStringExtra("process_id");
         pageNo = intent.getIntExtra("pageNo",1);
         pageSize = intent.getIntExtra("pageSize",10);
+        
         //开启线程并执行
         ThreadPoolUtils.execute(mRunnable);
         
@@ -175,7 +183,7 @@ public class LoadingActivity extends BaseActivity{
 		{
 			RestProjectPlan restProjectPlan = JSON.parseObject(projectPlanJson, RestProjectPlan.class);
 			qcApp.setProjectPlan(restProjectPlan);
-			Intent intent = new Intent (LoadingActivity.this,MyHomeActivity.class);			
+			Intent intent = new Intent (LoadingActivity.this,MyHomeGeneralizeActivity.class);			
 			startActivity(intent);
 			//切换动画
 			overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
@@ -184,6 +192,59 @@ public class LoadingActivity extends BaseActivity{
 		//频率控制
 		Constants.LAST_MYPROJECT = System.currentTimeMillis();
 		
+	}
+	
+	/**
+	 * 基础明细
+	 * @throws ClientProtocolException
+	 * @throws Exception
+	 */
+	public void initProjectPlan_BaseDetail() throws ClientProtocolException, Exception
+	{
+		HttpUtils httpUtil = new HttpUtils();
+		String baseDetailJson = httpUtil
+				.httpGetExecute(RestService.GET_PROJECTPLAN_BASEDETAIL_URL
+						+ qcApp.getUserToken() + "/"
+						+ qcApp.getUserBase().getQuo_id() + "/"
+						+ qcApp.getUserBase().getBisiness_id() + "/"
+						+ process_id);
+		
+		if (!StringUtils.isEmpty(baseDetailJson)) {
+			List<BaseDetail> baseDetailList = JSONArray.parseArray(baseDetailJson, BaseDetail.class);
+			
+			Intent intent = new Intent (LoadingActivity.this,MyHomeBaseDetailActivity.class);
+			intent.putExtra("BASEDETAILLIST", (Serializable)baseDetailList);
+			startActivity(intent);
+			//切换动画
+			overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+		}else throw new AppException("9992");
+	}
+	
+	/**
+	 * 主材明细
+	 * @throws ClientProtocolException
+	 * @throws Exception
+	 */
+	public void initProjectPlan_MainDetail() throws ClientProtocolException, Exception
+	{
+		HttpUtils httpUtil = new HttpUtils();
+		String mainDetailJson = httpUtil
+				.httpGetExecute(RestService.GET_PROJECTPLAN_MAINDETAIL_URL
+						+ qcApp.getUserToken() + "/"
+						+ qcApp.getUserBase().getQuo_id() + "/"
+						+ qcApp.getUserBase().getBisiness_id() + "/"
+						+ process_id +"/"
+						+ qcApp.getUserBase().getCustomer_id());
+		
+		if (!StringUtils.isEmpty(mainDetailJson)) {
+			List<MainDetail> mainDetailList = JSONArray.parseArray(mainDetailJson, MainDetail.class);
+			
+			Intent intent = new Intent (LoadingActivity.this,MyHomeMainDetailActivity.class);
+			intent.putExtra("MAINDETAILLIST", (Serializable)mainDetailList);
+			startActivity(intent);
+			//切换动画
+			overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+		}else throw new AppException("9991");
 	}
 	
 	/**
@@ -235,6 +296,58 @@ public class LoadingActivity extends BaseActivity{
 	}
 	
 	/**
+	 * 获取基础清单
+	 * @throws ClientProtocolException
+	 * @throws Exception
+	 */
+	public void initContract_baseInventory() throws ClientProtocolException, Exception
+	{
+		HttpUtils httpUtil = new HttpUtils();
+		String baseInventoryJson = httpUtil
+				.httpGetExecute(RestService.GET_CONTRACT_BASEINVENTORY_URL
+						+ qcApp.getUserToken() + "/"
+						+ qcApp.getUserBase().getQuo_id() + "/"
+						+ qcApp.getUserBase().getBisiness_id() + "/"
+						+ qcApp.getUserBase().getCustomer_id());
+		
+		if (!StringUtils.isEmpty(baseInventoryJson)) {
+			List<BaseInventory> baseInventoryList = JSONArray.parseArray(baseInventoryJson,  BaseInventory.class);
+			
+			Intent intent = new Intent (LoadingActivity.this,MyContractBaseInventoryActivity.class);
+			intent.putExtra("BASEINVENTORYLIST", (Serializable)baseInventoryList);
+			startActivity(intent);
+			//切换动画
+			//overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+		}else throw new AppException("9990");
+	}
+	
+	/**
+	 * 获取主材清单
+	 * @throws ClientProtocolException
+	 * @throws Exception
+	 */
+	public void initContract_MaterialInventory() throws ClientProtocolException, Exception
+	{
+		HttpUtils httpUtil = new HttpUtils();
+		String materialInventoryJson = httpUtil
+				.httpGetExecute(RestService.GET_CONTRACT_MATERIALINVENTORY_URL
+						+ qcApp.getUserToken() + "/"
+						+ qcApp.getUserBase().getQuo_id() + "/"
+						+ qcApp.getUserBase().getBisiness_id() + "/"
+						+ qcApp.getUserBase().getCustomer_id());
+		
+		if (!StringUtils.isEmpty(materialInventoryJson)) {
+			List<MaterialInventory> materialInventoryList = JSONArray.parseArray(materialInventoryJson,  MaterialInventory.class);
+			
+			Intent intent = new Intent (LoadingActivity.this,MyContractMaterialInventoryActivity.class);
+			intent.putExtra("MATERIALINVENTORYLIST", (Serializable)materialInventoryList);
+			startActivity(intent);
+			//切换动画
+			//overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+		}else throw new AppException("9989");
+	}
+	
+	/**
 	 * 退出APP
 	 * @throws ClientProtocolException
 	 * @throws Exception
@@ -264,8 +377,20 @@ public class LoadingActivity extends BaseActivity{
 		        case Constants.INIT_CONTRACT:
 		        	initContract();
 		        	break;
+		        case Constants.INIT_CONTRACT_BASEINVENTORY:
+		        	initContract_baseInventory();
+		        	break;
+		        case Constants.INIT_CONTRACT_MATERIALINVENTORY:
+		        	initContract_MaterialInventory();
+		        	break;
 		        case Constants.INIT_PROJECTPLAN:
 		        	initProjectPlan();
+		        	break;
+		        case Constants.INIT_RROJECTPLAN_BASEDETAIL:
+		        	initProjectPlan_BaseDetail();
+		        	break;
+		        case Constants.INIT_RROJECTPLAN_MAINDETAIL:
+		        	initProjectPlan_MainDetail();
 		        	break;
 		        case Constants.SHOW_PHOTO:
 		        	showPhoto();

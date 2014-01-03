@@ -2,27 +2,19 @@ package com.qingzhou.client;
 
 import java.util.List;
 
-import com.qingzhou.client.adapter.ProcessListViewAdapter;
-import com.qingzhou.client.common.Constants;
+import com.qingzhou.client.adapter.ProcessLevel2ListViewAdapter;
 import com.qingzhou.client.common.QcApp;
 import com.qingzhou.client.domain.RestProjectPlan;
 import com.qingzhou.client.domain.RestProjectPlanDetail;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.AlertDialog.Builder;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
+
 
 
 /**
@@ -54,7 +46,7 @@ public class MyHomeLevel2Activity extends BaseActivity {
 		    	  MyHomeLevel2Activity.this.finish();
 		      }    
 		});
-				
+		
 		processListView = (ListView) findViewById(R.id.processLevel2List);
 		process_title = (TextView) findViewById(R.id.process_title);
 		
@@ -73,7 +65,7 @@ public class MyHomeLevel2Activity extends BaseActivity {
 	 */
 	private void initProcessList(List<RestProjectPlanDetail> processList)
 	{
-		processListView.setAdapter(new ProcessListViewAdapter(this,processList));
+		processListView.setAdapter(new ProcessLevel2ListViewAdapter(this,processList));
 
 	}
 

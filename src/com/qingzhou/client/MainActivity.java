@@ -169,14 +169,12 @@ public class MainActivity extends BaseActivity implements TagAliasCallback{
 	 * 临时方法，切换用户
 	 * @param arg0
 	 */
-	public void reLogin(View arg0)
+	public void myConfig(View arg0)
 	{
 		Intent intent = new Intent();
-		intent.putExtra("isReLogin", true);
-		intent.setClass(MainActivity.this,LoginActivity.class);
+		intent.setClass(MainActivity.this,MyConfigActivity.class);
 		startActivity(intent);
-		 overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
-		MainActivity.this.finish();
+		overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
 	}
 
 

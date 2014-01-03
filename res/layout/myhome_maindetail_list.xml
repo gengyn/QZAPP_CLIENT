@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout 
+        android:layout_width="match_parent"
+   		android:layout_height="80dp">
+	    <TextView
+	        android:id="@+id/materialSpec"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentTop="true"
+	        android:layout_marginLeft="15dp"
+	        android:layout_marginTop="10dp"
+	        android:textSize="14sp"
+	        android:textColor="#000"/>
+
+	    <TextView
+	        android:id="@+id/materialBrand"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/materialSpec"
+	        android:layout_alignLeft="@id/materialSpec"
+	        android:textSize="12sp"
+	        android:textColor="#666"/>
+
+	     <TextView
+	        android:id="@+id/materialSalePrice"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerHorizontal="true"
+	        android:layout_alignTop="@id/materialBrand"
+	        android:paddingLeft="50dp"
+	        android:textSize="12sp"
+	        android:textColor="#666"/>
+	     <TextView
+	        android:id="@+id/materialcount"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/materialBrand"
+	        android:layout_alignLeft="@id/materialBrand"
+	        android:textColor="#666" 
+	        android:textSize="12sp"/>
+	     <TextView
+	        android:id="@+id/materialPrice"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@id/materialSalePrice"
+	        android:layout_alignTop="@id/materialcount"
+	        android:paddingLeft="50dp"
+	        android:textColor="#666" 
+	        android:textSize="12sp"/>
+	     <TextView
+	        android:id="@+id/materialStatus"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/materialcount"
+	        android:layout_alignLeft="@id/materialcount"
+	        android:textColor="#666" 
+	        android:textSize="12sp"/>
+	     
+	</RelativeLayout>
+</RelativeLayout>

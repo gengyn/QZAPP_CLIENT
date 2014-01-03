@@ -11,6 +11,10 @@ public class Constants {
 	public final static int SHOW_PHOTO = 0x04;//查看图片
 	public final static int INIT_MYINFO = 0X05;//初始化资讯
 	public final static int INIT_EXITAPP = 0X06;//退出APP
+	public final static int INIT_RROJECTPLAN_BASEDETAIL = 0x07;//初始化基础明细
+	public final static int INIT_RROJECTPLAN_MAINDETAIL = 0x08;//初始化主材明细
+	public final static int INIT_CONTRACT_BASEINVENTORY = 0x09;//初始化基础清单
+	public final static int INIT_CONTRACT_MATERIALINVENTORY = 0x10;//初始化主材清单
 
 	//工程状态
 	public final static int PROJECT_NORMAL = 0x11; //正常

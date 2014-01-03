@@ -2,16 +2,21 @@ package com.qingzhou.client;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.qingzhou.app.utils.DialogUtils;
 import com.qingzhou.app.utils.StringUtils;
 import com.qingzhou.client.adapter.FavorableViewAdapter;
+import com.qingzhou.client.common.Constants;
 import com.qingzhou.client.common.QcApp;
 
 import com.qingzhou.client.domain.Contract;
+import com.qingzhou.client.domain.ContractAmount;
 import com.qingzhou.client.domain.ContractDiscount;
+import com.qingzhou.client.domain.ContractPayment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -21,6 +26,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
@@ -30,10 +36,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
- * 资讯活动
+ * 合同活动
  * 
  * @author hihi
  * 
@@ -56,6 +63,8 @@ public class MyContractActivity extends BaseActivity {
 		
 	Contract contract;
 	List<ContractDiscount> contractDiscountList;
+	ContractAmount contractAmount;
+	Map<String,ContractPayment> cpMap;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +85,8 @@ public class MyContractActivity extends BaseActivity {
 		qcApp = (QcApp)getApplication();
 		contract = qcApp.getContract();
 		contractDiscountList = contract.getContractList();
+		contractAmount = contract.getContractAmount();
+		cpMap = contract.getCpMap();
 		//初始化界面
 		initPager();
 		
@@ -180,24 +191,92 @@ public class MyContractActivity extends BaseActivity {
 	 */
 	public void initAmount(View v)
 	{
-		TextView contract_sum_price = (TextView) v.findViewById(R.id.contract_sum_price);
-		TextView base_item_price = (TextView) v.findViewById(R.id.base_item_price);
-		TextView main_item_price = (TextView) v.findViewById(R.id.main_item_price);
-		TextView finish_item_price = (TextView) v.findViewById(R.id.finish_item_price);
-		TextView design_fee = (TextView) v.findViewById(R.id.design_fee);
-		TextView manage_fee = (TextView) v.findViewById(R.id.manage_fee);
-
-		TextView favorable_price = (TextView) v.findViewById(R.id.favorable_price);
-		TextView fact_totalmoney = (TextView) v.findViewById(R.id.fact_totalmoney);
+		TextView quoOriginal = (TextView) v.findViewById(R.id.quoOriginal);
+		TextView countPrivilege = (TextView) v.findViewById(R.id.countPrivilege);
+		TextView countContract = (TextView) v.findViewById(R.id.countContract);
+		TextView countUdItem = (TextView) v.findViewById(R.id.countUdItem);
+		TextView countAfterPrivilege = (TextView) v.findViewById(R.id.countAfterPrivilege);
+		TextView countTotalAmount = (TextView) v.findViewById(R.id.countTotalAmount);
+		TextView total_paid = (TextView) v.findViewById(R.id.total_paid);
+		TextView total_unpaid = (TextView) v.findViewById(R.id.total_unpaid);
 		
-		contract_sum_price.setText(StringUtils.formatDecimal(contract.getContract_sum_price()));
-		base_item_price.setText(StringUtils.formatDecimal(contract.getBase_item_price()));
-		main_item_price.setText(StringUtils.formatDecimal(contract.getMain_item_price()));
-		finish_item_price.setText(StringUtils.formatDecimal(contract.getFinish_item_price()));
-		design_fee.setText(StringUtils.formatDecimal(contract.getDesign_fee()));
-		manage_fee.setText(StringUtils.formatDecimal(contract.getManage_fee()));
-		favorable_price.setText(StringUtils.formatDecimal(contract.getFavorable_price()));
-		fact_totalmoney.setText(StringUtils.formatDecimal(contract.getFact_totalmoney()));
+		RelativeLayout original_layout = (RelativeLayout)v.findViewById(R.id.original_layout);
+		RelativeLayout privilege_layout = (RelativeLayout)v.findViewById(R.id.privilege_layout);
+		RelativeLayout contract_layout = (RelativeLayout)v.findViewById(R.id.contract_layout);
+		RelativeLayout udItem_layout = (RelativeLayout)v.findViewById(R.id.udItem_layout);
+		RelativeLayout afterPrivilege_layout = (RelativeLayout)v.findViewById(R.id.afterPrivilege_layout);
+		RelativeLayout totalAmount_layout = (RelativeLayout)v.findViewById(R.id.totalAmount_layout);
+		
+		quoOriginal.setText(StringUtils.formatDecimal(contractAmount.getQuoOriginal()));
+		countPrivilege.setText(StringUtils.formatDecimal(contractAmount.getCountPrivilege()));
+		countContract.setText(StringUtils.formatDecimal(contractAmount.getCountContract()));
+		countUdItem.setText(StringUtils.formatDecimal(contractAmount.getCountUdItem()));
+		countAfterPrivilege.setText(StringUtils.formatDecimal(contractAmount.getCountAfterPrivilege()));
+		countTotalAmount.setText(StringUtils.formatDecimal(contractAmount.getCountTotalAmount()));
+		
+		total_paid.setText(StringUtils.formatDecimal(cpMap.get("16").getPayMoney().trim()));
+		total_unpaid.setText(StringUtils.formatDecimal(cpMap.get("16").getNoPayMoney().trim()));
+		
+		
+		//报价金额点击
+		original_layout.setOnClickListener(new OnClickListener(){
+			public void onClick(View v) {    
+				Intent intent = new Intent();
+				intent.setClass(MyContractActivity.this,MyContractAmountOriginalActivity.class);
+				startActivity(intent);
+            }    
+        });
+		//合同优惠点击
+		privilege_layout.setOnClickListener(new OnClickListener(){
+			public void onClick(View v) {    
+				Intent intent = new Intent();
+				intent.setClass(MyContractActivity.this,MyContractAmountPrivilegeActivity.class);
+				startActivity(intent);
+            }    
+        });
+		//合同金额点击
+		contract_layout.setOnClickListener(new OnClickListener(){
+			public void onClick(View v) {    
+				Intent intent = new Intent();
+				intent.setClass(MyContractActivity.this,MyContractAmountContractActivity.class);
+				startActivity(intent);
+            }    
+        });
+		//增减项点击
+		udItem_layout.setOnClickListener(new OnClickListener(){
+			public void onClick(View v) {    
+				Intent intent = new Intent();
+				intent.setClass(MyContractActivity.this,MyContractAmountUditemActivity.class);
+				startActivity(intent);
+            }    
+        });
+		//后期优惠点击
+		afterPrivilege_layout.setOnClickListener(new OnClickListener(){
+			public void onClick(View v) {    
+				Intent intent = new Intent();
+				intent.setClass(MyContractActivity.this,MyContractAmountAfterPrivilegeActivity.class);
+				startActivity(intent);
+            }    
+        });
+		//竣工金额点击
+		totalAmount_layout.setOnClickListener(new OnClickListener(){
+			public void onClick(View v) {    
+				Intent intent = new Intent();
+				intent.setClass(MyContractActivity.this,MyContractAmountTotalAmountActivity.class);
+				startActivity(intent);
+            }    
+        });
+	}
+	
+	/**
+	 * 客户交款情况点击
+	 * @param v
+	 */
+	public void totalPaid(View v)
+	{
+		Intent intent = new Intent();
+		intent.setClass(MyContractActivity.this,MyContractAmountPaidInfoActivity.class);
+		startActivity(intent);
 	}
 	
 	/**
@@ -207,13 +286,38 @@ public class MyContractActivity extends BaseActivity {
 	public void initFavorable(View v)
 	{
 		TextView favorable_price = (TextView) v.findViewById(R.id.favorable_price);
-		favorable_price.setText(StringUtils.formatDecimal(contract.getFavorable_price()));
+		favorable_price.setText(StringUtils.formatDecimal(contractAmount.getCountPrivilege()));
 		
 		ListView favorablelist = (ListView) v.findViewById(R.id.favorablelist);
 		//favorablelist.setEnabled(false);
 		favorablelist.setAdapter(new FavorableViewAdapter(getBaseContext(),contractDiscountList));
 	}
-	
+	/**
+	 * 初始化结算清单
+	 * @param v
+	 */
+	public void initInventory(View v)
+	{
+		RelativeLayout base_inventory_layout = (RelativeLayout)v.findViewById(R.id.base_inventory_layout);
+		RelativeLayout main_inventory_layout = (RelativeLayout)v.findViewById(R.id.main_inventory_layout);
+		//基础项目结算清单点击
+		base_inventory_layout.setOnClickListener(new OnClickListener(){
+			public void onClick(View v) {    
+				Intent intent = new Intent (MyContractActivity.this,LoadingActivity.class);
+            	intent.putExtra("FLAG", Constants.INIT_CONTRACT_BASEINVENTORY);
+				startActivity(intent);
+            }    
+        });
+		//主材项目结算点击
+		main_inventory_layout.setOnClickListener(new OnClickListener(){
+			public void onClick(View v) {    
+				Intent intent = new Intent (MyContractActivity.this,LoadingActivity.class);
+            	intent.putExtra("FLAG", Constants.INIT_CONTRACT_MATERIALINVENTORY);
+            	startActivity(intent);
+				
+            }    
+        });
+	}
 	
 	/**
 	 * 初始化页面
@@ -256,8 +360,10 @@ public class MyContractActivity extends BaseActivity {
 		initDate(view2);
 		View view3 = mLi.inflate(R.layout.mycontract_amount, null);
 		initAmount(view3);
-		View view4 = mLi.inflate(R.layout.mycontract_favorable, null);
-		initFavorable(view4);
+		//View view4 = mLi.inflate(R.layout.mycontract_favorable, null);
+		View view4 = mLi.inflate(R.layout.mycontract_inventory, null);
+		//initFavorable(view4);
+		initInventory(view4);
 		
 		final ArrayList<View> views = new ArrayList<View>();
 		views.add(view1);

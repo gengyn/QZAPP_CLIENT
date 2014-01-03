@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.qingzhou.client"
-    android:versionCode="9"
+    android:versionCode="13"
     android:versionName="Beta" >
 
     <uses-sdk
@@ -54,12 +54,23 @@
             
         </activity>
         <activity 
+            android:name="com.qingzhou.client.MyConfigActivity" 
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
+        </activity>
+        <activity 
             android:name="com.qingzhou.client.MainActivity" 
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden">
         </activity>
         <activity 
             android:name="com.qingzhou.client.MyMessageActivity" 
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
+        </activity>
+        
+         <activity 
+            android:name="com.qingzhou.client.MyHomeGeneralizeActivity" 
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden">
         </activity>
@@ -70,6 +81,17 @@
         </activity>
         <activity 
             android:name="com.qingzhou.client.MyHomeLevel2Activity" 
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
+        </activity>
+        <activity 
+            android:name="com.qingzhou.client.MyHomeMainDetailActivity" 
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
+        </activity>
+        
+        <activity 
+            android:name="com.qingzhou.client.MyHomeBaseDetailActivity" 
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden">
         </activity>
@@ -104,8 +126,45 @@
         <activity android:name="com.qingzhou.client.MyInfoContentActivity" 
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden">
-            
+         </activity>   
+         <activity android:name="com.qingzhou.client.MyContractAmountOriginalActivity" 
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">   
         </activity>
+        
+         <activity android:name="com.qingzhou.client.MyContractAmountPrivilegeActivity" 
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">   
+        </activity>
+        <activity android:name="com.qingzhou.client.MyContractAmountContractActivity" 
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">   
+        </activity>
+        <activity android:name="com.qingzhou.client.MyContractAmountUditemActivity" 
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">   
+        </activity>
+        <activity android:name="com.qingzhou.client.MyContractAmountAfterPrivilegeActivity" 
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">   
+        </activity>
+        <activity android:name="com.qingzhou.client.MyContractAmountTotalAmountActivity" 
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">   
+        </activity>
+        <activity android:name="com.qingzhou.client.MyContractAmountPaidInfoActivity" 
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">   
+        </activity>
+        <activity android:name="com.qingzhou.client.MyContractBaseInventoryActivity" 
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">   
+        </activity>
+        <activity android:name="com.qingzhou.client.MyContractMaterialInventoryActivity" 
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">   
+        </activity>
+        
         <activity android:name="com.qingzhou.client.LoadingActivity" android:theme="@style/MyDialogStyle"
             android:configChanges="orientation|keyboardHidden">
         </activity>
@@ -129,7 +188,7 @@
             -->
         </activity>
 
-        <!-- 在安装成功后广播 -->
+        <!-- 在安装成功后广播-->
         
           <receiver android:name="com.qingzhou.client.version.ReplaceBroadcastReceiver">
             <intent-filter>
@@ -137,7 +196,7 @@
                 <action android:name="android.intent.action.PACKAGE_REPLACED"/>
                 <data android:scheme="package"/>
             </intent-filter>
-  		</receiver>
+  		</receiver> 
         
         <!-- 推送使用 -->
         <!-- Required SDK核心功能-->

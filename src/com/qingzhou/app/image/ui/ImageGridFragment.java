@@ -124,8 +124,8 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
         /**
          * 如果只有一张图片，默认显示，不再显示图片列表
          */
-        if (Images.getImageUrls().size() == 1)
-        	defaultShow();
+//        if (Images.getImageUrls().size() == 1)
+//        	defaultShow();
 
         return v;
     }

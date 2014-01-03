@@ -70,6 +70,10 @@ public class AppException extends RuntimeException {
 			exception.put("9995", "没有您的合同信息");
 			exception.put("9994", "没有您的家装工程信息");
 			exception.put("9993", "还没有资讯信息");
+			exception.put("9992", "没有您的基础明细信息");
+			exception.put("9991", "没有您的主材明细信息");
+			exception.put("9990", "没有您的基础结算清单明细");
+			exception.put("9989", "没有您的主材结算清单明细");
 		}
 		
 		return exception.containsKey(code)?exception.get(code):exception.get("9999");

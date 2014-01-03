@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/title_bar"
+        android:gravity="center_vertical" >
+
+        <ImageButton
+            android:id="@id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/title_go_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="客户交款情况"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbarStyle="outsideOverlay" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/preference_single_item"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+			        android:layout_alignParentTop="true"
+			        android:layout_marginLeft="15dp"
+			        android:layout_marginTop="10dp"
+			        android:textSize="14sp"
+			        android:textColor="#000"
+                    android:text="合计"/>
+                <TextView
+                    android:id="@+id/colflag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/total_contract"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/colflag"
+                    android:layout_alignTop="@id/colflag"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/total_paid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/total_contract"
+                    android:layout_alignLeft="@id/total_contract"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/total_nopaid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/total_paid"
+                    android:layout_alignLeft="@id/total_paid"
+                    style="@style/Contract.mutitem"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/preference_first_item"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+			        android:layout_alignParentTop="true"
+			        android:layout_marginLeft="15dp"
+			        android:layout_marginTop="10dp"
+			        android:textSize="14sp"
+			        android:textColor="#000"
+                    android:text="设计定金"/>
+                <TextView
+                    android:id="@+id/colflag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    style="@style/Contract.mutitem"/>
+                 <TextView
+                    android:id="@+id/design_bargain_contract"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/colflag"
+                    android:layout_alignTop="@id/colflag"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/design_bargain_paid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/design_bargain_contract"
+                    android:layout_alignLeft="@id/design_bargain_contract"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/design_bargain_nopid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/design_bargain_paid"
+                    android:layout_alignLeft="@id/design_bargain_paid"
+                    style="@style/Contract.mutitem"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/preference_item"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+			        android:layout_alignParentTop="true"
+			        android:layout_marginLeft="15dp"
+			        android:layout_marginTop="10dp"
+			        android:textSize="14sp"
+			        android:textColor="#000"
+                    android:text="合同定金"/>
+                <TextView
+                    android:id="@+id/colflag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/contract_bargain_contract"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/colflag"
+                    android:layout_alignTop="@id/colflag"
+                    style="@style/Contract.mutitem"/>
+                
+                <TextView
+                    android:id="@+id/contract_bargain_paid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/contract_bargain_contract"
+                    android:layout_alignLeft="@id/contract_bargain_contract"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/contract_bargain_nopid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/contract_bargain_paid"
+                    android:layout_alignLeft="@id/contract_bargain_paid"
+                    style="@style/Contract.mutitem"/>
+                
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/preference_item"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+			        android:layout_alignParentTop="true"
+			        android:layout_marginLeft="15dp"
+			        android:layout_marginTop="10dp"
+			        android:textSize="14sp"
+			        android:textColor="#000"
+                    android:text="设计费"/>
+                <TextView
+                    android:id="@+id/colflag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/design_contract"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/colflag"
+                    android:layout_alignTop="@id/colflag"
+                    style="@style/Contract.mutitem"/>
+                
+                <TextView
+                    android:id="@+id/design_paid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/design_contract"
+                    android:layout_alignLeft="@id/design_contract"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/design_nopid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/design_paid"
+                    android:layout_alignLeft="@id/design_paid"
+                    style="@style/Contract.mutitem"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/preference_item"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+			        android:layout_alignParentTop="true"
+			        android:layout_marginLeft="15dp"
+			        android:layout_marginTop="10dp"
+			        android:textSize="14sp"
+			        android:textColor="#000"
+                    android:text="基础工程管理费" />
+                <TextView
+                    android:id="@+id/colflag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/base_manage_contract"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/colflag"
+                    android:layout_alignTop="@id/colflag"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/base_manage_paid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/base_manage_contract"
+                    android:layout_alignLeft="@id/base_manage_contract"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/base_manage_nopaid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/base_manage_paid"
+                    android:layout_alignLeft="@id/base_manage_paid"
+                    style="@style/Contract.mutitem"/>
+                
+                
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/preference_item"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+			        android:layout_alignParentTop="true"
+			        android:layout_marginLeft="15dp"
+			        android:layout_marginTop="10dp"
+			        android:textSize="14sp"
+			        android:textColor="#000"
+                    android:text="基础工程首期款"/>
+                <TextView
+                    android:id="@+id/colflag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/base_downpayment_contract"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/colflag"
+                    android:layout_alignTop="@id/colflag"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/base_downpayment_paid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/base_downpayment_contract"
+                    android:layout_alignLeft="@id/base_downpayment_contract"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/base_downpayment_nopaid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/base_downpayment_paid"
+                    android:layout_alignLeft="@id/base_downpayment_paid"
+                    style="@style/Contract.mutitem"/>              
+                
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/preference_item"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+			        android:layout_alignParentTop="true"
+			        android:layout_marginLeft="15dp"
+			        android:layout_marginTop="10dp"
+			        android:textSize="14sp"
+			        android:textColor="#000"
+                    android:text="基础工程中期款"/>
+                <TextView
+                    android:id="@+id/colflag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/base_medium_contract"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/colflag"
+                    android:layout_alignTop="@id/colflag"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/base_medium_paid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/base_medium_contract"
+                    android:layout_alignLeft="@id/base_medium_contract"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/base_medium_nopaid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/base_medium_paid"
+                    android:layout_alignLeft="@id/base_medium_paid"
+                    style="@style/Contract.mutitem"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/preference_item"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+			        android:layout_alignParentTop="true"
+			        android:layout_marginLeft="15dp"
+			        android:layout_marginTop="10dp"
+			        android:textSize="14sp"
+			        android:textColor="#000"
+                    android:text="基础增减项款"
+                    style="@style/Contract.title" />
+                <TextView
+                    android:id="@+id/colflag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/base_moreorless_contract"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/colflag"
+                    android:layout_alignTop="@id/colflag"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/base_moreorless_paid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/base_moreorless_contract"
+                    android:layout_alignLeft="@id/base_moreorless_contract"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/base_moreorless_nopaid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/base_moreorless_paid"
+                    android:layout_alignLeft="@id/base_moreorless_paid"
+                    style="@style/Contract.mutitem"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/preference_item"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+			        android:layout_alignParentTop="true"
+			        android:layout_marginLeft="15dp"
+			        android:layout_marginTop="10dp"
+			        android:textSize="14sp"
+			        android:textColor="#000"
+                    android:text="基础增减项管理费"
+                    style="@style/Contract.title" />
+                <TextView
+                    android:id="@+id/colflag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/base_moreorless_manage_contract"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/colflag"
+                    android:layout_alignTop="@id/colflag"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/base_moreorless_manage_paid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/base_moreorless_manage_contract"
+                    android:layout_alignLeft="@id/base_moreorless_manage_contract"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/base_moreorless_manage_nopaid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/base_moreorless_manage_paid"
+                    android:layout_alignLeft="@id/base_moreorless_manage_paid"
+                    style="@style/Contract.mutitem"/>
+                
+                
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/preference_item"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+			        android:layout_alignParentTop="true"
+			        android:layout_marginLeft="15dp"
+			        android:layout_marginTop="10dp"
+			        android:textSize="14sp"
+			        android:textColor="#000"
+                    android:text="基础增减项设计费"/>
+                <TextView
+                    android:id="@+id/colflag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/base_moreorless_design_contract"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/colflag"
+                    android:layout_alignTop="@id/colflag"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/base_moreorless_design_paid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/base_moreorless_design_contract"
+                    android:layout_alignLeft="@id/base_moreorless_design_contract"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/base_moreorless_design_nopaid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/base_moreorless_design_paid"
+                    android:layout_alignLeft="@id/base_moreorless_design_paid"
+                    style="@style/Contract.mutitem"/>
+                
+                
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/preference_item"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+			        android:layout_alignParentTop="true"
+			        android:layout_marginLeft="15dp"
+			        android:layout_marginTop="10dp"
+			        android:textSize="14sp"
+			        android:textColor="#000"
+                    android:text="基础工程尾款"/>
+                <TextView
+                    android:id="@+id/colflag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/base_finalpayment_contract"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/colflag"
+                    android:layout_alignTop="@id/colflag"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/base_finalpayment_paid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/base_finalpayment_contract"
+                    android:layout_alignLeft="@id/base_finalpayment_contract"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/base_finalpayment_nopaid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/base_finalpayment_paid"
+                    android:layout_alignLeft="@id/base_finalpayment_paid"
+                    style="@style/Contract.mutitem"/>
+                
+                
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="70dp"
+                android:background="@drawable/preference_item"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+			        android:layout_alignParentTop="true"
+			        android:layout_marginLeft="15dp"
+			        android:layout_marginTop="10dp"
+			        android:textSize="14sp"
+			        android:textColor="#000"
+                    android:text="主材项目款"/>
+                <TextView
+                    android:id="@+id/colflag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/main_project_contract"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/colflag"
+                    android:layout_alignTop="@id/colflag"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/main_moreorless_contract"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/main_project_contract"
+                    android:layout_alignLeft="@id/main_project_contract"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/main_project_paid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/main_moreorless_contract"
+                    android:layout_alignLeft="@id/main_moreorless_contract"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/main_project_nopaid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/main_project_paid"
+                    android:layout_alignLeft="@id/main_project_paid"
+                    style="@style/Contract.mutitem"/>
+            </RelativeLayout>
+           
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/preference_last_item"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+			        android:layout_alignParentTop="true"
+			        android:layout_marginLeft="15dp"
+			        android:layout_marginTop="10dp"
+			        android:textSize="14sp"
+			        android:textColor="#000"
+                    android:text="其他款项"/>
+                <TextView
+                    android:id="@+id/colflag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/other_contract"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/colflag"
+                    android:layout_alignTop="@id/colflag"
+                    style="@style/Contract.mutitem"/>
+                
+                <TextView
+                    android:id="@+id/other_paid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/other_contract"
+                    android:layout_alignLeft="@id/other_contract"
+                    style="@style/Contract.mutitem"/>
+                <TextView
+                    android:id="@+id/other_nopaid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/other_paid"
+                    android:layout_alignLeft="@id/other_paid"
+                    style="@style/Contract.mutitem"/>
+                
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -34,8 +34,7 @@
 	    android:layout_marginRight="20dp"
 	    android:singleLine="true"
 	    android:background="@drawable/login_editbox"
-	    android:hint="@string/userName"
-	    android:text="耿延宁"/>
+	    android:hint="@string/userName"/>
 	<EditText 
 	    android:id="@+id/login_phone_edit"
 	    android:layout_width="fill_parent"
@@ -50,8 +49,7 @@
 		android:maxLength="11"
 	    android:singleLine="true"
 	    android:background="@drawable/login_editbox"
-	    android:hint="@string/phone"
-	    android:text="15011320143"/>
+	    android:hint="@string/phone"/>
 	<EditText 
 	    android:id="@+id/login_passwd_edit"
 	    android:layout_width="fill_parent"
@@ -66,8 +64,7 @@
 	    android:password="true"
 	    android:maxLength="6"
 	    android:singleLine="true"
-	    android:hint="@string/passwd"
-	    android:text="09852D"/>
+	    android:hint="@string/passwd"/>
 	<CheckBox
 	    android:id="@+id/autoLogin_box"
 	    android:layout_width="fill_parent"

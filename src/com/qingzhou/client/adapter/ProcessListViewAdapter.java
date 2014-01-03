@@ -29,7 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * 工程进度行碎片
+ * 工程进度行适配器
  * @author hihi
  *
  */
@@ -76,14 +76,21 @@ public class ProcessListViewAdapter extends BaseAdapter {
 		viewHolder.process_date = (TextView) convertView.findViewById(R.id.process_date);
 		viewHolder.process_status = (TextView) convertView.findViewById(R.id.process_status);
 		viewHolder.process_photo = (TextView) convertView.findViewById(R.id.process_photo);
+		viewHolder.process_sub = (ImageView) convertView.findViewById(R.id.process_sub);
 		viewHolder.list_row = (RelativeLayout) convertView.findViewById(R.id.list_row);
+		viewHolder.material_money = (TextView) convertView.findViewById(R.id.material_money);
+		viewHolder.basic_money = (TextView) convertView.findViewById(R.id.basic_money);
+		viewHolder.material_status = (TextView) convertView.findViewById(R.id.material_status);
 		convertView.setTag(viewHolder);
 		
 		viewHolder.process_name.setText(entity.getProject_process_name());
-		if (!StringUtils.isEmpty(entity.getSche_start_project()))
+		if (entity.getProject_process_status() == Constants.PROCESS_END)
 		{
-			viewHolder.process_date.setText(String.format(ctx.getResources().
-					getString(R.string.process_date),entity.getSche_start_project(),entity.getSche_end_project()));
+			if (!StringUtils.isEmpty(entity.getUpdate_time()))
+			{
+				viewHolder.process_date.setText(String.format(ctx.getResources().
+						getString(R.string.process_date),entity.getUpdate_time()));
+			}
 		}
 		viewHolder.process_photo.setText(entity.getPhotocount()>0?entity.getPhotocount()+"":"");
 		//如果有图片，则显示图片的图标，并且加上点击事件
@@ -98,7 +105,17 @@ public class ProcessListViewAdapter extends BaseAdapter {
 			            }  
 			        });  
 		}
-			
+		
+		//如有下级则显示>箭头
+		if (entity.getRestProjectPlanDetailList() != null && entity.getRestProjectPlanDetailList().size() > 0)
+			viewHolder.process_sub.setVisibility(View.VISIBLE);
+		
+		viewHolder.material_money.setText(String.format(ctx.getResources().
+					getString(R.string.main_detail),StringUtils.formatDecimal(entity.getMaterialMoney())));
+		viewHolder.basic_money.setText(String.format(ctx.getResources().
+				getString(R.string.base_detail),StringUtils.formatDecimal(entity.getBasicMoney())));
+		viewHolder.material_status.setVisibility(View.GONE);
+		
 		initProcessStatus(viewHolder,entity.getProject_process_status());
 		return convertView;
 	}
@@ -109,7 +126,11 @@ public class ProcessListViewAdapter extends BaseAdapter {
         public TextView process_date;
         public TextView process_status;
         public TextView process_photo;
+        public ImageView process_sub;
         public RelativeLayout list_row;
+        public TextView material_money;
+        public TextView basic_money;
+        public TextView material_status;
         
     }
 	

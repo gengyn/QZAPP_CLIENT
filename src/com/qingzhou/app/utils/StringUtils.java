@@ -120,7 +120,7 @@ public class StringUtils {
      */
     public static String formatDecimal(String strNumber)
     {
-    	return formatDecimal(strNumber,",##0.00");
+    	return "￥"+formatDecimal(strNumber,",##0.00");
     }
     
     /**

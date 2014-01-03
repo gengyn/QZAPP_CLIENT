@@ -134,7 +134,7 @@
                 <TextView
             		android:layout_width="wrap_content"
             		android:layout_height="wrap_content"
-            		android:text="优惠"
+            		android:text="清单"
             		android:textColor="#fff"
             		android:textSize="12sp" />                
         	 </LinearLayout>         
